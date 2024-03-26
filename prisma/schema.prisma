@@ -27,3 +27,22 @@ model Income {
     budget Budget[]
     monthlyIncome Boolean
 }
+
+model Expense {
+  id String @id @default(uuid())
+  title String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  budget Budget[]
+  categoryType CategoryType
+  monthlyExpense Boolean
+}
+
+enum CategoryType {
+  ENTERTAINMENT
+  HOME
+  SAVINGS
+  SHOPPING
+  TRANSPORTATION
+  OTHER
+}
