@@ -1,0 +1,1 @@
+export { IncomeTypes } from "./types";
