@@ -10,12 +10,21 @@ type Income {
 	monthlyIncome: Boolean
 }
 `;
+
 input IncomeCreateDataInput {
 	title: String!
 	amount: Int!
 	monthlyIncome: Boolean!
     budgetID: String!
 }
+
+input IncomeUpdateDataInput {
+	title: String
+	amount: Int
+	monthlyIncome: Boolean
+    budgetID: String!
+}
+
 type Mutation {
 	incomeCreate(data: IncomeCreateDataInput!): Income
     incomeUpdate(id: ID, data: IncomeUpdateDataInput!): Income
