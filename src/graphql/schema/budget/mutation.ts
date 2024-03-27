@@ -9,17 +9,34 @@ type BudgetCreateInput = {
   };
 };
 
-// TODO - Add functionality to automatically add monthly expenses and incomes on create
+// TODO - Add functionality to automatically add monthly expenses on create
 export const BudgetMutation = {
-  budgetCreate: (_: any, args: BudgetCreateInput) => {
+  budgetCreate: async (_: any, args: BudgetCreateInput) => {
     const { data } = args;
-    return prisma.budget.create({
+
+    const newBudget = await prisma.budget.create({
       data: {
         title: data.title,
         description: data.description,
         startDate: data.startDate,
         endDate: data.endDate,
       },
+      include: { incomes: true },
     });
+
+    const monthlyIncomes = await prisma.income.findMany({
+      where: { monthlyIncome: true },
+    });
+
+    await prisma.budget.update({
+      where: { id: newBudget.id },
+      data: {
+        incomes: {
+          connect: monthlyIncomes.map((income) => ({ id: income.id })),
+        },
+      },
+    });
+
+    return newBudget;
   },
 };
