@@ -28,4 +28,8 @@ input BudgetCreateDataInput {
 type Mutation {
 	budgetCreate(data: BudgetCreateDataInput!): Budget
 }
+
+type Budget {
+	incomes: [Income]
+}
 `;

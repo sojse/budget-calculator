@@ -1,5 +1,10 @@
 import gql from "graphql-tag";
-import { BudgetMutation, BudgetQuery, BudgetTypes } from "./budget";
+import {
+  BudgetMutation,
+  BudgetQuery,
+  BudgetResolvers,
+  BudgetTypes,
+} from "./budget";
 import { ExpenseTypes } from "./expense";
 import { IncomeMutation, IncomeTypes } from "./income";
 
@@ -19,4 +24,5 @@ export const resolvers = {
     ...BudgetMutation,
     ...IncomeMutation,
   },
+  Budget: BudgetResolvers,
 };
