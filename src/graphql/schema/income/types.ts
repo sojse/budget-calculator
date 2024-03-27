@@ -9,7 +9,6 @@ type Income {
 	updatedAt: DateTime
 	monthlyIncome: Boolean
 }
-`;
 
 input IncomeCreateDataInput {
 	title: String!

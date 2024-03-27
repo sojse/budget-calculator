@@ -31,6 +31,37 @@ export const IncomeMutation = {
       },
     });
   },
+  incomeDelete: async (_: any, args: { id: string }) => {
+    const { id } = args;
+
+    const income = await prisma.income.findUnique({
+      where: { id },
+      include: { budgets: true },
+    });
+
+    if (!income) {
+      throw new Error(`Income with ID ${id} not found`);
+    }
+
+    const numberOfBudgets = income.budgets.length;
+
+    if (numberOfBudgets > 1) {
+      // The income is connected to multiple budgets, so just disconnect it from the current budget
+      await prisma.income.update({
+        where: { id },
+        data: {
+          budgets: { disconnect: { id: income.budgets[0].id } },
+        },
+      });
+    } else {
+      // The income is connected to only one budget, so delete it
+      await prisma.income.delete({
+        where: { id },
+      });
+    }
+
+    return `${income.title} was deleted successfully`;
+  },
   incomeUpdate: async (_: any, args: IncomeUpdateInput) => {
     const { id, data } = args;
 
