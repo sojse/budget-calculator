@@ -41,4 +41,8 @@ type Mutation {
     expenseUpdate(id: ID!, data: ExpenseUpdateDataInput!): Expense
     expenseDelete(id: ID!, budgetID: String!): String
 }
+
+type Query {
+	expenseCategoryTypes: [CategoryType!]!
+}
 `;
