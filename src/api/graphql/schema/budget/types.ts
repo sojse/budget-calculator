@@ -31,5 +31,6 @@ type Mutation {
 
 type Budget {
 	incomes: [Income]
+	expenses: [Expense]
 }
 `;

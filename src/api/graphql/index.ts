@@ -5,9 +5,9 @@ import {
 	BudgetResolvers,
 	BudgetTypes,
 } from './schema/budget';
-import { ExpenseTypes } from '../../graphql/schema/expense';
-import { IncomeMutation, IncomeTypes } from '../../graphql/schema/income';
-import { ExpenseResolver } from '../../graphql/schema/expense/resolvers';
+import { ExpenseTypes } from './schema/expense';
+import { IncomeMutation, IncomeTypes } from './schema/income';
+import { ExpenseMutation } from './schema/expense/mutation';
 
 export const typeDefs = gql`
 	type Query
@@ -23,6 +23,7 @@ export const resolvers = {
 	},
 	Mutation: {
 		...BudgetMutation,
+		...ExpenseMutation,
 		...IncomeMutation,
 	},
 	Budget: BudgetResolvers,

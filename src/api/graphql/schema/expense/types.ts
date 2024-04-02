@@ -19,4 +19,26 @@ enum CategoryType {
 	TRANSPORTATION
 	OTHER
 }
+
+input ExpenseCreateDataInput {
+	title: String!
+	amount: Int!
+	monthlyTransaction: Boolean!
+	categoryType: CategoryType!
+    budgetID: String!
+}
+
+input ExpenseUpdateDataInput {
+	title: String
+	amount: Int
+	monthlyTransaction: Boolean
+	categoryType: CategoryType
+    budgetID: String!
+}
+
+type Mutation {
+	expenseCreate(data: ExpenseCreateDataInput!): Expense
+    expenseUpdate(id: ID!, data: ExpenseUpdateDataInput!): Expense
+    expenseDelete(id: ID!, budgetID: String!): String
+}
 `;
