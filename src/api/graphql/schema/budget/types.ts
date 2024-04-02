@@ -24,11 +24,14 @@ type CategoryExpenseGroup {
 	expensesByCategory: [Expense]
 }
 
+type BudgetByYear {
+	year: Int!
+	budgets: [Budget]!
 }
 
 type Query {
 	budget(id: ID!): Budget
-	budgets: [Budget]
+	budgets: [BudgetByYear]
 }
 
 input BudgetCreateDataInput {
