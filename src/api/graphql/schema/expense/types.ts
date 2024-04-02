@@ -1,6 +1,5 @@
 export const ExpenseTypes = `
 scalar DateTime
-scalar CategoryType
 
 type Expense {
 	id: ID!
@@ -9,7 +8,7 @@ type Expense {
 	createdAt: DateTime
 	updatedAt: DateTime
 	categoryType: CategoryType
-	monthlyExpense: Boolean
+	monthlyTransaction: Boolean
 }
 
 enum CategoryType {

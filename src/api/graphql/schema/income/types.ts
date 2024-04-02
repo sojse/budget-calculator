@@ -7,26 +7,26 @@ type Income {
 	amount: Int!
 	createdAt: DateTime
 	updatedAt: DateTime
-	monthlyIncome: Boolean
+	monthlyTransaction: Boolean
 }
 
 input IncomeCreateDataInput {
 	title: String!
 	amount: Int!
-	monthlyIncome: Boolean!
+	monthlyTransaction: Boolean!
     budgetID: String!
 }
 
 input IncomeUpdateDataInput {
 	title: String
 	amount: Int
-	monthlyIncome: Boolean
+	monthlyTransaction: Boolean
     budgetID: String!
 }
 
 type Mutation {
 	incomeCreate(data: IncomeCreateDataInput!): Income
     incomeUpdate(id: ID, data: IncomeUpdateDataInput!): Income
-    incomeDelete(id: ID!): String
+    incomeDelete(id: ID!, budgetID: String!): String
 }
 `;

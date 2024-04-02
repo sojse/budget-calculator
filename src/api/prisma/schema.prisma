@@ -26,7 +26,7 @@ model Income {
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt
     budgets Budget[]
-    monthlyIncome Boolean
+    monthlyTransaction Boolean
 }
 
 model Expense {
@@ -37,7 +37,7 @@ model Expense {
   updatedAt DateTime @updatedAt
   budgets Budget[]
   categoryType CategoryType
-  monthlyExpense Boolean
+  monthlyTransaction Boolean
 }
 
 enum CategoryType {
