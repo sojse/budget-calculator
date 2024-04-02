@@ -5,7 +5,7 @@ import {
 	BudgetResolvers,
 	BudgetTypes,
 } from './schema/budget';
-import { ExpenseMutation, ExpenseTypes } from './schema/expense';
+import { ExpenseMutation, ExpenseTypes, ExpenseQuery } from './schema/expense';
 import { IncomeMutation, IncomeTypes } from './schema/income';
 
 export const typeDefs = gql`
@@ -19,6 +19,7 @@ export const typeDefs = gql`
 export const resolvers = {
 	Query: {
 		...BudgetQuery,
+		...ExpenseQuery,
 	},
 	Mutation: {
 		...BudgetMutation,

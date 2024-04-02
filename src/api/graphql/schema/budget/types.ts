@@ -9,8 +9,21 @@ type Budget {
 	endDate: DateTime!
 	createdAt: DateTime
 	updatedAt: DateTime
-	expenses: [Expense]!
-	income: [Income]!
+	incomes: BudgetIncomeData
+	expenses(categoryType: CategoryType): [CategoryExpenseGroup]
+}
+
+type BudgetIncomeData {
+	incomes: [Income]
+	totalSum: Int
+}
+
+type CategoryExpenseGroup {
+	category: CategoryType
+	totalSum: Int
+	expensesByCategory: [Expense]
+}
+
 }
 
 type Query {
@@ -29,8 +42,4 @@ type Mutation {
 	budgetCreate(data: BudgetCreateDataInput!): Budget
 }
 
-type Budget {
-	incomes: [Income]
-	expenses: [Expense]
-}
 `;
