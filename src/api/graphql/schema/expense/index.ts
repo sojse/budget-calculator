@@ -1,3 +1,2 @@
-export { ExpenseTypes } from "./types";
-export { ExpenseResolver } from './resolvers';
+export { ExpenseTypes } from './types';
 export { ExpenseMutation } from './mutation';

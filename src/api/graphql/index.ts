@@ -5,9 +5,8 @@ import {
 	BudgetResolvers,
 	BudgetTypes,
 } from './schema/budget';
-import { ExpenseTypes } from './schema/expense';
+import { ExpenseMutation, ExpenseTypes } from './schema/expense';
 import { IncomeMutation, IncomeTypes } from './schema/income';
-import { ExpenseMutation } from './schema/expense/mutation';
 
 export const typeDefs = gql`
 	type Query
@@ -27,5 +26,4 @@ export const resolvers = {
 		...IncomeMutation,
 	},
 	Budget: BudgetResolvers,
-	//CategoryType: ExpenseResolver.CategoryType,
 };
