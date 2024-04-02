@@ -1,5 +1,6 @@
 export const ExpenseTypes = `
 scalar DateTime
+scalar CategoryType
 
 type Expense {
 	id: ID!

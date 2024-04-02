@@ -9,7 +9,7 @@ export const ProductResolvers = {
 }
  */
 
-import prisma from "@/graphql/db";
+import prisma from '@/api/prisma/db';
 
 // TODO - add resolver when expenses and incomes are added
 export const BudgetResolvers = {
