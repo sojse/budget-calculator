@@ -1,0 +1,51 @@
+
+.heading {
+	font-weight: $font-weight--bold;
+
+	&__xxs {
+		@include heading--xxs;
+	}
+
+	&__xs {
+		@include heading--xs;
+	}
+
+	&__sm {
+		@include heading--sm;
+	}
+
+	&__md {
+		@include heading--md;
+	}
+
+	&__lg {
+		@include heading--lg;
+	}
+
+	&__xl {
+		@include heading--xl;
+	}
+
+	&__light {
+		color: $color-heading--light;
+	}
+
+	&__dark {
+		color: $color-heading--dark;
+	}
+
+	&__normal {
+		font-weight: $font-weight--normal;
+	}
+	&__center {
+		text-align: center;
+	}
+
+	&__primary {
+		color: $color-heading--primary;
+	}
+
+	&__secondary {
+		color: $color-heading--secondary;
+	}
+}
