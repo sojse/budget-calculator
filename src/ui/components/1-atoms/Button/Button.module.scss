@@ -1,0 +1,16 @@
+.button {
+    @include button;
+
+    &__right {
+		margin-left: auto;
+	}
+	&__center {
+		margin-left: auto;
+		margin-right: auto;
+	}
+	&__maxMobile {
+		@include mq(md, max) {
+			min-width: 100%;
+		}
+	}
+}
