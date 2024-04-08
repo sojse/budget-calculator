@@ -1,0 +1,20 @@
+/**
+* Main entry for all Sass variables to be made available to use in
+* the styling modules for the application
+*
+*/
+
+// #1 - SETTINGS
+@import './1-settings/settings.borders.scss';
+@import './1-settings/settings.colors.scss';
+@import './1-settings/settings.corners.scss';
+@import './1-settings/settings.sizes.scss';
+@import './1-settings/settings.spacing.scss';
+@import './1-settings/settings.typography.scss';
+
+// #2 - TOOLS
+@import './2-tools/tools.action';
+@import './2-tools/tools.display-mixins';
+@import './2-tools/tools.media-queries';
+@import './2-tools/tools.list-mixins';
+@import './2-tools/tools.typography';

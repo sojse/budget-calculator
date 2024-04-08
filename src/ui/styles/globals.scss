@@ -1,0 +1,14 @@
+/**
+* Main entry for all global scss imports
+*
+* NOTE, there is no need to manually add any imports to this file - unless you have added a new folder to /src/project/styles/
+*
+*/
+
+// #3 - GENERIC
+@import './3-generic/generic.box-sizing.scss';
+@import './3-generic/generic.reset.scss';
+
+// #4 - ELEMENTS
+@import './4-elements/elements.anchor.scss';
+@import './4-elements/elements.page.scss';
