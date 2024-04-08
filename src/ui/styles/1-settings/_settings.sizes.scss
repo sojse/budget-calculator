@@ -1,0 +1,16 @@
+/* ------------------------------------ *\
+		settings.sizes
+\* ------------------------------------ */
+
+// Icons
+$icon-size--base: 1rem;
+
+$icon-size--xs: $icon-size--base;
+$icon-size--sm: calc($icon-size--base) * 1.5;
+$icon-size--md: calc($icon-size--base) * 2;
+$icon-size--lg: calc($icon-size--base) * 3;
+$icon-size--xl: calc($icon-size--base) * 4;
+$icon-size--2xl: calc($icon-size--base) * 6;
+$icon-size--3xl: calc($icon-size--base) * 8;
+$icon-size--4xl: calc($icon-size--base) * 10;
+$icon-size--5xl: calc($icon-size--base) * 13;

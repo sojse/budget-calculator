@@ -1,0 +1,18 @@
+/* ------------------------------------ *\
+		settings.corners
+\* ------------------------------------ */
+
+
+$corner-size--base: 0.5rem;
+
+$corner-size--0: calc($corner-size--base) * 0.5;
+$corner-size--2: calc($corner-size--base) * 2; // 8px
+$corner-size--3: calc($corner-size--base) * 3;
+$corner-size--1: calc($corner-size--base);
+$corner-size--4: calc($corner-size--base) * 4;
+$corner-size--5: calc($corner-size--base) * 5;
+$corner-size--6: calc($corner-size--base) * 6;
+$corner-size--7: calc($corner-size--base) * 7;
+$corner-size--8: calc($corner-size--base) * 8;
+
+$corner-circle: 50%;
