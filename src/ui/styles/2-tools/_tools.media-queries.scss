@@ -1,0 +1,28 @@
+/* ------------------------------------ *\
+		tools.media-queries
+\* ------------------------------------ */
+
+@import 'src/ui/styles/0-globals/globals.breakpoints.scss';
+
+@mixin mq($width, $type: min) {
+	@if map_has_key($breakpoints, $width) {
+		$width: map_get($breakpoints, $width);
+		@if $type == max {
+			$width: $width - 1px;
+		}
+		@media only screen and (#{$type}-width: $width) {
+			@content;
+		}
+	}
+}
+
+@mixin mq-limit($width-start, $width-end, $type-start: min, $type-end: max) {
+	@if map_has_key($breakpoints, $width-start) {
+		$width-start: map_get($breakpoints, $width-start);
+		$width-end: map_get($breakpoints, $width-end);
+
+		@media only screen and (#{$type-start}-width: $width-start) and (#{$type-end}-width: $width-end) {
+			@content;
+		}
+	}
+}

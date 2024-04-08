@@ -1,0 +1,70 @@
+/* ------------------------------------ *\
+		tools.display-mixins
+\* ------------------------------------ */
+
+// Based on BlazeUI
+// More info: http://blazeui.com
+
+@mixin visible {
+	visibility: visible;
+}
+
+@mixin invisible {
+	visibility: hidden;
+}
+
+@mixin hidden-absolute {
+	position: absolute;
+	left: -99999px;
+}
+
+@mixin visually-hidden {
+	position: absolute;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+	clip: rect(1px, 1px, 1px, 1px);
+	white-space: nowrap; /* added line */
+}
+
+@mixin display-none {
+	display: none;
+}
+
+@mixin display-initial {
+	display: initial;
+}
+
+@mixin display-inline {
+	display: inline;
+}
+
+@mixin display-inline-block {
+	display: inline-block;
+}
+
+@mixin display-block {
+	display: block;
+}
+
+@mixin display-table {
+	display: table;
+}
+
+@mixin display-table-cell {
+	display: table-cell;
+}
+
+@mixin display-flex {
+	display: flex;
+}
+
+@mixin display-inline-flex {
+	display: inline-flex;
+}
+
+@mixin disable-scroll {
+    overflow: hidden;
+	height: 100vh;
+}

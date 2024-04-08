@@ -1,0 +1,49 @@
+
+@mixin heading--xl {
+	font-family: $font-primary;
+	font-weight: $font-weight--normal;
+	font-size: $font-size--9;
+	line-height: $line-height--9;
+}
+
+@mixin heading--lg {
+	font-family: $font-primary;
+	font-weight: $font-weight--normal;
+	font-size: $font-size--8;
+	line-height: $line-height--8;
+}
+
+@mixin heading--md {
+	font-family: $font-primary;
+	font-weight: $font-weight--normal;
+	font-size: $font-size--7;
+	line-height: $line-height--7;
+}
+
+@mixin heading--sm {
+	font-family: $font-primary;
+	font-weight: $font-weight--normal;
+	font-size: $font-size--6;
+	line-height: $line-height--6;
+}
+
+@mixin heading--xs {
+	font-family: $font-primary;
+	font-weight: $font-weight--normal;
+	font-size: $font-size--5;
+	line-height: $line-height--5;
+}
+
+@mixin heading--xxs {
+	font-family: $font-primary;
+	font-weight: $font-weight--normal;
+	font-size: $font-size--4;
+	line-height: $line-height--4;
+}
+
+@mixin paragraph {
+	font-family: $font-secondary;
+	font-weight: $font-weight--normal;
+	font-size: $font-size--3;
+	line-height: $line-height--3;
+}
