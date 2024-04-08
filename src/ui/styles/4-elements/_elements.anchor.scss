@@ -1,0 +1,13 @@
+/* ------------------------------------ *\
+		elements.anchor
+\* ------------------------------------ */
+
+/**
+ *  Elements – unclassed HTML elements,
+ *  redefine browsers' default styling
+*/
+
+a {
+	// Inherits font family from parent (not default in browsers)
+	font-family: inherit;
+}

@@ -1,0 +1,23 @@
+/* ------------------------------------ *\
+		elements.page
+\* ------------------------------------ */
+
+/**
+ *  Elements – unclassed HTML elements,
+ *  redefine browsers' default styling
+*/
+@import '../2-tools/tools.media-queries.scss';
+
+html {
+	font-family: $font-primary;
+	font-size: 8px;
+	scroll-behavior: smooth;
+	@media (prefers-reduced-motion: reduce) {
+		scroll-behavior: auto;
+	}
+}
+
+body {
+	font-size: $font-size--3;
+	line-height: $line-height--3;
+}
