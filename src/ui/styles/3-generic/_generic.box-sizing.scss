@@ -1,0 +1,20 @@
+/* ------------------------------------ *\
+		generic.box-sizing
+\* ------------------------------------ */
+
+/**
+ * Generic – reset and/or normalize styles,
+ * box-sizing definition, etc.
+*/
+
+html {
+	box-sizing: border-box;
+}
+
+* {
+	&,
+	&:before,
+	&:after {
+		box-sizing: inherit;
+	}
+}

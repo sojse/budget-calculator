@@ -1,0 +1,83 @@
+/* ------------------------------------ *\
+		generic.reset
+\* ------------------------------------ */
+
+/**
+*  Generic – reset and/or normalize styles,
+*  box-sizing definition, etc.
+*/
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+dl,
+dd,
+ol,
+ul,
+form,
+fieldset,
+legend,
+figure,
+table,
+th,
+td,
+caption,
+hr {
+	margin: 0;
+	padding: 0;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+	color: inherit;
+	font: inherit;
+	margin: 0;
+	cursor: text;
+}
+
+button,
+html input[type='button'],
+input[type='reset'],
+input[type='submit'] {
+	-webkit-appearance: button;
+	cursor: pointer;
+}
+
+/**
+*  Give a help cursor to elements that give extra info on `:hover`.
+*/
+abbr[title],
+dfn[title] {
+	cursor: help;
+}
+
+/**
+*  Remove underlines from potentially troublesome elements.
+*/
+u,
+ins {
+	text-decoration: none;
+}
+
+/**
+*  Apply faux underlines to inserted text via `border-bottom`.
+*/
+ins {
+	border-bottom: 1px solid;
+}
+
+body,
+html {
+	height: 100%;
+	margin: 0;
+}
