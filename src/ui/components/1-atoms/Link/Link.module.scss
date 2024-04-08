@@ -1,0 +1,9 @@
+.link {
+    @include link;
+
+    &__maxMobile {
+		@include mq(md) {
+			min-width: 100%;
+		}
+	}
+}
