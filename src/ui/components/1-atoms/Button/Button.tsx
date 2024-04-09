@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import styles from './Button.module.scss';
-// import { Spinner } from '../../Media';
+import Spinner from '@/ui/icons/icon-spinner.svg';
 
 export interface ButtonProps {
 	children: React.ReactNode;
@@ -15,7 +15,7 @@ export interface ButtonProps {
 	loading?: boolean;
 	spinnerColor?: 'dark' | 'light';
 	onClick?: () => void;
-};
+}
 
 export const Button: React.FC<ButtonProps> = ({
 	children,
@@ -27,30 +27,33 @@ export const Button: React.FC<ButtonProps> = ({
 	disabled,
 	align,
 	width,
-	loading = false,
+	loading,
 	onClick,
 }) => (
-	<button
-		name={buttonName}
-		type={type || 'button'}
-		title={title}
-		className={classNames(
-			styles.button,
-			styles[`button__${style}`],
-			styles[`button__${align}`],
-			styles[`button__${width}`],
-			className
-		)}
-		disabled={disabled || loading}
-		aria-disabled={disabled || loading}
-		onClick={onClick}
-	>
-		<span
-			className={classNames({
-				[styles.button_content__hidden]: loading,
-			})}
+	<div className={classNames(styles.button_container)}>
+		<button
+			name={buttonName}
+			type={type || 'button'}
+			title={title}
+			className={classNames(
+				styles.button,
+				styles[`button__${style}`],
+				styles[`button__${align}`],
+				styles[`button__${width}`],
+				className
+			)}
+			disabled={disabled || loading}
+			aria-disabled={disabled || loading}
+			onClick={onClick}
 		>
-			{children}
-		</span>
-	</button>
+			<span
+				className={classNames({
+					[styles.button_content__hidden]: loading,
+				})}
+			>
+				{children}
+			</span>
+		</button>
+		{loading && <Spinner className={classNames(styles.button_spinner)} />}
+	</div>
 );

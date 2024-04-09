@@ -1,3 +1,11 @@
+.button_container {
+	display: inline-flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: $spacing--2;
+}
+
 .button {
     @include button;
 
@@ -13,4 +21,10 @@
 			min-width: 100%;
 		}
 	}
+}
+
+.button_spinner {
+	height: 3rem;
+	width: 3rem;
+	color: $color-button;
 }

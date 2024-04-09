@@ -1,3 +1,5 @@
+'use client';
+
 import classNames from 'classnames';
 import styles from './FormfieldString.module.scss';
 import { ErrorMessage, Label } from '@/ui/components/1-atoms/Form';

@@ -50,3 +50,10 @@ UnderlineDisabled.args = {
 	style: 'underline',
 	disabled: true,
 };
+
+export const Loading: StoryFn<ButtonProps> = Template.bind({});
+Loading.args = {
+	children: 'Loading Button',
+	style: 'primary',
+	loading: true,
+};
