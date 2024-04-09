@@ -1,0 +1,108 @@
+.content_section {
+    scroll-margin-top: 30rem;
+
+	@include mq(md) {
+		margin-left: auto;
+        margin-right: auto;
+        padding: var(--spacing--2);
+        opacity: 1;
+
+        &__scrollBehavior {
+            scroll-margin-top: 15rem;
+        }
+	}
+
+	&__standard {
+		max-width: 124.8rem;
+	}
+	&__wide {
+		max-width: 153rem;
+	}
+	&__narrow {
+		max-width: 96rem;
+	}
+
+	&__slim {
+		max-width: 72rem;
+	}
+
+	&__skinny {
+		max-width: 65rem;
+	}
+
+	&__background {
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-attachment: fixed;
+	}
+	&__full {
+		padding: 0;
+	}
+
+	&__fullscreen {
+		height: 100%;
+		width: 100%;
+		min-height: 100vh;
+		padding: var(--spacing--base) 0;
+	}
+	&__center {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	&__box {
+		background-color: var(--color-white);
+		border-radius: var(--corner--xxs);
+
+		padding: var(--spacing--5);
+	}
+	&__noPadding {
+		padding: 0;
+	}
+
+	&__noMargin {
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	&__headerSpacing {
+        padding-top: var(--header-height-mobile);
+
+		@include mq(md) {
+            padding-top: var(--header-height);
+		}
+	}
+
+	&__light {
+		background-color: var(--color-light);
+	}
+
+	&__fadeIn {
+		opacity: 1;
+		transition: opacity var(--trans-time--shorter);
+	}
+
+	&__fadeOut {
+		opacity: 0;
+		transition: opacity var(--trans-time--shorter);
+		pointer-events: none;
+	}
+
+	&__fadeOnRender {
+		opacity: 0;
+		@include transition {
+			animation: fadeIn var(--trans-time--shorter) ease-in-out forwards;
+		}
+	}
+
+	&__fullHeight {
+		height: 100%;
+	}
+}
+
+@keyframes fadeIn {
+	to {
+		opacity: 1;
+	}
+}
