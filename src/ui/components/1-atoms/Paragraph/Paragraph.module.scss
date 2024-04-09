@@ -1,0 +1,11 @@
+.paragraph {
+	@include paragraph;
+
+	&___semibold {
+		font-weight: var(--font-weight--semibold);
+	}
+
+	&___bold {
+		font-weight: var(--font-weight--bold);
+	}
+}
