@@ -72,15 +72,22 @@ $color-expense: $color-secondary;
 // Formfield
 $color-formfield: $color-grey-900;
 $color-formfield-bg: $color-white;
+$color-formfield--error: $color-error;
 $color-formfield--disabled: $color-grey-400;
 $color-formfield-control: $color-primary;
 $color-formfield-border: $color-grey-800;
 $color-formfield-border--disabled: $color-grey-400;
 $color-formfield-placeholder: $color-grey-500;
-$color-formfield--error: $color-error;
 $color-formfield-label: $color-text-dark;
+$color-formfield--toggle: $color-grey-400;
 
-// Radio Button
+// Heading
+$color-heading--dark: $color-text-dark;
+$color-heading--light: $color-text-light;
+$color-heading--primary: $color-primary;
+$color-heading--secondary: $color-secondary;
+
+// Radio
 $color-radio: $color-grey-800;
 $color-radio-bg: $color-white;
 $color-radio-toggle: $color-primary;
@@ -91,6 +98,12 @@ $color-checkbox: $color-primary;
 $color-checkbox-bg: $color-white;
 $color-checkbox-bg--checked: $color-primary;
 $color-checkbox-border: $color-grey-800;
+
+// Label 
+$color-label--error: $color-error;
+$color-label--disabled: $color-grey-700;
+$color-label: $color-text-dark;
+
 
 // Link
 $link-primary: $color-primary;
