@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import styles from './Link.module.scss';
 import Link from 'next/link';
 
-export type LinkProps = {
+export interface LinkProps {
 	children: React.ReactNode;
 	style?: 'primary' | 'dark' | 'disabled';
 	overrideStyle?: any;

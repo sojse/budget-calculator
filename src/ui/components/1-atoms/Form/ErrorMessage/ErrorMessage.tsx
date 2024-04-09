@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import styles from './ErrorMessage.module.scss';
 
-export type ErrorMessageProps = {
+export interface ErrorMessageProps {
 	className?: string;
 	id: string;
 	children?: React.ReactNode;

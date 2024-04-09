@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import styles from './Label.module.scss';
 
-export type LabelProps = {
+export interface LabelProps {
 	className?: string;
 	id: string;
 	state?: {

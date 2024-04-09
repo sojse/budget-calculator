@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import styles from './Heading.module.scss';
 
-export type HeadingProps = {
+export interface HeadingProps {
 	children?: string;
 	className?: string;
 	headingLevel: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';

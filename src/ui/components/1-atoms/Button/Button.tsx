@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import styles from './Button.module.scss';
 // import { Spinner } from '../../Media';
 
-export type ButtonProps = {
+export interface ButtonProps {
 	children: React.ReactNode;
 	style?: 'primary' | 'secondary' | 'underline';
 	buttonName?: string;
