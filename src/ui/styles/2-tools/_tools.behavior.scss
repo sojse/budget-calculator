@@ -1,0 +1,16 @@
+/* ------------------------------------ *\
+		tools.behavior
+\* ------------------------------------ */
+
+/* Mixin for transitions
+	* to be compliant with
+	* media-prefers-reduced-motion
+	*
+*/
+
+@mixin transition {
+	@content;
+	@media (prefers-reduced-motion: reduce) {
+		transition-duration: 0;
+	}
+}
