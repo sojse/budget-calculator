@@ -1,0 +1,35 @@
+.formfield_radio {
+	display: flex;
+    align-items: center;
+    gap: $spacing--1;
+	color: $color-radio;
+
+	&.hasError {
+		color: $color-formfield--error;
+	}
+
+	&.isDisabled {
+		color: $color-formfield--disabled;
+	}
+}
+
+.formfield_radio_input {
+    width: 2rem;
+	height: 2rem;
+	border-radius: 100%;
+	margin: $spacing--0 0;
+    cursor: pointer;
+    accent-color: $color-radio-toggle;
+
+    .isDisabled & {
+		cursor: not-allowed;
+	}
+}
+
+.formfield_radio_label {
+    cursor: pointer;
+
+    &__hidden {
+        @include visually-hidden;
+    }
+}
