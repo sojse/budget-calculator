@@ -1,0 +1,107 @@
+.formfield_select {
+	position: relative;
+	display: flex;
+	flex-flow: column;
+
+	&.hasError {
+		color: $color-error;
+	}
+
+	&.isDisabled {
+		color: $color-formfield--disabled;
+	}
+}
+
+.formfield_select_wrapper {
+	position: relative;
+	margin: $spacing--0 0;
+	@include paragraph;
+
+	&::placeholder {
+		color: currentColor;
+	}
+
+	&:after {
+		content: '';
+		display: block;
+		position: absolute;
+		right: 0;
+		top: 0;
+		height: 100%;
+		width: 5rem;
+		background: transparent;
+		pointer-events: none;
+	}
+
+	&:before {
+		content: '';
+		display: block;
+		position: absolute;
+		right: $spacing--base;
+		top: 50%;
+		height: 0.8rem;
+		width: 0.8rem;
+		border: solid $color-formfield;
+		border-width: 0 0 $border--md $border--md;
+		background: transparent;
+		pointer-events: none;
+		transform: translateY(-66.7%) rotate(-45deg);
+	}
+
+	.hasError & {
+		color: $color-formfield;
+
+		.formfield_select_element {
+			border-color: $color-formfield--error;
+		}
+	}
+
+	&.isMultiple {
+		&:after,
+		&:before {
+			display: none;
+		}
+
+		.formfield_select_element {
+			padding-right: $spacing--base;
+		}
+	}
+}
+
+.formfield_select_label {
+    &__hidden {
+        @include visually-hidden;
+    }
+}
+
+
+.formfield_select_element {
+	width: 100%;
+	padding: $spacing--1;
+	border: 1px solid $color-formfield-border;
+	border-radius: $corner-size--2;
+	background-color: $color-formfield-bg;
+	appearance: none;
+	cursor: pointer;
+	outline: none;
+	.isDisabled & {
+		cursor: not-allowed;
+		border-color: $color-formfield-border--disabled;
+	}
+
+	&::-ms-expand {
+		display: none;
+	}
+
+	&::placeholder {
+		color: currentColor;
+	}
+
+	.formfield_select__background & {
+		background-color: $color-formfield-bg;
+	}
+	&__noLabel {
+		padding: $spacing--1 $spacing--7 $spacing--1
+			$spacing--1;
+	}
+}
