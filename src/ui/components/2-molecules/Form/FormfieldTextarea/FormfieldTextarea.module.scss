@@ -1,0 +1,50 @@
+.formfield_textarea {
+	position: relative;
+	display: flex;
+	flex-flow: column;
+	color: $color-formfield;
+
+	&.hasError {
+		border-color: $color-formfield--error;
+	}
+
+	&.isDisabled {
+		color: $color-formfield-border--disabled;
+	}
+}
+
+.formfield_textarea_label {
+    &__hidden {
+        @include visually-hidden;
+    }
+}
+
+.formfield_textarea_input {
+	background-color: transparent;
+	width: 100%;
+	border: $border--sm solid $color-formfield-border;
+	border-radius: $corner-size--2;
+	padding: $spacing--1;
+	line-height: $line-height--2;
+	margin: $spacing--0 0;
+	height: 16rem;
+	resize: none;
+
+	.isDisabled & {
+		cursor: not-allowed;
+		border-color: $color-formfield-border--disabled;
+	}
+
+	&.hasError {
+		border-color: $color-formfield--error;
+	}
+
+	&::placeholder {
+		color: $color-formfield-placeholder;
+	}
+
+	.formfield_textarea__background & {
+		border: $border--sm solid transparent;
+		background-color: $color-formfield-bg;
+	}
+}
