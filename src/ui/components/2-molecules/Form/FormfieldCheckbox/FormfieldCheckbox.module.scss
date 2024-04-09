@@ -1,0 +1,35 @@
+.formfield_checkbox {
+	display: flex;
+    align-items: center;
+    gap: $spacing--1;
+	color: $color-checkbox;
+
+	&.hasError {
+		color: $color-formfield--error;
+	}
+
+	&.isDisabled {
+		color: $color-formfield--disabled;
+	}
+}
+
+.formfield_checkbox_input {
+    width: 2.3rem;
+	height: 2.3rem;
+	border-radius: 100%;
+	margin: $spacing--0 0;
+    cursor: pointer;
+    accent-color: $color-checkbox-bg--checked;
+
+    .isDisabled & {
+		cursor: not-allowed;
+	}
+}
+
+.formfield_checkbox_label {
+    cursor: pointer;
+
+    &__hidden {
+        @include visually-hidden;
+    }
+}
