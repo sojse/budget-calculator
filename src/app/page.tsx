@@ -1,8 +1,9 @@
+import { Main } from '@/ui/components';
 
 export default function Home() {
 	return (
-		<main>
-		</main>
+		<Main>
+			<h1>hej</h1>
+		</Main>
 	);
 }
-
