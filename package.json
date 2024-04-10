@@ -1,50 +1,50 @@
 {
-	"name": "budget-calculator",
-	"version": "0.1.0",
-	"private": true,
-	"scripts": {
-		"dev": "next dev",
-		"build": "next build",
-		"start": "next start",
-		"lint": "next lint",
-		"storybook": "storybook dev -p 6006",
-		"build-storybook": "storybook build"
-	},
-	"dependencies": {
-		"@apollo/server": "^4.10.2",
-		"@as-integrations/next": "^3.0.0",
-		"@prisma/client": "^5.11.0",
-		"classnames": "^2.5.1",
-		"graphql": "^16.8.1",
-		"graphql-tag": "^2.12.6",
-		"micro": "^9.4.1",
-		"next": "14.1.4",
-		"prisma": "^5.11.0",
-		"react": "^18",
-		"react-dom": "^18"
-	},
-	"devDependencies": {
-		"@chromatic-com/storybook": "^1.2.25",
-		"@storybook/addon-a11y": "^8.0.6",
-		"@storybook/addon-essentials": "^8.0.4",
-		"@storybook/addon-interactions": "^8.0.4",
-		"@storybook/addon-links": "^8.0.4",
-		"@storybook/addon-mdx-gfm": "^8.0.6",
-		"@storybook/addon-onboarding": "^8.0.4",
-		"@storybook/addon-styling-webpack": "^1.0.0",
-		"@storybook/blocks": "^8.0.4",
-		"@storybook/nextjs": "^8.0.4",
-		"@storybook/react": "^8.0.4",
-		"@storybook/test": "^8.0.4",
-		"@svgr/webpack": "^8.1.0",
-		"@types/node": "^20",
-		"@types/react": "^18",
-		"@types/react-dom": "^18",
-		"sass": "^1.74.1",
-		"storybook": "^8.0.4",
-		"typescript": "^5"
-	},
-	"prisma": {
-		"schema": "src/api/prisma/schema.prisma"
-	}
+  "name": "budget-calculator",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.10.2",
+    "@as-integrations/next": "^3.0.0",
+    "@prisma/client": "^5.11.0",
+    "classnames": "^2.5.1",
+    "graphql": "^16.8.1",
+    "graphql-tag": "^2.12.6",
+    "micro": "^9.4.1",
+    "next": "14.1.4",
+    "prisma": "^5.11.0",
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^1.2.25",
+    "@storybook/addon-a11y": "^8.0.6",
+    "@storybook/addon-essentials": "^8.0.4",
+    "@storybook/addon-interactions": "^8.0.4",
+    "@storybook/addon-links": "^8.0.4",
+    "@storybook/addon-mdx-gfm": "^8.0.6",
+    "@storybook/addon-onboarding": "^8.0.4",
+    "@storybook/addon-styling-webpack": "^1.0.0",
+    "@storybook/blocks": "^8.0.4",
+    "@storybook/nextjs": "^8.0.4",
+    "@storybook/react": "^8.0.4",
+    "@storybook/test": "^8.0.4",
+    "@svgr/webpack": "^8.1.0",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "sass": "^1.74.1",
+    "storybook": "^8.0.4",
+    "typescript": "^5"
+  },
+  "prisma": {
+    "schema": "src/api/prisma/schema.prisma"
+  }
 }
