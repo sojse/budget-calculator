@@ -4,7 +4,7 @@ import { Button, ButtonProps } from './Button';
 import { fn } from '@storybook/test';
 
 export default {
-	title: 'Atoms/Button',
+	title: 'Atoms/Actions/Button',
 	component: Button,
 	tags: ['autodocs'],
 	args: { onClick: fn() },

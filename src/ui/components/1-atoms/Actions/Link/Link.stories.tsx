@@ -4,7 +4,7 @@ import { LinkComponent, LinkProps } from './Link';
 import { fn } from '@storybook/test';
 
 export default {
-	title: 'Atoms/Link',
+	title: 'Atoms/Actions/Link',
 	component: LinkComponent,
 	tags: ['autodocs'],
 } as Meta;
