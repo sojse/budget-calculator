@@ -1,0 +1,9 @@
+.hamburger_button {
+    @include action;
+}
+
+.hamburger_button_icon {
+    width: $icon-size--xl;
+    height: $icon-size--xl;
+    color: $color-primary;
+}
