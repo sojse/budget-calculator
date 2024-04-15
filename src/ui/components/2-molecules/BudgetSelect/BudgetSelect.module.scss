@@ -1,0 +1,18 @@
+.budget_select {
+    display: flex;
+    gap: $spacing--2;
+    width: 100%;
+
+    & > * {
+        flex: 1;
+
+    }
+
+    @include mq(md) {
+        width: 50%;
+
+        > :first-child {
+            max-width: 12rem;
+        }
+    }
+}
