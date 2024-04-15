@@ -1,4 +1,5 @@
 'use server';
+import { fetchMonthData } from '@/lib/api';
 import client from '@/lib/apolloClient';
 import gql from 'graphql-tag';
 
@@ -17,5 +18,5 @@ const responseBody = {
 };
 
 export async function getMonthData(year: string) {
-	return getMonthData(year);
+	return await fetchMonthData(year);
 }
