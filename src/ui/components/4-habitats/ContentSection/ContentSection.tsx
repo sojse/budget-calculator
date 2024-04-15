@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import styles from './ContentSection.module.scss';
 
-export type content_sectionidth =
+export type contentSectionWidth =
 	| 'Skinny'
 	| 'Slim'
 	| 'Narrow'
@@ -13,37 +13,27 @@ export type content_sectionidth =
 
 export interface ContentSectionProps {
 	id?: string;
-	width: content_sectionidth;
+	width: contentSectionWidth;
 	height?: 'Default' | 'Full height';
 	fullscreen?: boolean;
 	className?: string;
-	style?: any;
 	center?: boolean;
 	noMargin?: boolean;
 	noPadding?: boolean;
-	backgroundImage?: string;
-	headerSpacing?: boolean;
 	background?: 'default' | 'light' | 'primary';
 	children?: React.ReactNode;
-	fade?: boolean;
-	fadeState?: 'none' | 'fadeIn' | 'fadeOut' | 'fadeOnRender';
 }
 
 export const ContentSection: React.FC<ContentSectionProps> = ({
 	id,
 	width = 'Standard',
 	height,
-	className = '',
-	style,
+	className,
 	fullscreen = false,
 	center = false,
-	backgroundImage = '',
 	background = 'default',
 	noPadding = false,
 	noMargin = false,
-	headerSpacing,
-	fade = false,
-	fadeState = 'none',
 	children,
 }) => {
 	width = width === '' ? 'Standard' : width;
@@ -61,22 +51,15 @@ export const ContentSection: React.FC<ContentSectionProps> = ({
 				{ [styles.content_section__full]: width === 'Full width' },
 				{ [styles.content_section__fullHeight]: height === 'Full height' },
 				{ [styles.content_section__scrollBehavior]: id },
-				{ [styles.content_section__background]: !!backgroundImage },
 				{ [styles.content_section__fullscreen]: fullscreen },
 				{ [styles.content_section__center]: center },
 				{ [styles.content_section__noPadding]: noPadding },
 				{ [styles.content_section__noMargin]: noMargin },
-				{ [styles.content_section__headerSpacing]: headerSpacing },
 
 				styles[`content_section__${background}`],
-				styles[`content_section__${fade && fadeState}`],
 
 				className
 			)}
-			style={{
-				backgroundImage: `url(${backgroundImage})`,
-				...style,
-			}}
 		>
 			{children}
 		</section>

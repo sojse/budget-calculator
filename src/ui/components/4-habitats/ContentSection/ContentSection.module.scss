@@ -1,10 +1,10 @@
 .content_section {
     scroll-margin-top: 30rem;
+	padding: $spacing--7 $spacing--2;
 
 	@include mq(md) {
 		margin-left: auto;
         margin-right: auto;
-        padding: var(--spacing--2);
         opacity: 1;
 
         &__scrollBehavior {
@@ -44,7 +44,7 @@
 		height: 100%;
 		width: 100%;
 		min-height: 100vh;
-		padding: var(--spacing--base) 0;
+		padding: $spacing--base 0;
 	}
 	&__center {
 		display: flex;
@@ -52,10 +52,9 @@
 		align-items: center;
 	}
 	&__box {
-		background-color: var(--color-white);
-		border-radius: var(--corner--xxs);
+		background-color: $color-white;
 
-		padding: var(--spacing--5);
+		padding: $spacing--5;
 	}
 	&__noPadding {
 		padding: 0;
@@ -66,43 +65,7 @@
 		margin-right: 0;
 	}
 
-	&__headerSpacing {
-        padding-top: var(--header-height-mobile);
-
-		@include mq(md) {
-            padding-top: var(--header-height);
-		}
-	}
-
-	&__light {
-		background-color: var(--color-light);
-	}
-
-	&__fadeIn {
-		opacity: 1;
-		transition: opacity var(--trans-time--shorter);
-	}
-
-	&__fadeOut {
-		opacity: 0;
-		transition: opacity var(--trans-time--shorter);
-		pointer-events: none;
-	}
-
-	&__fadeOnRender {
-		opacity: 0;
-		@include transition {
-			animation: fadeIn var(--trans-time--shorter) ease-in-out forwards;
-		}
-	}
-
 	&__fullHeight {
 		height: 100%;
-	}
-}
-
-@keyframes fadeIn {
-	to {
-		opacity: 1;
 	}
 }
