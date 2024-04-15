@@ -30,7 +30,12 @@ export const Button: React.FC<ButtonProps> = ({
 	loading,
 	onClick,
 }) => (
-	<div className={classNames(styles.button_container)}>
+	<div
+		className={classNames(
+			styles.button_container,
+			loading && styles.button__loading
+		)}
+	>
 		<button
 			name={buttonName}
 			type={type || 'button'}

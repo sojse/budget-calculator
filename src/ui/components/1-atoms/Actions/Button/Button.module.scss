@@ -1,9 +1,15 @@
-.button_container {
-	display: inline-flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	gap: $spacing--2;
+.button_container {	
+	@include mq(md, max) {
+		min-width: 100%;
+	}
+
+	&__loading {
+		display: inline-flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: center;
+		gap: $spacing--2;
+	}
 }
 
 .button {
