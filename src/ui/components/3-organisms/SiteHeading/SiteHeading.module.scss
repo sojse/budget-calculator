@@ -1,0 +1,38 @@
+.site_heading {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing--4;
+
+    @include mq(md) {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+	}
+
+    & > * {
+        flex: 1; 
+    }
+}
+
+.site_heading__left {
+    display: flex;
+    align-items: center;
+    gap: $spacing--2;
+}
+
+.site_heading__right {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    & :first-child {
+        margin-bottom: $spacing--0;
+    }
+
+    @include mq(md) {
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: $spacing--2;
+    }
+}
