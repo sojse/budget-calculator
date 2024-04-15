@@ -1,0 +1,14 @@
+.desktop_navigation {
+    display: none;
+
+    @include mq(md) {
+        display: flex;
+        justify-content: center;
+        gap: $spacing--3;
+	}
+}
+
+.desktop_navigation_link__active {
+    color: $color-header-link--active;
+    font-weight: $font-weight--bold;
+}
