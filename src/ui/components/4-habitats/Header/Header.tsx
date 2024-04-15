@@ -1,15 +1,17 @@
+'use client';
 import classNames from 'classnames';
 import styles from './Header.module.scss';
 import Logo from '@/ui/icons/icon-logo.svg';
 import User from '@/ui/icons/icon-user.svg';
 import {
+	DesktopMenu,
 	HamburgerButton,
 	Heading,
-	LinkComponent,
 	MobileMenu,
 } from '@/ui/components';
 import { MobileMenuProvider } from '@/context/mobileMenuContext';
 import Link from 'next/link';
+import { useSelectedLayoutSegments } from 'next/navigation';
 
 export interface HeaderProps {
 	navigation: {
@@ -20,10 +22,40 @@ export interface HeaderProps {
 }
 
 export const Header = ({ navigation }: HeaderProps) => {
+	const segment = useSelectedLayoutSegments();
+
+	const dynamicNavigation = navigation.map((item) => {
+		let isActive = false;
+
+		var url: string;
+
+		if (segment.length >= 1) {
+			url = '/' + segment[0];
+		} else {
+			url = '/' + segment.join('/');
+		}
+
+		if (url === item.url) {
+			isActive = true;
+		}
+
+		const updatedUrl =
+			segment.length > 1 ? `${item.url}/${segment[1]}` : item.url;
+
+		return {
+			label: item.label,
+			isActive: isActive,
+			url: updatedUrl,
+		};
+	});
+
 	return (
 		<MobileMenuProvider>
 			<header className={classNames(styles.header)}>
-				<Link href="/" className={classNames(styles.header_logo_container)}>
+				<Link
+					href={navigation[0].url}
+					className={classNames(styles.header_logo_container)}
+				>
 					<Logo className={classNames(styles.header_logo)} />
 					<Heading
 						headingLevel={'h2'}
@@ -34,21 +66,10 @@ export const Header = ({ navigation }: HeaderProps) => {
 						Budget kalkylator
 					</Heading>
 				</Link>
-				<nav className={classNames(styles.header_navigation_desktop)}>
-					{navigation.map((item: any, index: any) => (
-						<LinkComponent
-							key={index}
-							url={item.url}
-							style="dark"
-							className={
-								item.isActive &&
-								classNames(styles.header_navigation_link__active)
-							}
-						>
-							{item.label}
-						</LinkComponent>
-					))}
-				</nav>
+				<DesktopMenu
+					navigation={dynamicNavigation}
+					className={classNames(styles.header_navigation_desktop)}
+				/>
 				<div className={classNames(styles.header_icon_container)}>
 					<User className={classNames(styles.header_icon)} />
 					<HamburgerButton
@@ -56,7 +77,7 @@ export const Header = ({ navigation }: HeaderProps) => {
 					/>
 				</div>
 			</header>
-			<MobileMenu navigation={navigation} />
+			<MobileMenu navigation={dynamicNavigation} />
 		</MobileMenuProvider>
 	);
 };

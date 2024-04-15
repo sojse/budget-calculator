@@ -40,24 +40,9 @@
     color: $color-primary;
 }
 
-.header_navigation_desktop {
-    display: none;
-
-    @include mq(md) {
-        display: flex;
-        justify-content: center;
-        gap: $spacing--3;
-	}
-}
-
-.header_navigation_link__active {
-    color: $color-header-link--active;
-    font-weight: $font-weight--bold;
-}
-
 .header_icon_container {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     gap: $spacing--5;
 }
 
