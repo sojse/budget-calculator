@@ -1,0 +1,61 @@
+.icon_circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: $corner-circle;
+    color: $color-white;
+
+    &__sm {
+        & > * {
+            height: $icon-size--xl;
+            width: $icon-size--xl;
+            padding: $spacing--1;
+        }
+    }
+
+    &__lg {
+         & > * {
+            height: $icon-size--4xl;
+            width: $icon-size--4xl;
+            padding: $spacing--3;
+            
+            @include mq(md) {
+                height: $icon-size--3xl;
+                width: $icon-size--3xl;
+            }
+        }
+    }
+
+    &__primary {
+        background-color: $color-primary;
+    }
+
+    &__secondary {
+        background-color: $color-secondary;
+    }
+
+    &__home {
+        background-color: $color-category-home;
+    }
+
+    &__transport {
+        background-color: $color-category-transport;
+    }
+
+    &__savings {
+        background-color: $color-category-savings;
+    }
+
+    &__shopping {
+        background-color: $color-category-shopping;
+    }
+
+    &__other {
+        background-color: $color-catehory-other;
+    }
+
+    &__fun {
+        background-color: $color-catehory-fun;
+    }
+
+}
