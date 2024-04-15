@@ -13,7 +13,7 @@ export interface LinkProps {
 	asText?: boolean;
 	target?: string;
 	onClick?: () => void;
-};
+}
 
 export const LinkComponent: React.FC<LinkProps> = ({
 	children,
@@ -26,30 +26,36 @@ export const LinkComponent: React.FC<LinkProps> = ({
 	asText,
 	width,
 	onClick,
-}) => (
-	<>
-		{asText ? (
-			<p
-				className={classNames(styles.link, styles[`link__${style}`], className)}
-			>
-				{children}
-			</p>
-		) : (
-			<Link
-				href={url}
-				style={overrideStyle}
-				target={target}
-				aria-label={ariaLabel}
-				onClick={onClick}
-				className={classNames(
-					styles.link,
-					styles[`link__${style}`],
-					styles[`link__${width}`],
-					className
-				)}
-			>
-				{children}
-			</Link>
-		)}
-	</>
-);
+}) => {
+	return (
+		<>
+			{asText ? (
+				<p
+					className={classNames(
+						styles.link,
+						styles[`link__${style}`],
+						className
+					)}
+				>
+					{children}
+				</p>
+			) : (
+				<Link
+					href={url}
+					style={overrideStyle}
+					target={target}
+					aria-label={ariaLabel}
+					onClick={onClick}
+					className={classNames(
+						styles.link,
+						styles[`link__${style}`],
+						styles[`link__${width}`],
+						className
+					)}
+				>
+					{children}
+				</Link>
+			)}
+		</>
+	);
+};
