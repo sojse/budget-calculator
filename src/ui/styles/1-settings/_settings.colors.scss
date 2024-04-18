@@ -48,8 +48,16 @@ $color-text-dark: $color-grey-900;
 $color-text-light: $color-grey-0;
 $color-text-warning: $color-error;
 
+// Surface
+$color-surface-primary: $color-grey-100;
+$color-surface-secondary: $color-grey-0;
+
 // Borders
 $color-border-primary: $color-grey-500;
+
+// Box
+$color-box-shadow: $color-grey-500;
+$color-box-bg: $color-surface-secondary;
 
 // Button
 $color-button: $color-primary;
@@ -114,10 +122,13 @@ $link-dark: $color-grey-700;
 $link-dark--hover: $color-grey-1000;
 $link-dark--disabled: $color-grey-400;
 
+// Modal
+$modal-background: $color-white;
+$modal-container: $color-grey-800;
+$modal-icon-color: $color-grey-600;
+$modal-icon-color--hover: $color-black;
+
 // Spinner
 $color-spinner: $color-primary;
-$color-spinner-secondary: $color-white;
+$color-spinner-secondary: $color-surface-secondary;
 
-// Surface
-$color-surface-primary: $color-grey-100;
-$color-surface-secondary: $color-grey-0;

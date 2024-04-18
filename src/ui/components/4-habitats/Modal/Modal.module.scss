@@ -1,0 +1,36 @@
+.modal_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(22, 22, 22, 0.2);
+}
+
+.modal {
+    @include box;
+    position: relative;
+    padding: $spacing--6 5%;
+    background-color: $modal-background;
+
+    @include mq(md) {
+        min-width: 600px;
+    }
+}
+
+.modal_button {
+    @include action;
+    position: absolute;
+    right: 2rem;
+    top: 1rem;
+    color: $modal-icon-color;
+
+    &:hover {
+        color: $modal-icon-color--hover
+    }
+}
+
+.modal_icon {
+    height: $icon-size--sm;
+    width: $icon-size--sm;
+}

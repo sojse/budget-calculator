@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import '@/ui/styles/globals.scss';
+import styles from './layout.module.scss';
+import classNames from 'classnames';
 import { Header, Main, SiteHeading } from '@/ui/components';
 
 export const metadata: Metadata = {
@@ -14,18 +16,21 @@ const navigation = [
 ];
 
 export default function RootLayout({
+	modal,
 	children,
 }: Readonly<{
+	modal: React.ReactNode;
 	children: React.ReactNode;
 }>) {
 	return (
 		<html lang="en">
-			<body>
+			<body className={classNames(styles.layout)}>
 				<Header navigation={navigation} />
 				<Main>
 					<SiteHeading />
 					{children}
 				</Main>
+				<div className={classNames(styles.layout_modal)}>{modal}</div>
 			</body>
 		</html>
 	);
