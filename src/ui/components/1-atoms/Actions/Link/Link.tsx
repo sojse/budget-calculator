@@ -11,6 +11,7 @@ export interface LinkProps {
 	className?: string;
 	url: string;
 	asText?: boolean;
+	asButton?: boolean;
 	target?: string;
 	onClick?: () => void;
 }
@@ -24,9 +25,23 @@ export const LinkComponent: React.FC<LinkProps> = ({
 	url,
 	target,
 	asText,
+	asButton,
 	width,
 	onClick,
 }) => {
+	const linkClasses = classNames(
+		styles.link,
+		styles[`link__${style}`],
+		styles[`link__${width}`],
+		className
+	);
+
+	const buttonClasses = classNames(
+		styles.button,
+		styles[`button__${style}`],
+		className
+	);
+
 	return (
 		<>
 			{asText ? (
@@ -46,12 +61,7 @@ export const LinkComponent: React.FC<LinkProps> = ({
 					target={target}
 					aria-label={ariaLabel}
 					onClick={onClick}
-					className={classNames(
-						styles.link,
-						styles[`link__${style}`],
-						styles[`link__${width}`],
-						className
-					)}
+					className={!asButton ? linkClasses : buttonClasses}
 				>
 					{children}
 				</Link>

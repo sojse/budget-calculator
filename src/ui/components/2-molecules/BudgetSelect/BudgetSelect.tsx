@@ -24,7 +24,7 @@ export const BudgetSelect: React.FC<BudgetSelectProps> = ({
 }) => {
 	const [months, setMonths] = useState(budgetInformation.months);
 	const [selectedYear, setSelectedYear] = useState(
-		budgetInformation.years[budgetInformation.selected.yearIndex].value
+		budgetInformation.years[budgetInformation.selected.yearIndex].caption
 	);
 	const [defaultValue, setDefautlValue] = useState(
 		months[budgetInformation.selected.monthIndex].value

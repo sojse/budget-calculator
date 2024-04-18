@@ -1,9 +1,12 @@
 .link {
     @include link;
+}
 
-    &__maxMobile {
-		@include mq(md) {
-			min-width: 100%;
-		}
+.button {
+	text-decoration: none;
+    @include button;
+
+	@include mq(md, max) {
+		width: 100%;
 	}
 }

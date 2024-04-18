@@ -31,3 +31,11 @@ Disabled.args = {
 	url: '#',
 	style: 'disabled',
 };
+
+export const AsButton: StoryFn<LinkProps> = Template.bind({});
+AsButton.args = {
+	children: 'Button Link',
+	url: '#',
+	style: 'primary',
+	asButton: true,
+};

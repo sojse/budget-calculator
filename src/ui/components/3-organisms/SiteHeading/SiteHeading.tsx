@@ -3,10 +3,10 @@ import classNames from 'classnames';
 import styles from './SiteHeading.module.scss';
 import {
 	BudgetSelect,
-	Button,
 	ContentSection,
 	DynamicHeader,
 	IconCircle,
+	LinkComponent,
 } from '@/ui/components';
 import Wallet from '@/ui/icons/icon-wallet.svg';
 import { fetchYearData } from '@/lib/api';
@@ -34,9 +34,14 @@ export const SiteHeading: React.FC<SiteHeadingProps> = async ({
 				/>
 			</div>
 			<div className={classNames(styles.site_heading__right)}>
-				<Button style="primary" width="maxMobile">
+				<LinkComponent
+					style="primary"
+					asButton
+					width="maxMobile"
+					url="/modal/createBudget"
+				>
 					Skapa ny budget
-				</Button>
+				</LinkComponent>
 				<BudgetSelect budgetInformation={budgetInformation} />
 			</div>
 		</ContentSection>
