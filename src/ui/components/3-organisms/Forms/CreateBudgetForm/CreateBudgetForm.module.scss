@@ -1,0 +1,33 @@
+.budget_form_heading {
+    margin-bottom: $spacing--4;
+}
+
+.budget_form {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing--4;
+}
+
+.budget_form_date_pickers,
+.budget_form_buttons { 
+    display: flex;
+    gap: $spacing--3;
+    flex-wrap: wrap;
+    margin-bottom: $spacing--2;
+
+    @include mq(md) {
+        flex-wrap: nowrap;
+
+        & > * {
+            width: 50%;
+        }
+    }
+
+    & > * {
+        width: 100%;
+    }
+}
+
+.budget_form_button {
+    width: 100%;
+}
