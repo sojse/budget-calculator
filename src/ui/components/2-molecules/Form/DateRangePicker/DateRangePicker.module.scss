@@ -1,0 +1,81 @@
+.day_picker {
+	position: relative;
+	display: flex;
+	flex-flow: column;
+    align-items: center;
+	color: $color-formfield;
+
+	&.isDisabled {
+		color: $color-formfield--disabled;
+	}
+	&.fullWidth {
+		width: 100%;
+	}
+}
+
+.day_picker_label {
+    &__hidden {
+        @include visually-hidden;
+    }
+}
+
+.day_picker_calendar {
+    display: none;
+
+    &__open {
+        display: block;
+        position: relative;
+        width: 100%;
+
+    }
+}
+
+.day_picker_picker {
+    @include box;
+    position: absolute;
+    background-color: $color-surface-secondary;
+    margin: 0;
+
+}
+
+.day_picker_input_container {
+    width: 100%;
+}
+
+.day_picker_input {
+	padding: $spacing--1;
+    text-align: left;
+	width: 100%;
+	border: 1px solid $color-formfield-border;
+	border-radius: $corner-size--2;
+	background-color: $color-formfield-bg;
+	&::placeholder {
+		color: currentColor;
+	}
+
+	&__noLabel {
+		padding-top: $spacing--2;
+	}
+	.isDisabled & {
+		cursor: not-allowed;
+		border-color: $color-formfield-border--disabled;
+	}
+
+    &.hasError {
+		border-color: $color-formfield--error;
+	}
+}
+
+.day_picker_input:focus ~ .day_picker_border {
+	width: 100%;
+
+	.hasError & {
+		width: 0%;
+	}
+}
+
+.day_picker_input:not([disabled]):hover:not(:focus) {
+	.hasError & {
+		box-shadow: 0 1px 0 0 transparent;
+	}
+}

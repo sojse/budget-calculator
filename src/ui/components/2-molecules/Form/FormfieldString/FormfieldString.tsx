@@ -115,6 +115,7 @@ export const FormfieldString: React.FC<FormfieldStringProps> = ({
 				min={min}
 				max={max}
 				pattern={pattern}
+				type={type}
 				ref={inputRef}
 				{...(register && {
 					...register(name, {
