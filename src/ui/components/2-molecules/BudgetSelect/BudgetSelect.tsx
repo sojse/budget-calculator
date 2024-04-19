@@ -1,10 +1,11 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import styles from './BudgetSelect.module.scss';
 import { FormfieldSelect } from '@/ui/components';
 import { getMonthData } from '@/app/actions';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter, usePathname, useParams } from 'next/navigation';
+import { capitalizeFirstLetter } from '@/helpers/string';
 
 export interface BudgetSelectProps {
 	className?: string;
@@ -22,24 +23,41 @@ export const BudgetSelect: React.FC<BudgetSelectProps> = ({
 	className,
 	budgetInformation,
 }) => {
-	const [months, setMonths] = useState(budgetInformation.months);
-	const [selectedYear, setSelectedYear] = useState(
-		budgetInformation.years[budgetInformation.selected.yearIndex].caption
-	);
-	const [defaultValue, setDefautlValue] = useState(
-		months[budgetInformation.selected.monthIndex].value
-	);
+	const params = useParams();
 	const router = useRouter();
 	const pathName = usePathname();
+	const placeHolderValue = 'Välj budget';
+	const [months, setMonths] = useState(budgetInformation.months);
+	const [selectedYear, setSelectedYear] = useState(
+		params.slug
+			? params.slug[1]
+			: budgetInformation.years[budgetInformation.selected.yearIndex].caption
+	);
+	const [selectedBudget, setSelectedBudget] = useState(
+		params.slug
+			? capitalizeFirstLetter(params.slug[0])
+			: budgetInformation.months[budgetInformation.selected.monthIndex].caption
+	);
+
+	useEffect(() => {
+		setSelectedBudget(
+			params.slug
+				? capitalizeFirstLetter(params.slug[0])
+				: budgetInformation.months[budgetInformation.selected.monthIndex]
+						.caption
+		);
+	}, []);
 
 	const fetchNewBudgets = async (e: any) => {
+		console.log(e.target.value);
+		setSelectedYear(e.target.value);
 		const newMonths = await getMonthData(e.target.value);
 		setMonths(newMonths);
-		setDefautlValue('Välj budget');
-		setSelectedYear(e.target.value);
+		setSelectedBudget(placeHolderValue);
 	};
 
 	const changeCurrentBudget = (e: any) => {
+		setSelectedBudget(e.target.value);
 		const budgetString = e.target.value.toString().toLowerCase();
 		const pathSegments = pathName.split('/');
 		var basePath: string;
@@ -60,9 +78,8 @@ export const BudgetSelect: React.FC<BudgetSelectProps> = ({
 				label={'Year'}
 				options={budgetInformation.years}
 				state={{ hiddenLabel: true }}
-				defaultValue={
-					budgetInformation.years[budgetInformation.selected.yearIndex].value
-				}
+				value={selectedYear}
+				placeHolderValue="Välj år"
 				onChange={fetchNewBudgets}
 			/>
 			<FormfieldSelect
@@ -70,7 +87,8 @@ export const BudgetSelect: React.FC<BudgetSelectProps> = ({
 				label={'Budget'}
 				options={months}
 				state={{ hiddenLabel: true }}
-				defaultValue={defaultValue}
+				value={selectedBudget}
+				placeHolderValue={placeHolderValue}
 				onChange={changeCurrentBudget}
 			/>
 		</form>
