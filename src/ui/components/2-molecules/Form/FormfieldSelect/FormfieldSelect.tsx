@@ -33,6 +33,8 @@ export interface FormfieldSelectProps {
 	requiredErrorMessage?: string;
 	state?: State;
 	defaultValue?: string;
+	placeHolderValue?: string;
+	value?: string;
 	preOption?: string;
 	tabIndex?: number;
 	onChange?: (e: any) => void;
@@ -60,7 +62,9 @@ export const FormfieldSelect: React.FC<FormfieldSelectProps> = ({
 	background,
 	size,
 	tabIndex = 0,
-	defaultValue = 'Select Option',
+	value,
+	defaultValue,
+	placeHolderValue,
 	onChange,
 }) => {
 	const { required, disabled, hasError, hiddenLabel, errorMessage } =
@@ -104,7 +108,8 @@ export const FormfieldSelect: React.FC<FormfieldSelectProps> = ({
 					multiple={multiple}
 					size={size}
 					disabled={disabled}
-					defaultValue={''}
+					defaultValue={defaultValue && ''}
+					value={value}
 					onChange={onChange}
 					tabIndex={tabIndex}
 					{...(register && {
@@ -113,9 +118,9 @@ export const FormfieldSelect: React.FC<FormfieldSelectProps> = ({
 						}),
 					})}
 				>
-					{defaultValue && (
-						<option value={''} disabled={true} hidden={true}>
-							{defaultValue}
+					{placeHolderValue && (
+						<option value={placeHolderValue} disabled={true} hidden={false}>
+							{placeHolderValue}
 						</option>
 					)}
 					{options.map((option, index) => (
