@@ -4,14 +4,13 @@ import styles from './ModalButtons.module.scss';
 import { Button } from '@/ui/components';
 import { useRouter } from 'next/navigation';
 import { useFormState, useFormStatus } from 'react-dom';
+import { showToast } from '@/helpers/toast';
 
-export interface ModalButtonsProps {
-	serverAction: any;
-}
+export interface ModalButtonsProps {}
 
 export const ModalButtons: React.FC<ModalButtonsProps> = (serverAction) => {
 	const router = useRouter();
-	const formStatus = useFormStatus();
+	const { pending } = useFormStatus();
 
 	const goBack = () => {
 		router.back();
@@ -22,14 +21,15 @@ export const ModalButtons: React.FC<ModalButtonsProps> = (serverAction) => {
 			<Button
 				style="primary"
 				type="submit"
-				//disabled={formInValid}
+				disabled={pending}
 				className={classNames(styles.modal_buttons_button)}
 			>
-				Skapa
+				{pending ? 'Laddar...' : 'Skapa budget'}
 			</Button>
 			<Button
 				style="secondary"
 				type="button"
+				disabled={pending}
 				onClick={goBack}
 				className={classNames(styles.modal_buttons_button)}
 			>

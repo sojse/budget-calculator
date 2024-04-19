@@ -1,10 +1,19 @@
 .modal_buttons {
     display: flex;
-    gap: $spacing--4;
+    gap: $spacing--3;
     flex-wrap: wrap;
+    margin-bottom: $spacing--2;
+
+    @include mq(md) {
+        flex-wrap: nowrap;
+
+        & > * {
+            width: 50%;
+        }
+    }
 
     & > * {
-        flex-grow: 1;
+        width: 100%;
     }
 }
 
