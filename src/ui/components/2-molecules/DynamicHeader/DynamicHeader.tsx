@@ -2,7 +2,7 @@
 import React from 'react';
 import { Heading } from '@/ui/components';
 import { useParams } from 'next/navigation';
-import { capitalizeFirstLetter } from '@/helpers/string';
+import { buildBudgetTitle, capitalizeFirstLetter } from '@/helpers/string';
 
 export interface DynamicHeaderProps {
 	defaultString: string;
@@ -17,7 +17,7 @@ export const DynamicHeader: React.FC<DynamicHeaderProps> = ({
 	if (pathName.slug === undefined) {
 		title = defaultString;
 	} else {
-		title = `${capitalizeFirstLetter(pathName.slug[0])} ${pathName.slug[1]}`;
+		title = buildBudgetTitle(pathName.slug[0], pathName.slug[1]);
 	}
 
 	return (
