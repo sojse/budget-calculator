@@ -38,8 +38,6 @@ export const CreateBudgetForm: React.FC<CreateBudgetFormProps> = () => {
 		}
 	}, [state]);
 
-	console.log(state);
-
 	return (
 		<>
 			<Heading
