@@ -35,6 +35,7 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
 	const { required, disabled, hasError, hiddenLabel, errorMessage } =
 		state ?? {};
 	const [range, setRange] = useState<DateRange | undefined>(undefined);
+	const [inputValue, setInputValue] = useState(defaultValue);
 	const [isCalendarOpen, setIsCalendarOpen] = useState(false);
 	const clickOutsideRef = useRef<HTMLDivElement | null>(null);
 	const handleOutsideClick = (e: any) => {
@@ -53,13 +54,36 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
 		};
 	}, []);
 
+	const handleInputChange = () => {
+		setInputValue(
+			range == undefined
+				? defaultValue
+				: `${range.from?.toLocaleDateString()} - ${range.to !== undefined ? range.to.toLocaleDateString() : 'åååå-mm-dd'}`
+		);
+	};
+
+	const handleSelect = (selectedRange: DateRange | undefined) => {
+		setRange(selectedRange);
+		if (selectedRange) {
+			const formattedValue = `${selectedRange.from?.toLocaleDateString()} - ${
+				selectedRange.to !== undefined
+					? selectedRange.to.toLocaleDateString()
+					: 'åååå-mm-dd'
+			}`;
+			setInputValue(formattedValue);
+		} else {
+			setInputValue(defaultValue ?? '');
+		}
+	};
+
 	return (
 		<div
 			className={classNames(
 				styles.day_picker,
 				className,
 				{ [styles.hasError]: hasError },
-				{ [styles.isDisabled]: disabled }
+				{ [styles.isDisabled]: disabled },
+				className
 			)}
 		>
 			{!hiddenLabel && (
@@ -90,13 +114,9 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
 						[styles.hasError]: hasError,
 					})}
 					type="text"
-					required
-					placeholder={defaultValue}
-					value={
-						range == undefined
-							? undefined
-							: `${range.from?.toLocaleDateString()} - ${range.to !== undefined ? range.to.toLocaleDateString() : 'åååå-mm-dd'}`
-					}
+					required={required}
+					onChange={handleInputChange}
+					value={inputValue}
 				/>
 
 				<div
@@ -111,7 +131,7 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
 						id="datePicker"
 						defaultMonth={new Date()}
 						selected={range}
-						onSelect={setRange}
+						onSelect={handleSelect}
 						locale={sv}
 						className={classNames(styles.day_picker_picker)}
 					/>

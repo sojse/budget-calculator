@@ -16,7 +16,7 @@ export const Default: StoryFn<DateRangePickerProps> = Template.bind({});
 Default.args = {
 	label: 'Välj datum',
 	id: 'pickDates',
-	defaultValue: 'åååå/mmm/dd-åååå/mm/dd',
+	defaultValue: 'åååå-mm-dd - åååå-mm-dd',
 	name: 'pickDates',
 };
 
