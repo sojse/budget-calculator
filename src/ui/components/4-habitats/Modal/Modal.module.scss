@@ -12,9 +12,10 @@
     position: relative;
     padding: $spacing--6 5%;
     background-color: $modal-background;
+    width: 100%;
 
     @include mq(md) {
-        min-width: 600px;
+        max-width: 600px;
     }
 }
 
