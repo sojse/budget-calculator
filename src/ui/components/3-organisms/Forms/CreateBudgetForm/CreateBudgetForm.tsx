@@ -5,28 +5,38 @@ import {
 	Heading,
 	FormfieldString,
 	FormfieldTextarea,
-	Button,
 	DateRangePicker,
+	ModalButtons,
 } from '@/ui/components';
 import { submitNewBudget } from '@/app/actions';
-import { useFormState, useFormStatus } from 'react-dom';
+import { useFormState } from 'react-dom';
 import { useRouter } from 'next/navigation';
+import { showToast } from '@/helpers/toast';
+import { useEffect } from 'react';
 
 export interface CreateBudgetFormProps {}
+const initialState = {
+	budgetName: { id: '', hasError: false },
+	budgetDates: { id: '', hasError: false },
+};
 
 export const CreateBudgetForm: React.FC<CreateBudgetFormProps> = () => {
-	const formStatus = useFormStatus();
-	const [state, formAction] = useFormState(submitNewBudget, {
-		budgetName: { id: '', hasError: false },
-		budgetDates: { id: '', hasError: false },
-	});
+	const [state, formAction] = useFormState(submitNewBudget, initialState);
 	const router = useRouter();
 
-	const goBack = () => {
-		router.back();
-	};
-
-	console.log(state);
+	useEffect(() => {
+		if (state.success) {
+			router.push(state.newRoute);
+			router.refresh();
+			showToast('success', <span>Din budget har skapats</span>);
+		} else if (state.error) {
+			router.back();
+			showToast(
+				'error',
+				<span>Något gick fel när din budget skulle skapas</span>
+			);
+		}
+	}, [state]);
 
 	return (
 		<>
@@ -46,8 +56,10 @@ export const CreateBudgetForm: React.FC<CreateBudgetFormProps> = () => {
 					name="budgetName"
 					state={{
 						required: true,
-						hasError: state?.budgetName.hasError,
-						errorMessage: 'Budgetnamn måste vara mellan 3-16 tecken',
+						hasError: state?.budgetName?.hasError,
+						errorMessage: !state.budgetName.errorMessage
+							? 'Budgetnamn måste vara mellan 3-16 tecken'
+							: state.budgetName.errorMessage,
 					}}
 				/>
 				<FormfieldTextarea
@@ -61,30 +73,13 @@ export const CreateBudgetForm: React.FC<CreateBudgetFormProps> = () => {
 					name="budgetDates"
 					state={{
 						required: true,
-						hasError: state?.budgetDates.hasError,
-						errorMessage: 'Slutdatum måste anges',
+						hasError: state?.budgetDates?.hasError,
+						errorMessage: 'Båda datum måste anges',
 					}}
 					defaultValue="åååå-mm-dd - åååå-mm-dd"
+					className={classNames(styles.budget_form_date_picker)}
 				/>
-				<div className={classNames(styles.budget_form_buttons)}>
-					<Button
-						style="primary"
-						type="submit"
-						disabled={formStatus.pending}
-						className={classNames(styles.budget_form_button)}
-					>
-						{formStatus.pending ? 'Laddar...' : 'Skapa budget'}
-					</Button>
-					<Button
-						style="secondary"
-						type="button"
-						disabled={formStatus.pending}
-						onClick={goBack}
-						className={classNames(styles.budget_form_button)}
-					>
-						Avbryt
-					</Button>
-				</div>
+				<ModalButtons />
 			</form>
 		</>
 	);
