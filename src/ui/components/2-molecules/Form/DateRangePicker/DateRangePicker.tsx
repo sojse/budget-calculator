@@ -54,6 +54,12 @@ export const DateRangePicker: React.FC<DateRangePickerProps> = ({
 		};
 	}, []);
 
+	useEffect(() => {
+		if (range?.to !== undefined && range?.from !== undefined) {
+			setIsCalendarOpen(false);
+		}
+	}, [range]);
+
 	const handleInputChange = () => {
 		setInputValue(
 			range == undefined
