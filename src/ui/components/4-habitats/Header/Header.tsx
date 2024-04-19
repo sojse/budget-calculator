@@ -63,7 +63,7 @@ export const Header = ({ navigation }: HeaderProps) => {
 						style="xs"
 						className={classNames(styles.header_logo_text)}
 					>
-						Budget kalkylator
+						Budgetkalkylator
 					</Heading>
 				</Link>
 				<DesktopMenu
