@@ -120,7 +120,6 @@ export const createBudget = async (budgetData: any) => {
 		});
 
 		const slug = `${data.budgetCreate.title}/${extractYear(data.budgetCreate.endDate)}`;
-
 		return { success: true, newRoute: `/finances/${slug}` };
 	} catch (error) {
 		console.error('An error occured', error);

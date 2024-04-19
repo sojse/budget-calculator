@@ -11,13 +11,13 @@ export interface DynamicHeaderProps {
 export const DynamicHeader: React.FC<DynamicHeaderProps> = ({
 	defaultString,
 }) => {
-	const pathName = useParams();
+	const params = useParams();
 	var title: string;
 
-	if (pathName.slug === undefined) {
+	if (params.slug === undefined) {
 		title = defaultString;
 	} else {
-		title = buildBudgetTitle(pathName.slug[0], pathName.slug[1]);
+		title = buildBudgetTitle(params.slug[0], params.slug[1]);
 	}
 
 	return (

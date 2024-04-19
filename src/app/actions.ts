@@ -13,9 +13,9 @@ export async function submitNewBudget(currentState: any, formData: FormData) {
 		budgetDates: formData.get('budgetDates'),
 	};
 
-	const inValidForm = createBudgetValidation(currentState, rawFormData);
+	const inValidForm = await createBudgetValidation(currentState, rawFormData);
 
-	if (inValidForm.budgetName.hasError || inValidForm.budgetDates.hasError) {
+	if (inValidForm.budgetName.hasError || inValidForm.budgetName.hasError) {
 		return inValidForm;
 	}
 
@@ -34,5 +34,6 @@ export async function submitNewBudget(currentState: any, formData: FormData) {
 		validAndFilteredData.endDate = new Date(endDateStr).toISOString();
 	}
 
-	createBudget(validAndFilteredData);
+	const status = createBudget(validAndFilteredData);
+	return status;
 }

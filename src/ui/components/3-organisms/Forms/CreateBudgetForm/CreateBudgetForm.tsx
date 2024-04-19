@@ -38,6 +38,8 @@ export const CreateBudgetForm: React.FC<CreateBudgetFormProps> = () => {
 		}
 	}, [state]);
 
+	console.log(state);
+
 	return (
 		<>
 			<Heading
@@ -57,9 +59,9 @@ export const CreateBudgetForm: React.FC<CreateBudgetFormProps> = () => {
 					state={{
 						required: true,
 						hasError: state?.budgetName?.hasError,
-						errorMessage: !state.budgetName.errorMessage
+						errorMessage: !state?.budgetName?.notUnique
 							? 'Budgetnamn måste vara mellan 3-16 tecken'
-							: state.budgetName.errorMessage,
+							: 'En budget med detta namnet existerar redan för det valda året',
 					}}
 				/>
 				<FormfieldTextarea
