@@ -3,6 +3,7 @@ import '@/ui/styles/globals.scss';
 import styles from './layout.module.scss';
 import classNames from 'classnames';
 import { Header, Main, SiteHeading } from '@/ui/components';
+import ToastProvider from '@/ui/components/1-atoms/Toast/Toast';
 
 export const metadata: Metadata = {
 	title: 'Create Next App',
@@ -15,6 +16,8 @@ const navigation = [
 	{ url: '#', label: 'Detaljer', isActive: false },
 ];
 
+export const revalidate = 10;
+
 export default function RootLayout({
 	modal,
 	children,
@@ -25,12 +28,14 @@ export default function RootLayout({
 	return (
 		<html lang="en">
 			<body className={classNames(styles.layout)}>
-				<Header navigation={navigation} />
-				<Main>
-					<SiteHeading />
-					{children}
-				</Main>
-				<div className={classNames(styles.layout_modal)}>{modal}</div>
+				<ToastProvider>
+					<Header navigation={navigation} />
+					<Main>
+						<SiteHeading />
+						{children}
+					</Main>
+					<div className={classNames(styles.layout_modal)}>{modal}</div>
+				</ToastProvider>
 			</body>
 		</html>
 	);
