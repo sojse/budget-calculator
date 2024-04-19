@@ -14,7 +14,7 @@ type State = {
 
 export interface FormfieldStringProps {
 	className?: string;
-	onChange?: () => void;
+	onChange?: (e: any) => void;
 	defaultValue?: string;
 	id: string;
 	label: string;
