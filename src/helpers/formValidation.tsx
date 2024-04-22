@@ -40,17 +40,18 @@ export const createBudgetValidation = async (
 				notUnique: false,
 			};
 		}
-
-		validationBudgets.map((item: { value: string; caption: string }) => {
-			if (item.value.toUpperCase() === formData.budgetTitle.toUpperCase()) {
-				currentState.budgetName = {
-					id: 'budgetName',
-					hasError: true,
-					notUnique: true,
-				};
-				return;
-			}
-		});
+		if (validationBudgets.length > 0) {
+			validationBudgets.map((item: { value: string; caption: string }) => {
+				if (item.value.toUpperCase() === formData.budgetTitle.toUpperCase()) {
+					currentState.budgetName = {
+						id: 'budgetName',
+						hasError: true,
+						notUnique: true,
+					};
+					return;
+				}
+			});
+		}
 	}
 
 	if (!isValidDate(startDateStr) || !isValidDate(endDateStr)) {

@@ -83,27 +83,38 @@ export const fetchYearData = async () => {
 };
 
 export const fetchMonthData = async (year: string) => {
-	const { data } = await client.query({
-		query: GET_BUDGETS_BY_YEAR,
-		variables: { year },
-	});
+	const client = getClient();
 
-	const { budgets } = data;
+	try {
+		const { data } = await client.query({
+			query: GET_BUDGETS_BY_YEAR,
+			variables: { year },
+			context: {
+				fetchOptions: {
+					next: { tags: ['budgets'] },
+				},
+			},
+		});
 
-	const matchingYearBudgets = budgets.find(
-		(item: any) => item.year === parseInt(year, 10)
-	);
+		const { budgets } = data;
 
-	if (!matchingYearBudgets) {
-		throw new Error(`No budgets found for year ${year}`);
+		const matchingYearBudgets = budgets.find(
+			(item: any) => item.year === parseInt(year, 10)
+		);
+
+		if (!matchingYearBudgets) {
+			return [];
+		}
+
+		const months = matchingYearBudgets.budgets.map((budget: any) => ({
+			value: budget.title,
+			caption: budget.title,
+		}));
+
+		return months;
+	} catch (error) {
+		console.error(`Error fetching budgets for year ${year}:`, error);
 	}
-
-	const months = matchingYearBudgets.budgets.map((budget: any) => ({
-		value: budget.title,
-		caption: budget.title,
-	}));
-
-	return months;
 };
 
 export const createBudget = async (budgetData: any) => {
