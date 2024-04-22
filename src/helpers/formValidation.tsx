@@ -1,4 +1,4 @@
-import { fetchBudgetArray, fetchYearData } from '@/lib/api';
+import { fetchMonthData } from '@/lib/api';
 import { extractYear, isValidDate } from './date';
 
 export const createBudgetValidation = async (
@@ -21,7 +21,8 @@ export const createBudgetValidation = async (
 	validDates.startDate = new Date(startDateStr);
 	validDates.endDate = new Date(endDateStr);
 
-	const validationArray = await fetchBudgetArray();
+	const validationBudgets = await fetchMonthData(extractYear(endDateStr));
+
 	if (formData.budgetTitle !== null) {
 		if (
 			formData.budgetTitle.toString().length < 3 ||
@@ -40,12 +41,8 @@ export const createBudgetValidation = async (
 			};
 		}
 
-		validationArray.map((item: { year: string; title: string }) => {
-			if (
-				Number(item.year) === Number(extractYear(endDateStr)) &&
-				item.title.toUpperCase() === formData.budgetTitle.toUpperCase()
-			) {
-				console.log('tast');
+		validationBudgets.map((item: { value: string; caption: string }) => {
+			if (item.value.toUpperCase() === formData.budgetTitle.toUpperCase()) {
 				currentState.budgetName = {
 					id: 'budgetName',
 					hasError: true,

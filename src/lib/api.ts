@@ -24,6 +24,18 @@ const GET_BUDGETS = {
 	`,
 };
 
+const GET_BUDGETS_BY_YEAR = gql`
+	query BudgetsQuery($year: String!) {
+		budgets(year: $year) {
+			year
+			budgets {
+				title
+				id
+			}
+		}
+	}
+`;
+
 const CREATE_BUDGET = gql`
 	mutation BudgetCreate($data: BudgetCreateDataInput!) {
 		budgetCreate(data: $data) {
@@ -70,22 +82,11 @@ export const fetchYearData = async () => {
 	return budgetInformation;
 };
 
-export const fetchBudgetArray = async () => {
-	const { data } = await client.query(GET_BUDGETS);
-
-	const { budgets } = data;
-	const budgetArray = budgets.flatMap(
-		(item: { budgets: { title: any }[]; year: any }) =>
-			item.budgets.map((budget: { title: any }) => ({
-				year: item.year,
-				title: budget.title,
-			}))
-	);
-	return budgetArray;
-};
-
 export const fetchMonthData = async (year: string) => {
-	const { data } = await client.query(GET_BUDGETS);
+	const { data } = await client.query({
+		query: GET_BUDGETS_BY_YEAR,
+		variables: { year },
+	});
 
 	const { budgets } = data;
 
