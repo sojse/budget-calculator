@@ -1,0 +1,12 @@
+.two_column {
+    display: flex;
+}
+
+.two_column_first {
+    flex-grow: 2;
+}
+
+.two_column_second {
+    flex-grow: 1;
+}
+
