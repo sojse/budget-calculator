@@ -1,0 +1,50 @@
+.finance_box {
+    display: flex;
+    justify-content: space-between;
+    padding: $spacing--5;
+}
+
+.finance_box_left,
+.finance_box_right {
+    display: flex;
+    align-items: center;
+    gap: $spacing--5;
+
+    @include mq(md) {
+        gap: $spacing--5;
+    }
+}
+
+.finance_box_text {
+    font-family: $font-secondary;
+    font-weight: $font-weight--semibold;
+
+    &__light {
+        font-weight: $font-weight--normal;
+        color: $color-primary-grey;
+        display: none;
+
+        @include mq(md) {
+            display: block;
+        }
+    }
+}
+
+.finance_box_icon {
+    height: $icon-size--lg;
+    width: $icon-size--lg;
+
+    @include mq(md) {
+        height: $icon-size--md;
+        width: $icon-size--md;
+    }
+
+    &__update {
+        color: $color-neutral;
+    }
+
+    &__delete {
+        color: $color-error;
+    }
+}
+
