@@ -1,0 +1,4 @@
+.content_box {
+    @include box;
+    background-color:  $color-surface-secondary;
+}
