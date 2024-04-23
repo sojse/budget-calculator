@@ -1,6 +1,6 @@
 import gql from 'graphql-tag';
 import { getClient } from '@/lib/apolloClient';
-import { buildNavigationString } from '@/helpers/string';
+import { buildNavigationString, capitalizeFirstLetter } from '@/helpers/string';
 import { extractYear } from '@/helpers/date';
 import { revalidatePath } from 'next/cache';
 
@@ -19,6 +19,7 @@ const GET_BUDGETS = {
 				budgets {
 					title
 					id
+					endDate
 				}
 			}
 		}
@@ -47,6 +48,41 @@ const CREATE_BUDGET = gql`
 		}
 	}
 `;
+
+const GET_BUDGET = gql`
+	query BudgetQuery($budgetId: ID!) {
+		budget(id: $budgetId) {
+			id
+			title
+			incomes {
+				totalSum
+				incomes {
+					title
+					amount
+				}
+			}
+			expenses {
+				category
+				totalSum
+				expensesByCategory {
+					amount
+					title
+				}
+			}
+		}
+	}
+`;
+
+export const fetchStaticParams = async () => {
+	const client = getClient();
+	const { data } = await client.query(GET_BUDGETS);
+
+	return data.budgets.flatMap((item: { year: number; budgets: any[] }) =>
+		item.budgets.map((budget: { title: string }) => ({
+			slug: [budget.title.toLocaleLowerCase(), `${item.year}`],
+		}))
+	);
+};
 
 export const fetchYearData = async () => {
 	const client = getClient();
@@ -143,4 +179,56 @@ export const createBudget = async (budgetData: any) => {
 		console.error('An error occured', error);
 		return { success: false };
 	}
+};
+
+export const fetchBudget = async (slug: string[]) => {
+	const year = slug ? slug[1] : '';
+	const month = slug ? capitalizeFirstLetter(slug[0]) : '';
+	const client = getClient();
+	const id = await getBudgetId(year, month);
+	const { data } = await client.query({
+		query: GET_BUDGET,
+		variables: { budgetId: id },
+	});
+
+	const incomes = data.budget.incomes.incomes;
+
+	return incomes.map((income: { title: any; amount: any }) => ({
+		category: 'income',
+		expenseInformation: {
+			text: income.title,
+			cost: income.amount,
+		},
+	}));
+};
+
+const getBudgetId = async (year: string, month: string) => {
+	const client = getClient();
+	const { data } = await client.query(GET_BUDGETS);
+	var id = '';
+
+	data.budgets.forEach(
+		(element: {
+			year: { toString: () => string };
+			budgets: { title: string; id: string }[];
+		}) => {
+			if (element.year.toString() === year) {
+				element.budgets.forEach((budget: { title: string; id: string }) => {
+					if (budget.title === month) {
+						id = budget.id;
+					}
+				});
+			}
+		}
+	);
+
+	if (id === '') {
+		// getting the budget with the latest date
+		id =
+			data.budgets[data.budgets.length - 1].budgets[
+				data.budgets[data.budgets.length - 1].budgets.length - 1
+			].id;
+	}
+
+	return id;
 };
