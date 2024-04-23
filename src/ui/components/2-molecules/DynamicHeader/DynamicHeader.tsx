@@ -21,7 +21,7 @@ export const DynamicHeader: React.FC<DynamicHeaderProps> = ({
 	}
 
 	return (
-		<Heading headingLevel="h1" color="primary" style="md">
+		<Heading headingLevel="h1" color="primary" style="lg">
 			{title}
 		</Heading>
 	);
