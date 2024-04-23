@@ -4,7 +4,7 @@ import styles from './ContentBox.module.scss';
 
 export interface ContentBoxProps {
 	children: React.ReactNode;
-	className: string;
+	className?: string;
 }
 
 export const ContentBox: React.FC<ContentBoxProps> = async ({

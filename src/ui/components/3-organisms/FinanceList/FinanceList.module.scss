@@ -1,0 +1,20 @@
+.finance_list,
+.finance_list_list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing--5;
+}
+
+.finance_list_add_container {
+    padding: $spacing--5;
+    font-family: $font-secondary;
+    font-weight: $font-weight--semibold;
+
+    &__income {
+        color: $color-income;
+    }
+
+    &__expense {
+        color: $color-expense;
+    }
+}
