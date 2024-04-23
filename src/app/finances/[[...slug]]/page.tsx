@@ -1,19 +1,19 @@
-import { Main, SiteHeading } from '@/ui/components';
+import { fetchBudget, fetchStaticParams } from '@/lib/api';
+import { FinanceList, TwoColumnLayout } from '@/ui/components';
 
 export async function generateStaticParams() {
-	const mappedData: any[] = [];
-
+	const mappedData = await fetchStaticParams();
 	return mappedData;
 }
 
-export default async function Finance({
-	params,
-}: {
-	params: { slug: string };
-}) {
+export default async function Finance({ params }: { params: { slug: string[] } }) {
+	const incomeData = await fetchBudget(params.slug);
 	return (
 		<>
-			<div>hej</div>
+			<TwoColumnLayout
+				column1={<FinanceList listType={'income'} listObjects={incomeData} />}
+				column2={<div></div>}
+			/>
 		</>
 	);
 }

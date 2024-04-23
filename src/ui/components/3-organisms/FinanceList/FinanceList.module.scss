@@ -1,5 +1,6 @@
 .finance_list,
 .finance_list_list {
+    @include reset-list;
     display: flex;
     flex-direction: column;
     gap: $spacing--5;

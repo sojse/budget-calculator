@@ -1,5 +1,10 @@
 .two_column {
     display: flex;
+    flex-direction: column-reverse;
+
+    @include mq(md) {
+        flex-direction: row;
+    }
 }
 
 .two_column_first {

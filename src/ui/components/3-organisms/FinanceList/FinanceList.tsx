@@ -10,13 +10,11 @@ import {
 } from '@/ui/components';
 
 export interface FinanceListProps {
-	className?: string;
 	listType: 'income' | 'expense';
 	listObjects: FinanceBoxProps[];
 }
 
 export const FinanceList: React.FC<FinanceListProps> = async ({
-	className,
 	listType,
 	listObjects,
 }) => {
