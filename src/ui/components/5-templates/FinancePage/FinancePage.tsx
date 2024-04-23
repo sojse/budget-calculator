@@ -18,12 +18,7 @@ export default function FinancePage({
 	return (
 		<>
 			<Header navigation={header.navigation} />
-			<Main>
-				<SiteHeading budgetInformation={budgetInformation.budgetInformation}>
-					{'Mars budget'}
-				</SiteHeading>
-				hej
-			</Main>
+			<Main>hej</Main>
 		</>
 	);
 }
