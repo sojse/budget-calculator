@@ -6,14 +6,25 @@
     color: $color-white;
 
     &__sm {
+        height: $icon-size--xl;
+        width: $icon-size--xl;
+
         & > * {
             height: $icon-size--xl;
             width: $icon-size--xl;
-            padding: $spacing--1;
+            padding: $spacing--0;
         }
     }
 
     &__lg {
+        height: $icon-size--4xl;
+        width: $icon-size--4xl;
+
+        @include mq(md) {
+            height: $icon-size--3xl;
+            width: $icon-size--3xl;
+        }
+
          & > * {
             height: $icon-size--4xl;
             width: $icon-size--4xl;
