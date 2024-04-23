@@ -1,9 +1,4 @@
-import {
-	ApolloClient,
-	ApolloLink,
-	createHttpLink,
-	InMemoryCache,
-} from '@apollo/client';
+import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
 //import { onError } from '@apollo/link-error';
 //import { createUploadLink } from '@apollo-upload-client';
 //import '../dotenv.config';
@@ -56,7 +51,7 @@ function createClient(): ApolloClient<unknown> {
 
 export default createClient();
 */
-
+/*
 const httpLink = createHttpLink({
 	uri: 'http://localhost:4000/graphql',
 });
@@ -65,5 +60,28 @@ const client = new ApolloClient({
 	link: httpLink,
 	cache: new InMemoryCache(),
 });
+*/
 
-export default client;
+// export const { getClient } = registerApolloClient(() => {
+// 	return new ApolloClient({
+// 		cache: new InMemoryCache(),
+// 		link: new HttpLink({
+// 			uri: 'http://localhost:4000/graphql',
+// 		}),
+// 	});
+// });
+
+let client: ApolloClient<any> | null = null;
+
+export const getClient = () => {
+	if (!client || typeof window === 'undefined') {
+		client = new ApolloClient({
+			link: new HttpLink({
+				uri: 'http://localhost:4000/graphql',
+			}),
+			cache: new InMemoryCache(),
+		});
+	}
+	return client;
+};
+

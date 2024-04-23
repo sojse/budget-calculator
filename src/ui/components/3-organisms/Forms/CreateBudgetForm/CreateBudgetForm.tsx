@@ -14,6 +14,7 @@ import { useRouter } from 'next/navigation';
 import { showToast } from '@/helpers/toast';
 import { useEffect } from 'react';
 
+
 export interface CreateBudgetFormProps {}
 const initialState = {
 	budgetName: { id: '', hasError: false },
@@ -27,7 +28,6 @@ export const CreateBudgetForm: React.FC<CreateBudgetFormProps> = () => {
 	useEffect(() => {
 		if (state.success) {
 			router.push(state.newRoute);
-			router.refresh();
 			showToast('success', <span>Din budget har skapats</span>);
 		} else if (state.error) {
 			router.back();

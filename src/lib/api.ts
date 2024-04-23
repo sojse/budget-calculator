@@ -1,7 +1,8 @@
 import gql from 'graphql-tag';
-import client from '@/lib/apolloClient';
+import { getClient } from '@/lib/apolloClient';
 import { buildNavigationString } from '@/helpers/string';
 import { extractYear } from '@/helpers/date';
+import { revalidatePath } from 'next/cache';
 
 export interface GraphQLResponse {
 	budgets: {
@@ -48,6 +49,7 @@ const CREATE_BUDGET = gql`
 `;
 
 export const fetchYearData = async () => {
+	const client = getClient();
 	const { data } = await client.query(GET_BUDGETS);
 
 	const { budgets } = data;
@@ -118,6 +120,7 @@ export const fetchMonthData = async (year: string) => {
 };
 
 export const createBudget = async (budgetData: any) => {
+	const client = getClient();
 	try {
 		const { data } = await client.mutate({
 			variables: {
@@ -131,7 +134,10 @@ export const createBudget = async (budgetData: any) => {
 			mutation: CREATE_BUDGET,
 		});
 
-		const slug = `${data.budgetCreate.title}/${extractYear(data.budgetCreate.endDate)}`;
+		const slug = `${data.budgetCreate.title.toLowerCase()}/${extractYear(data.budgetCreate.endDate)}`;
+
+		revalidatePath('/', 'layout');
+
 		return { success: true, newRoute: `/finances/${slug}` };
 	} catch (error) {
 		console.error('An error occured', error);

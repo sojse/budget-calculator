@@ -40,16 +40,16 @@ export const BudgetSelect: React.FC<BudgetSelectProps> = ({
 	);
 
 	useEffect(() => {
+		setMonths(budgetInformation.months);
 		setSelectedBudget(
-			params.slug
+			params.slug && !params.id
 				? capitalizeFirstLetter(params.slug[0])
 				: budgetInformation.months[budgetInformation.selected.monthIndex]
 						.caption
 		);
-	}, []);
+	}, [budgetInformation]);
 
 	const fetchNewBudgets = async (e: any) => {
-		console.log(e.target.value);
 		setSelectedYear(e.target.value);
 		const newMonths = await getMonthData(e.target.value);
 		setMonths(newMonths);

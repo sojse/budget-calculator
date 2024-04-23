@@ -11,17 +11,19 @@
 		"build-storybook": "storybook build"
 	},
 	"dependencies": {
-		"@apollo/client": "^3.9.10",
+		"@apollo/client": "^3.9.11",
 		"@prisma/client": "^5.11.0",
 		"apollo-link-error": "^1.1.13",
 		"apollo-upload-client": "^18.0.1",
 		"classnames": "^2.5.1",
 		"date-fns": "^3.6.0",
+		"eslint-config-next": "^14.2.2",
 		"graphql-tag": "^2.12.6",
-		"next": "14.1.4",
+		"next": "^14.2.2",
+		"react": "^18.2.0",
 		"react-date-range": "^2.0.0-alpha.4",
 		"react-day-picker": "^8.10.1",
-		"react-dom": "^18",
+		"react-dom": "^18.2.0",
 		"react-toastify": "^10.0.5"
 	},
 	"devDependencies": {

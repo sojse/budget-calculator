@@ -16,7 +16,7 @@ const navigation = [
 	{ url: '#', label: 'Detaljer', isActive: false },
 ];
 
-export const revalidate = 10;
+const revalidate = 10;
 
 export default function RootLayout({
 	modal,

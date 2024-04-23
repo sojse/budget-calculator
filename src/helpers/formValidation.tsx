@@ -40,7 +40,7 @@ export const createBudgetValidation = async (
 				notUnique: false,
 			};
 		}
-		if (validationBudgets.length > 0) {
+		if (validationBudgets && validationBudgets.length > 0) {
 			validationBudgets.map((item: { value: string; caption: string }) => {
 				if (item.value.toUpperCase() === formData.budgetTitle.toUpperCase()) {
 					currentState.budgetName = {
