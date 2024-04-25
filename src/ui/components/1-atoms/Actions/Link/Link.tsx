@@ -1,6 +1,8 @@
+'use client';
 import classNames from 'classnames';
 import styles from './Link.module.scss';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export interface LinkProps {
 	children: React.ReactNode;
@@ -13,7 +15,6 @@ export interface LinkProps {
 	asText?: boolean;
 	asButton?: boolean;
 	target?: string;
-	onClick?: () => void;
 }
 
 export const LinkComponent: React.FC<LinkProps> = ({
@@ -27,8 +28,8 @@ export const LinkComponent: React.FC<LinkProps> = ({
 	asText,
 	asButton,
 	width,
-	onClick,
 }) => {
+	const router = useRouter();
 	const linkClasses = classNames(
 		styles.link,
 		styles[`link__${style}`],
@@ -42,10 +43,14 @@ export const LinkComponent: React.FC<LinkProps> = ({
 		className
 	);
 
+	const navigate = () => {
+		router.push(url);
+	};
+
 	return (
 		<>
 			{asText ? (
-				<p
+				<span
 					className={classNames(
 						styles.link,
 						styles[`link__${style}`],
@@ -53,15 +58,23 @@ export const LinkComponent: React.FC<LinkProps> = ({
 					)}
 				>
 					{children}
-				</p>
+				</span>
+			) : asButton ? (
+				<button
+					style={overrideStyle}
+					aria-label={ariaLabel}
+					onClick={navigate}
+					className={buttonClasses}
+				>
+					{children}
+				</button>
 			) : (
 				<Link
 					href={url}
 					style={overrideStyle}
 					target={target}
 					aria-label={ariaLabel}
-					onClick={onClick}
-					className={!asButton ? linkClasses : buttonClasses}
+					className={linkClasses}
 				>
 					{children}
 				</Link>
