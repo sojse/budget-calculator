@@ -1,0 +1,9 @@
+.finance_button {
+    @include action;
+    width: 100%;
+    height: 100%;
+    text-align: left;
+    padding: $spacing--5;
+    font-family: $font-secondary;
+    font-weight: $font-weight--semibold;
+}
