@@ -3,7 +3,7 @@ import { StoryFn, Meta } from '@storybook/react';
 import { FinanceBox, FinanceBoxProps } from './FinanceBox';
 
 export default {
-	title: 'Molecules/FinanceBox',
+	title: 'Molecules/FinanceListItems/FinanceBox',
 	component: FinanceBox,
 	tags: ['autodocs'],
 } as Meta;
