@@ -2,7 +2,6 @@
 import classNames from 'classnames';
 import styles from './MobileMenu.module.scss';
 import { LinkComponent } from '@/ui/components';
-import { useMobileMenu } from '@/hooks/useMobileMenu';
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 
@@ -13,14 +12,20 @@ export interface MobileMenuProps {
 		isActive: boolean;
 	}[];
 	className?: string;
+	mobileMenuOpen: boolean;
+	toggleMobileMenu: (state: boolean) => void;
 }
 
-export const MobileMenu = ({ navigation, className }: MobileMenuProps) => {
-	const { mobileMenuOpen, toggleMenu } = useMobileMenu();
+export const MobileMenu = ({
+	navigation,
+	className,
+	mobileMenuOpen,
+	toggleMobileMenu,
+}: MobileMenuProps) => {
 	const pathName = usePathname();
 
 	useEffect(() => {
-		toggleMenu(false);
+		toggleMobileMenu(false);
 	}, [pathName]);
 
 	return (

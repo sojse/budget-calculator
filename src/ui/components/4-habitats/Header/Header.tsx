@@ -9,9 +9,9 @@ import {
 	Heading,
 	MobileMenu,
 } from '@/ui/components';
-import { MobileMenuProvider } from '@/context/mobileMenuContext';
 import Link from 'next/link';
 import { useSelectedLayoutSegments } from 'next/navigation';
+import { useState } from 'react';
 
 export interface HeaderProps {
 	navigation: {
@@ -23,6 +23,11 @@ export interface HeaderProps {
 
 export const Header = ({ navigation }: HeaderProps) => {
 	const segment = useSelectedLayoutSegments();
+	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+	const toggleMenu = (state: boolean) => {
+		setMobileMenuOpen(state);
+	};
 
 	const dynamicNavigation = navigation.map((item) => {
 		let isActive = false;
@@ -50,7 +55,7 @@ export const Header = ({ navigation }: HeaderProps) => {
 	});
 
 	return (
-		<MobileMenuProvider>
+		<>
 			<header className={classNames(styles.header)}>
 				<Link
 					href={navigation[0].url}
@@ -74,10 +79,16 @@ export const Header = ({ navigation }: HeaderProps) => {
 					<User className={classNames(styles.header_icon)} />
 					<HamburgerButton
 						className={classNames(styles.header_hamburger_menu)}
+						mobileMenuOpen={mobileMenuOpen}
+						toggleMobileMenu={toggleMenu}
 					/>
 				</div>
 			</header>
-			<MobileMenu navigation={dynamicNavigation} />
-		</MobileMenuProvider>
+			<MobileMenu
+				navigation={dynamicNavigation}
+				mobileMenuOpen={mobileMenuOpen}
+				toggleMobileMenu={toggleMenu}
+			/>
+		</>
 	);
 };
