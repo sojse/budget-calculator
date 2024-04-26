@@ -3,7 +3,13 @@ import {
 	addIncomeValidation,
 	createBudgetValidation,
 } from '@/helpers/formValidation';
-import { createBudget, createIncome, fetchMonthData } from '@/lib/api';
+import {
+	createBudget,
+	createIncome,
+	fetchMonthData,
+	updateIncome,
+} from '@/lib/api';
+import { State } from '@/ui/components/3-organisms/Forms/IncomeForm';
 
 export async function getMonthData(year: string) {
 	return await fetchMonthData(year);
@@ -42,15 +48,7 @@ export async function submitNewBudget(currentState: any, formData: FormData) {
 	return status;
 }
 
-export async function addNewIncome(
-	currentState: {
-		incomeType: { hasError: boolean };
-		success: boolean;
-		error: boolean;
-		id: string;
-	},
-	formData: FormData
-) {
+export async function addNewIncome(currentState: State, formData: FormData) {
 	const rawFormData = Object.fromEntries(formData);
 	const newState = addIncomeValidation(currentState, rawFormData);
 
@@ -58,6 +56,28 @@ export async function addNewIncome(
 		return newState;
 	}
 
-	const finishState = await createIncome(rawFormData, currentState.id);
+	const finishState = await createIncome(rawFormData, currentState.budgetId);
 	return finishState;
+}
+
+export async function editIncome(currentState: State, formData: FormData) {
+	const rawFormData = Object.fromEntries(formData);
+	const newState = addIncomeValidation(currentState, rawFormData);
+
+	if (newState.incomeType.hasError) {
+		return newState;
+	}
+
+	if (currentState.incomeId) {
+		const finishState = await updateIncome(
+			rawFormData,
+			currentState.budgetId,
+			currentState.incomeId
+		);
+		return finishState;
+	}
+
+	const errorState = currentState;
+	errorState.error = true;
+	return errorState;
 }
