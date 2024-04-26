@@ -1,6 +1,9 @@
 'use server';
-import { createBudgetValidation } from '@/helpers/formValidation';
-import { createBudget, fetchMonthData } from '@/lib/api';
+import {
+	addIncomeValidation,
+	createBudgetValidation,
+} from '@/helpers/formValidation';
+import { createBudget, createIncome, fetchMonthData } from '@/lib/api';
 
 export async function getMonthData(year: string) {
 	return await fetchMonthData(year);
@@ -37,4 +40,24 @@ export async function submitNewBudget(currentState: any, formData: FormData) {
 	const status = await createBudget(validAndFilteredData);
 
 	return status;
+}
+
+export async function addNewIncome(
+	currentState: {
+		incomeType: { hasError: boolean };
+		success: boolean;
+		error: boolean;
+		id: string;
+	},
+	formData: FormData
+) {
+	const rawFormData = Object.fromEntries(formData);
+	const newState = addIncomeValidation(currentState, rawFormData);
+
+	if (newState.incomeType.hasError) {
+		return newState;
+	}
+
+	const finishState = await createIncome(rawFormData, currentState.id);
+	return finishState;
 }
