@@ -6,14 +6,11 @@ interface ToastProviderProps {
 	children: React.ReactNode;
 }
 
-export default function ToastProvider({ children }: ToastProviderProps) {
+export function ToastProvider({ children }: ToastProviderProps) {
 	return (
 		<>
 			{children}
-			<ToastContainer
-				position="bottom-left"
-				autoClose={3000}
-			/>
+			<ToastContainer position="bottom-left" autoClose={3000} />
 		</>
 	);
 }

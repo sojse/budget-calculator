@@ -6,4 +6,11 @@
     padding: $spacing--5;
     font-family: $font-secondary;
     font-weight: $font-weight--semibold;
+
+    &:hover {
+        .finance_button_text {
+            text-decoration: underline;
+            color: $color-button--hover
+        }
+    }
 }

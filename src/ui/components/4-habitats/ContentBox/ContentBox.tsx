@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import classNames from 'classnames';
 import styles from './ContentBox.module.scss';
@@ -7,7 +8,7 @@ export interface ContentBoxProps {
 	className?: string;
 }
 
-export const ContentBox: React.FC<ContentBoxProps> = async ({
+export const ContentBox: React.FC<ContentBoxProps> = ({
 	children,
 	className,
 }) => {

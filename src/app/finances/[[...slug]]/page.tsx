@@ -7,11 +7,17 @@ export async function generateStaticParams() {
 }
 
 export default async function Finance({ params }: { params: { slug: string[] } }) {
-	const incomeData = await fetchBudget(params.slug);
+	const budgetData = await fetchBudget(params.slug);
 	return (
 		<>
 			<TwoColumnLayout
-				column1={<FinanceList listType={'income'} listObjects={incomeData} />}
+				column1={
+					<FinanceList
+						listType={'income'}
+						listObjects={budgetData.incomes}
+						budgetId={budgetData.budgetId}
+					/>
+				}
 				column2={<div></div>}
 			/>
 		</>

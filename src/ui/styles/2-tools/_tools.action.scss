@@ -60,7 +60,6 @@
     &__underline {
         padding: 0;
         color: $color-button;
-        text-decoration: underline;
 
         &:disabled {
             color: $color-button--disabled;
@@ -68,6 +67,7 @@
 
         &:hover {
             color: $color-button--hover;
+            text-decoration: underline;
         }
     }
 }

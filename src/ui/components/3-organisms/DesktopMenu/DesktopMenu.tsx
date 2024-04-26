@@ -1,4 +1,3 @@
-'use client';
 import classNames from 'classnames';
 import styles from './DesktopMenu.module.scss';
 import { LinkComponent } from '@/ui/components';

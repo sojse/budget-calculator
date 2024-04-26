@@ -12,8 +12,6 @@ import { submitNewBudget } from '@/app/actions';
 import { useFormState } from 'react-dom';
 import { useRouter } from 'next/navigation';
 import { showToast } from '@/helpers/toast';
-import { useEffect } from 'react';
-
 
 export interface CreateBudgetFormProps {}
 const initialState = {
@@ -25,18 +23,16 @@ export const CreateBudgetForm: React.FC<CreateBudgetFormProps> = () => {
 	const [state, formAction] = useFormState(submitNewBudget, initialState);
 	const router = useRouter();
 
-	useEffect(() => {
-		if (state.success) {
-			router.push(state.newRoute);
-			showToast('success', <span>Din budget har skapats</span>);
-		} else if (state.error) {
-			router.back();
-			showToast(
-				'error',
-				<span>Något gick fel när din budget skulle skapas</span>
-			);
-		}
-	}, [state]);
+	if (state?.success) {
+		router.push(state.newRoute);
+		showToast('success', <span>Din budget har skapats</span>);
+	} else if (state?.success) {
+		router.back();
+		showToast(
+			'error',
+			<span>Något gick fel när din budget skulle skapas</span>
+		);
+	}
 
 	return (
 		<>
@@ -50,6 +46,7 @@ export const CreateBudgetForm: React.FC<CreateBudgetFormProps> = () => {
 			</Heading>
 			<form action={formAction} className={classNames(styles.budget_form)}>
 				<FormfieldString
+					tabIndex={0}
 					id="budgetName"
 					label="Budgetnamn"
 					type="text"

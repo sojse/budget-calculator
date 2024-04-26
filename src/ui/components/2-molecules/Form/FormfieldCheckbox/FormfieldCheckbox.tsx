@@ -14,7 +14,7 @@ export interface FormfieldCheckboxProps {
 	name?: string;
 	fieldGroup?: boolean;
 	register?: any;
-	onChange: () => void;
+	onChange?: () => void;
 	state?: {
 		required?: boolean;
 		disabled?: boolean;
