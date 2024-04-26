@@ -5,9 +5,11 @@ import { Button } from '@/ui/components';
 import { useRouter } from 'next/navigation';
 import { useFormStatus } from 'react-dom';
 
-export interface ModalButtonsProps {}
+export interface ModalButtonsProps {
+	buttonText: string;
+}
 
-export const ModalButtons: React.FC<ModalButtonsProps> = (serverAction) => {
+export const ModalButtons: React.FC<ModalButtonsProps> = ({ buttonText }) => {
 	const router = useRouter();
 	const { pending } = useFormStatus();
 
@@ -23,7 +25,7 @@ export const ModalButtons: React.FC<ModalButtonsProps> = (serverAction) => {
 				disabled={pending}
 				className={classNames(styles.modal_buttons_button)}
 			>
-				{pending ? 'Laddar...' : 'Skapa budget'}
+				{pending ? 'Laddar...' : buttonText}
 			</Button>
 			<Button
 				style="secondary"

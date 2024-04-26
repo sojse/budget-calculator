@@ -1,12 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
 import styles from './FinanceBox.module.scss';
-import { ContentBox, IconCircle } from '@/ui/components';
-import Pen from '@/ui/icons/icon-pen.svg';
+import { ContentBox, EditButton, IconCircle } from '@/ui/components';
 import TrashCan from '@/ui/icons/icon-trash.svg';
 import Money from '@/ui/icons/icon-dollar-sign.svg';
-import { capitalizeFirstLetter } from '@/helpers/string';
 import { formatCost } from '@/helpers/number';
+import { Income } from '@/context/budgetIdContext';
 
 export interface FinanceBoxProps {
 	className?: string;
@@ -18,10 +17,7 @@ export interface FinanceBoxProps {
 		| 'shopping'
 		| 'other'
 		| 'fun';
-	expenseInformation: {
-		text: string;
-		cost: number;
-	};
+	expenseInformation: Income;
 }
 
 const categories = {
@@ -54,18 +50,17 @@ export const FinanceBox: React.FC<FinanceBoxProps> = async ({
 					{categories[category]}
 				</span>
 				<span className={classNames(styles.finance_box_text)}>
-					{expenseInformation.text}
+					{expenseInformation.title}
 				</span>
 			</div>
 			<div className={classNames(styles.finance_box_right)}>
 				<span className={classNames(styles.finance_box_text)}>
-					{formatCost(expenseInformation.cost)} kr
+					{formatCost(expenseInformation.amount)} kr
 				</span>
-				<Pen
-					className={classNames(
-						styles.finance_box_icon,
-						styles.finance_box_icon__update
-					)}
+				<EditButton
+					className={classNames(styles.finance_box_icon)}
+					url="/modal/editIncome"
+					income={expenseInformation}
 				/>
 				<TrashCan
 					className={classNames(
