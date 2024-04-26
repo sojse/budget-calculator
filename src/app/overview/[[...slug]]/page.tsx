@@ -1,5 +1,9 @@
-import { Main, SiteHeading } from '@/ui/components';
-import { CreateBudgetForm } from '@/ui/components/3-organisms/Forms';
+import { fetchStaticParams } from '@/lib/api';
+
+export async function generateStaticParams() {
+	const mappedData = await fetchStaticParams();
+	return mappedData;
+}
 
 export default function Overview() {
 	return (
