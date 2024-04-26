@@ -24,6 +24,16 @@ export interface FinanceBoxProps {
 	};
 }
 
+const categories = {
+	income: 'Inkomst',
+	home: 'Hem',
+	transport: 'Transport',
+	savings: 'Sparande',
+	shopping: 'Shopping',
+	other: 'Övrigt',
+	fun: 'Nöjen',
+};
+
 export const FinanceBox: React.FC<FinanceBoxProps> = async ({
 	className,
 	category,
@@ -41,7 +51,7 @@ export const FinanceBox: React.FC<FinanceBoxProps> = async ({
 						styles.finance_box_text__light
 					)}
 				>
-					{capitalizeFirstLetter(category)}
+					{categories[category]}
 				</span>
 				<span className={classNames(styles.finance_box_text)}>
 					{expenseInformation.text}
