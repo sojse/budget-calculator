@@ -3,6 +3,7 @@ import { getClient } from '@/lib/apolloClient';
 import { buildNavigationString, capitalizeFirstLetter } from '@/helpers/string';
 import { extractYear } from '@/helpers/date';
 import { revalidatePath, revalidateTag } from 'next/cache';
+import { Income } from '@/context/budgetIdContext';
 
 export interface GraphQLResponse {
 	budgets: {
@@ -49,6 +50,16 @@ const CREATE_BUDGET = gql`
 	}
 `;
 
+const EDIT_INCOME = gql`
+	mutation IncomeUpdate($data: IncomeUpdateDataInput!, $incomeUpdateId: ID) {
+		incomeUpdate(data: $data, id: $incomeUpdateId) {
+			title
+			amount
+			id
+		}
+	}
+`;
+
 const ADD_INCOME = gql`
 	mutation IncomeCreate($data: IncomeCreateDataInput!) {
 		incomeCreate(data: $data) {
@@ -68,6 +79,8 @@ const GET_BUDGET = gql`
 				incomes {
 					title
 					amount
+					id
+					monthlyTransaction
 				}
 			}
 			expenses {
@@ -191,7 +204,6 @@ export const createBudget = async (budgetData: any) => {
 };
 
 export const createIncome = async (incomeData: any, id: string) => {
-	console.log(id);
 	const client = getClient();
 	try {
 		const { data } = await client.mutate({
@@ -205,6 +217,35 @@ export const createIncome = async (incomeData: any, id: string) => {
 			},
 			mutation: ADD_INCOME,
 		});
+		revalidateTag('budget');
+
+		return { success: true };
+	} catch (error) {
+		console.error('An error occured', error);
+		return { error: true };
+	}
+};
+
+export const updateIncome = async (
+	incomeData: any,
+	budgetId: string,
+	incomeId: string
+) => {
+	const client = getClient();
+	try {
+		const { data } = await client.mutate({
+			variables: {
+				data: {
+					budgetID: budgetId,
+					monthlyTransaction: incomeData.monthlyTransaction ? true : false,
+					title: incomeData.incomeType,
+					amount: Number(incomeData.incomeAmount),
+				},
+				incomeUpdateId: incomeId,
+			},
+			mutation: EDIT_INCOME,
+		});
+
 		revalidateTag('budget');
 
 		return { success: true };
@@ -233,11 +274,13 @@ export const fetchBudget = async (slug: string[]) => {
 
 	return {
 		budgetId: id,
-		incomes: incomes.map((income: { title: any; amount: any }) => ({
+		incomes: incomes.map((income: Income) => ({
 			category: 'income',
 			expenseInformation: {
-				text: income.title,
-				cost: income.amount,
+				title: income.title,
+				amount: income.amount,
+				monthlyTransaction: income.monthlyTransaction,
+				id: income.id,
 			},
 		})),
 	};
