@@ -1,0 +1,10 @@
+.delete_button {
+    @include action;
+    display: flex;
+    align-items: center;
+}
+
+.delete_button_icon {
+    color: $color-error;
+
+}

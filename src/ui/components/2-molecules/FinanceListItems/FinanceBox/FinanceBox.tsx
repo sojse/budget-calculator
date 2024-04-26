@@ -1,7 +1,12 @@
 import React from 'react';
 import classNames from 'classnames';
 import styles from './FinanceBox.module.scss';
-import { ContentBox, EditButton, IconCircle } from '@/ui/components';
+import {
+	ContentBox,
+	DeleteButton,
+	EditButton,
+	IconCircle,
+} from '@/ui/components';
 import TrashCan from '@/ui/icons/icon-trash.svg';
 import Money from '@/ui/icons/icon-dollar-sign.svg';
 import { formatCost } from '@/helpers/number';
@@ -62,11 +67,10 @@ export const FinanceBox: React.FC<FinanceBoxProps> = async ({
 					url="/modal/editIncome"
 					income={expenseInformation}
 				/>
-				<TrashCan
-					className={classNames(
-						styles.finance_box_icon,
-						styles.finance_box_icon__delete
-					)}
+				<DeleteButton
+					className={classNames(styles.finance_box_icon)}
+					url="/modal/deleteIncome"
+					income={expenseInformation}
 				/>
 			</div>
 		</ContentBox>
