@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 import { getClient } from '@/lib/apolloClient';
 import { buildNavigationString, capitalizeFirstLetter } from '@/helpers/string';
 import { extractYear } from '@/helpers/date';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 
 export interface GraphQLResponse {
 	budgets: {
@@ -45,6 +45,15 @@ const CREATE_BUDGET = gql`
 			endDate
 			startDate
 			title
+		}
+	}
+`;
+
+const ADD_INCOME = gql`
+	mutation IncomeCreate($data: IncomeCreateDataInput!) {
+		incomeCreate(data: $data) {
+			title
+			amount
 		}
 	}
 `;
@@ -181,6 +190,30 @@ export const createBudget = async (budgetData: any) => {
 	}
 };
 
+export const createIncome = async (incomeData: any, id: string) => {
+	console.log(id);
+	const client = getClient();
+	try {
+		const { data } = await client.mutate({
+			variables: {
+				data: {
+					budgetID: id,
+					monthlyTransaction: incomeData.monthlyTransaction ? true : false,
+					title: incomeData.incomeType,
+					amount: Number(incomeData.incomeAmount),
+				},
+			},
+			mutation: ADD_INCOME,
+		});
+		revalidateTag('budget');
+
+		return { success: true };
+	} catch (error) {
+		console.error('An error occured', error);
+		return { error: true };
+	}
+};
+
 export const fetchBudget = async (slug: string[]) => {
 	const year = slug ? slug[1] : '';
 	const month = slug ? capitalizeFirstLetter(slug[0]) : '';
@@ -189,17 +222,25 @@ export const fetchBudget = async (slug: string[]) => {
 	const { data } = await client.query({
 		query: GET_BUDGET,
 		variables: { budgetId: id },
+		context: {
+			fetchOptions: {
+				next: { tags: ['budget'] },
+			},
+		},
 	});
 
 	const incomes = data.budget.incomes.incomes;
 
-	return incomes.map((income: { title: any; amount: any }) => ({
-		category: 'income',
-		expenseInformation: {
-			text: income.title,
-			cost: income.amount,
-		},
-	}));
+	return {
+		budgetId: id,
+		incomes: incomes.map((income: { title: any; amount: any }) => ({
+			category: 'income',
+			expenseInformation: {
+				text: income.title,
+				cost: income.amount,
+			},
+		})),
+	};
 };
 
 const getBudgetId = async (year: string, month: string) => {
