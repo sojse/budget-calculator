@@ -28,8 +28,10 @@ export const Modal: React.FC<ModalProps> = ({ children }) => {
 
 	useEffect(() => {
 		document.addEventListener('mousedown', handleOutsideClick);
+		document.body.classList.add('u-disable-scroll');
 		return () => {
 			document.removeEventListener('mousedown', handleOutsideClick);
+			document.body.classList.remove('u-disable-scroll');
 		};
 	}, []);
 
