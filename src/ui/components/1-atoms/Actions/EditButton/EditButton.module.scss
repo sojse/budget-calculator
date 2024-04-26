@@ -1,0 +1,10 @@
+.edit_button {
+    @include action;
+    display: flex;
+    align-items: center;
+}
+
+.edit_button_icon {
+    color: $color-neutral;
+
+}
