@@ -76,7 +76,7 @@ export const CreateBudgetForm: React.FC<CreateBudgetFormProps> = () => {
 					defaultValue="åååå-mm-dd - åååå-mm-dd"
 					className={classNames(styles.budget_form_date_picker)}
 				/>
-				<ModalButtons />
+				<ModalButtons buttonText="Skapa budget" />
 			</form>
 		</>
 	);
