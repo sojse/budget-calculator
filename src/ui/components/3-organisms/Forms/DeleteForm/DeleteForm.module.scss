@@ -1,0 +1,7 @@
+.delete_form_button {
+    color: $color-error;
+}
+
+.delete_form {
+    @include form;
+}
