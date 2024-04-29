@@ -18,14 +18,14 @@ export interface FinanceBoxProps {
 	data: Expense | Income;
 }
 
-const categories = {
+export const categories = {
 	income: 'Inkomst',
 	home: 'Hem',
-	transport: 'Transport',
-	savings: 'Sparande',
-	shopping: 'Shopping',
-	other: 'Övrigt',
 	entertainment: 'Nöjen',
+	shopping: 'Shopping',
+	savings: 'Sparande',
+	transport: 'Transport',
+	other: 'Övrigt',
 };
 
 export const FinanceBox: React.FC<FinanceBoxProps> = async ({

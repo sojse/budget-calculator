@@ -7,6 +7,7 @@ import { createBudget, fetchMonthData } from '@/lib/api/budget';
 import { createIncome, deleteIncomeById, updateIncome } from '@/lib/api/income';
 
 import { DeleteState } from '@/ui/components/3-organisms/Forms/DeleteForm/DeleteForm';
+import { ExpenseState } from '@/ui/components/3-organisms/Forms/ExpenseForm';
 import { State } from '@/ui/components/3-organisms/Forms/IncomeForm';
 
 export async function getMonthData(year: string) {
@@ -92,4 +93,11 @@ export async function deleteIncome(currentState: DeleteState, _: FormData) {
 	const errorState = currentState;
 	errorState.error = true;
 	return errorState;
+}
+
+export async function createExpense(
+	currentState: ExpenseState,
+	formData: FormData
+) {
+	return currentState;
 }

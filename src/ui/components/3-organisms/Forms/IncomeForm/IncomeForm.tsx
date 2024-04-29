@@ -89,13 +89,20 @@ export const IncomeForm: React.FC<IncomeFormProps> = ({
 					name="incomeAmount"
 					state={{ required: true }}
 				/>
-				<FormfieldCheckbox
-					id="monthlyTransaction"
-					label="Löpande månadsinkomst"
-					name="monthlyTransaction"
-					defaultChecked={incomeData?.monthlyTransaction}
-					value="true"
-				/>
+				{
+					<FormfieldCheckbox
+						id="monthlyTransaction"
+						label={
+							incomeData
+								? 'Uppdatera kommande inkomster'
+								: 'Löpande månadsinkomst'
+						}
+						name="monthlyTransaction"
+						defaultChecked={incomeData?.monthlyTransaction}
+						value="true"
+					/>
+				}
+
 				<ModalButtons buttonText={buttonText} />
 			</form>
 		</>
