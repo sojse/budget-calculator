@@ -4,7 +4,7 @@ import {
 	createBudgetValidation,
 } from '@/helpers/formValidation';
 import { createBudget, fetchMonthData } from '@/lib/api/budget';
-import { createIncome, updateIncome } from '@/lib/api/income';
+import { createIncome, deleteIncomeById, updateIncome } from '@/lib/api/income';
 
 import { DeleteState } from '@/ui/components/3-organisms/Forms/DeleteForm/DeleteForm';
 import { State } from '@/ui/components/3-organisms/Forms/IncomeForm';
@@ -69,6 +69,20 @@ export async function editIncome(currentState: State, formData: FormData) {
 	if (currentState.incomeId) {
 		const finishState = await updateIncome(
 			rawFormData,
+			currentState.budgetId,
+			currentState.incomeId
+		);
+		return finishState;
+	}
+
+	const errorState = currentState;
+	errorState.error = true;
+	return errorState;
+}
+
+export async function deleteIncome(currentState: DeleteState, _: FormData) {
+	if (currentState.incomeId) {
+		const finishState = await deleteIncomeById(
 			currentState.budgetId,
 			currentState.incomeId
 		);

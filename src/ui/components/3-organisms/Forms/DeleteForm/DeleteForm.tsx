@@ -54,16 +54,6 @@ export const DeleteForm: React.FC<DeleteFormProps> = ({
 			</Heading>
 			<form action={formAction} className={classNames(styles.delete_form)}>
 				<span>Är du säker på att du vill radera "{incomeData.title}"</span>
-				{incomeData.monthlyTransaction && (
-					<FormfieldCheckbox
-						id="monthlyTransaction"
-						label="Radera även för kommande månader"
-						name="monthlyTransaction"
-						defaultChecked={false}
-						value="true"
-					/>
-				)}
-
 				<ModalButtons buttonText="Radera" deleteButton={true} />
 			</form>
 		</>

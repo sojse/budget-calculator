@@ -21,6 +21,12 @@ const ADD_INCOME = gql`
 	}
 `;
 
+const DELETE_INCOME = gql`
+	mutation IncomeDelete($incomeDeleteId: ID!, $budgetId: String!) {
+		incomeDelete(id: $incomeDeleteId, budgetID: $budgetId)
+	}
+`;
+
 export const createIncome = async (incomeData: any, id: string) => {
 	const client = getClient();
 	try {
@@ -62,6 +68,26 @@ export const updateIncome = async (
 				incomeUpdateId: incomeId,
 			},
 			mutation: EDIT_INCOME,
+		});
+
+		revalidateTag('budget');
+
+		return { success: true };
+	} catch (error) {
+		console.error('An error occured', error);
+		return { error: true };
+	}
+};
+
+export const deleteIncomeById = async (budgetId: string, incomeId: string) => {
+	const client = getClient();
+	try {
+		const { data } = await client.mutate({
+			variables: {
+				budgetId: budgetId,
+				incomeDeleteId: incomeId,
+			},
+			mutation: DELETE_INCOME,
 		});
 
 		revalidateTag('budget');
