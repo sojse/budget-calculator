@@ -89,7 +89,7 @@ export const ExpenseForm: React.FC<ExpenseFormProps> = ({
 					state={{
 						required: true,
 						hasError: state?.expenseType?.hasError,
-						errorMessage: 'Utgiftstyp måste vara mellan 3-16 tecken',
+						errorMessage: 'Utgiftstyp måste vara mellan 2-20 tecken',
 					}}
 				/>
 				<FormfieldString

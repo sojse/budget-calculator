@@ -71,7 +71,7 @@ export const createBudgetValidation = async (
 
 export const addIncomeValidation = (currentState: any, formData: any) => {
 	if (formData.incomeType !== null) {
-		if (formData.incomeType.length < 3 || formData.incomeType.length > 16) {
+		if (formData.incomeType.length < 2 || formData.incomeType.length > 20) {
 			currentState.incomeType.hasError = true;
 		} else {
 			currentState.incomeType = {

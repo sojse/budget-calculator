@@ -77,7 +77,7 @@ export const IncomeForm: React.FC<IncomeFormProps> = ({
 					state={{
 						required: true,
 						hasError: state?.incomeType?.hasError,
-						errorMessage: 'Inkomststyp måste vara mellan 3-16 tecken',
+						errorMessage: 'Inkomststyp måste vara mellan 2-20 tecken',
 					}}
 				/>
 				<FormfieldString
