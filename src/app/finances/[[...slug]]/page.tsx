@@ -1,4 +1,4 @@
-import { fetchBudget, fetchStaticParams } from '@/lib/api';
+import { fetchBudget, fetchStaticParams } from '@/lib/api/budget';
 import { FinanceList, TwoColumnLayout } from '@/ui/components';
 
 export async function generateStaticParams() {
@@ -6,7 +6,11 @@ export async function generateStaticParams() {
 	return mappedData;
 }
 
-export default async function Finance({ params }: { params: { slug: string[] } }) {
+export default async function Finance({
+	params,
+}: {
+	params: { slug: string[] };
+}) {
 	const budgetData = await fetchBudget(params.slug);
 	return (
 		<>

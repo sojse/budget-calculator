@@ -1,4 +1,4 @@
-import { fetchStaticParams } from '@/lib/api';
+import { fetchStaticParams } from '@/lib/api/budget';
 
 export async function generateStaticParams() {
 	const mappedData = await fetchStaticParams();

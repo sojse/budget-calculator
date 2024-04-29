@@ -21,7 +21,6 @@ export interface DeleteFormProps {
 	successMessage: string;
 	errorMessage: string;
 	incomeData: Income;
-	buttonText: string;
 }
 
 export const DeleteForm: React.FC<DeleteFormProps> = ({

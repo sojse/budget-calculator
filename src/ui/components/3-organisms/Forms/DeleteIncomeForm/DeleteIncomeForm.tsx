@@ -13,7 +13,6 @@ export const DeleteIncomeForm: React.FC = ({}) => {
 			successMessage="Inkomsten har raderats"
 			errorMessage="Något gick fel när inkosmten skulle raderas"
 			incomeData={income}
-			buttonText="Radera inkomst"
 		/>
 	);
 };

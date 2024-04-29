@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 import { getClient } from '@/lib/apolloClient';
 import { buildNavigationString, capitalizeFirstLetter } from '@/helpers/string';
 import { extractYear } from '@/helpers/date';
-import { revalidatePath, revalidateTag } from 'next/cache';
+import { revalidatePath } from 'next/cache';
 import { Income } from '@/context/budgetIdContext';
 
 export interface GraphQLResponse {
@@ -46,25 +46,6 @@ const CREATE_BUDGET = gql`
 			endDate
 			startDate
 			title
-		}
-	}
-`;
-
-const EDIT_INCOME = gql`
-	mutation IncomeUpdate($data: IncomeUpdateDataInput!, $incomeUpdateId: ID) {
-		incomeUpdate(data: $data, id: $incomeUpdateId) {
-			title
-			amount
-			id
-		}
-	}
-`;
-
-const ADD_INCOME = gql`
-	mutation IncomeCreate($data: IncomeCreateDataInput!) {
-		incomeCreate(data: $data) {
-			title
-			amount
 		}
 	}
 `;
@@ -200,58 +181,6 @@ export const createBudget = async (budgetData: any) => {
 	} catch (error) {
 		console.error('An error occured', error);
 		return { success: false };
-	}
-};
-
-export const createIncome = async (incomeData: any, id: string) => {
-	const client = getClient();
-	try {
-		const { data } = await client.mutate({
-			variables: {
-				data: {
-					budgetID: id,
-					monthlyTransaction: incomeData.monthlyTransaction ? true : false,
-					title: incomeData.incomeType,
-					amount: Number(incomeData.incomeAmount),
-				},
-			},
-			mutation: ADD_INCOME,
-		});
-		revalidateTag('budget');
-
-		return { success: true };
-	} catch (error) {
-		console.error('An error occured', error);
-		return { error: true };
-	}
-};
-
-export const updateIncome = async (
-	incomeData: any,
-	budgetId: string,
-	incomeId: string
-) => {
-	const client = getClient();
-	try {
-		const { data } = await client.mutate({
-			variables: {
-				data: {
-					budgetID: budgetId,
-					monthlyTransaction: incomeData.monthlyTransaction ? true : false,
-					title: incomeData.incomeType,
-					amount: Number(incomeData.incomeAmount),
-				},
-				incomeUpdateId: incomeId,
-			},
-			mutation: EDIT_INCOME,
-		});
-
-		revalidateTag('budget');
-
-		return { success: true };
-	} catch (error) {
-		console.error('An error occured', error);
-		return { error: true };
 	}
 };
 

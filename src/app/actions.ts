@@ -3,12 +3,10 @@ import {
 	addIncomeValidation,
 	createBudgetValidation,
 } from '@/helpers/formValidation';
-import {
-	createBudget,
-	createIncome,
-	fetchMonthData,
-	updateIncome,
-} from '@/lib/api';
+import { createBudget, fetchMonthData } from '@/lib/api/budget';
+import { createIncome, updateIncome } from '@/lib/api/income';
+
+import { DeleteState } from '@/ui/components/3-organisms/Forms/DeleteForm/DeleteForm';
 import { State } from '@/ui/components/3-organisms/Forms/IncomeForm';
 
 export async function getMonthData(year: string) {

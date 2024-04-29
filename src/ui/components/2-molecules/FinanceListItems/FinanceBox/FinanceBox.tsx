@@ -7,7 +7,6 @@ import {
 	EditButton,
 	IconCircle,
 } from '@/ui/components';
-import TrashCan from '@/ui/icons/icon-trash.svg';
 import Money from '@/ui/icons/icon-dollar-sign.svg';
 import { formatCost } from '@/helpers/number';
 import { Income } from '@/context/budgetIdContext';
