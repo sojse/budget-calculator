@@ -17,22 +17,28 @@ Income.args = {
 		{
 			category: 'income',
 			expenseInformation: {
-				text: 'Present från farmor',
-				cost: 2000,
+				title: 'Lön',
+				amount: 12300,
+				monthlyTransaction: true,
+				id: '12345',
 			},
 		},
 		{
 			category: 'income',
 			expenseInformation: {
-				text: 'Lön',
-				cost: 46000,
+				title: 'CSN',
+				amount: 12374,
+				monthlyTransaction: true,
+				id: '45657',
 			},
 		},
 		{
 			category: 'income',
 			expenseInformation: {
-				text: 'Csn',
-				cost: 12543,
+				title: 'Present',
+				amount: 400,
+				monthlyTransaction: false,
+				id: '563232',
 			},
 		},
 	],

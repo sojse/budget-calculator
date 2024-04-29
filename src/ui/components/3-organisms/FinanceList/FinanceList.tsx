@@ -33,7 +33,7 @@ export const FinanceList: React.FC<FinanceListProps> = async ({
 
 			<ul className={classNames(styles.finance_list_list)}>
 				<LoadMore visibleElements={4}>
-					{listObjects.reverse().map((item: FinanceBoxProps, index: number) => {
+					{listObjects.map((item: FinanceBoxProps, index: number) => {
 						return (
 							<li key={index}>
 								<FinanceBox
