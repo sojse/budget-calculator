@@ -31,6 +31,7 @@ UpdateIncome.args = {
 		title: 'Lön',
 		monthlyTransaction: true,
 		id: '1234',
+		categoryType: { category: 'income' },
 	},
 	buttonText: 'Uppdatera inkomst',
 };

@@ -22,6 +22,7 @@ DeleteIncome.args = {
 		title: 'Lön',
 		monthlyTransaction: false,
 		id: '1234',
+		categoryType: { category: 'income' },
 	},
 };
 
@@ -36,5 +37,6 @@ DeleteExpense.args = {
 		title: 'Netflix',
 		monthlyTransaction: true,
 		id: '1234',
+		categoryType: { category: 'income' },
 	},
 };

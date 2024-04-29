@@ -19,3 +19,9 @@ export const Income: StoryFn<FinanceCreateButtonProps> = Template.bind({});
 Income.args = {
 	category: 'income',
 };
+
+export const Expense: StoryFn<FinanceCreateButtonProps> = Template.bind({});
+Expense.args = {
+	category: 'expense',
+};
+

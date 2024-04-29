@@ -10,7 +10,29 @@
     &:hover {
         .finance_button_text {
             text-decoration: underline;
-            color: $color-button--hover
+        }
+    }
+
+    &__expense {
+        .finance_button_text {
+            color: $color-expense;
+        }
+
+        &:hover {
+            .finance_button_text {
+                color: $color-expense--hover
+            }
+        }
+    }
+
+    &__income {
+        .finance_button_text {
+            color: $color-income;
+        }
+        &:hover {
+            .finance_button_text {
+                color: $color-button--hover
+            }
         }
     }
 }

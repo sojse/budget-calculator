@@ -7,21 +7,15 @@ import {
 	EditButton,
 	IconCircle,
 } from '@/ui/components';
-import Money from '@/ui/icons/icon-dollar-sign.svg';
+import * as Icons from '@/ui/icons';
 import { formatCost } from '@/helpers/number';
-import { Income } from '@/context/budgetIdContext';
+import { Expense, Income } from '@/context/budgetIdContext';
+import { capitalizeFirstLetter } from '@/helpers/string';
 
 export interface FinanceBoxProps {
 	className?: string;
-	category:
-		| 'income'
-		| 'home'
-		| 'transport'
-		| 'savings'
-		| 'shopping'
-		| 'other'
-		| 'fun';
-	expenseInformation: Income;
+	category: 'income' | 'expense';
+	data: Expense | Income;
 }
 
 const categories = {
@@ -31,19 +25,24 @@ const categories = {
 	savings: 'Sparande',
 	shopping: 'Shopping',
 	other: 'Övrigt',
-	fun: 'Nöjen',
+	entertainment: 'Nöjen',
 };
 
 export const FinanceBox: React.FC<FinanceBoxProps> = async ({
 	className,
 	category,
-	expenseInformation,
+	data,
 }) => {
+	const IconComponent =
+		Icons[
+			capitalizeFirstLetter(data.categoryType.category) as keyof typeof Icons
+		];
+
 	return (
 		<ContentBox className={classNames(styles.finance_box, className)}>
 			<div className={classNames(styles.finance_box_left)}>
-				<IconCircle style="primary" size="sm">
-					<Money />
+				<IconCircle style={data.categoryType.category} size="sm">
+					<IconComponent />
 				</IconCircle>
 				<span
 					className={classNames(
@@ -51,25 +50,26 @@ export const FinanceBox: React.FC<FinanceBoxProps> = async ({
 						styles.finance_box_text__light
 					)}
 				>
-					{categories[category]}
+					{categories[data.categoryType.category]}
 				</span>
 				<span className={classNames(styles.finance_box_text)}>
-					{expenseInformation.title}
+					{data.title}
 				</span>
 			</div>
 			<div className={classNames(styles.finance_box_right)}>
 				<span className={classNames(styles.finance_box_text)}>
-					{formatCost(expenseInformation.amount)} kr
+					{category === 'expense' && '- '}
+					{formatCost(data.amount)} kr
 				</span>
 				<EditButton
 					className={classNames(styles.finance_box_icon)}
 					url="/modal/editIncome"
-					income={expenseInformation}
+					income={data}
 				/>
 				<DeleteButton
 					className={classNames(styles.finance_box_icon)}
 					url="/modal/deleteIncome"
-					income={expenseInformation}
+					income={data}
 				/>
 			</div>
 		</ContentBox>

@@ -208,21 +208,24 @@ export const fetchBudget = async (slug: string[]) => {
 		budgetId: id,
 		incomes: incomes.map((income: Income) => ({
 			category: 'income',
-			expenseInformation: {
+			data: {
 				title: income.title,
 				amount: income.amount,
 				monthlyTransaction: income.monthlyTransaction,
 				id: income.id,
+				categoryType: { category: 'income' },
 			},
 		})),
 		expenses: expenses.map((expense: Expense) => ({
 			category: 'expense',
-			expenseInformation: {
+			data: {
 				title: expense.title,
 				amount: expense.amount,
 				monthlyTransaction: expense.monthlyTransaction,
 				id: expense.id,
-				expenseCategory: expense.categoryType,
+				categoryType: {
+					category: expense.categoryType?.toString().toLowerCase(),
+				},
 			},
 		})),
 	};

@@ -30,7 +30,11 @@ export const FinanceCreateButton: React.FC<FinanceCreateButtonProps> = ({
 	return (
 		<ContentBox>
 			<button
-				className={classNames(styles.finance_button, className)}
+				className={classNames(
+					styles.finance_button,
+					styles[`finance_button__${category}`],
+					className
+				)}
 				onClick={navigate}
 			>
 				<LinkComponent
@@ -39,7 +43,7 @@ export const FinanceCreateButton: React.FC<FinanceCreateButtonProps> = ({
 					style="primary"
 					className={classNames(styles.finance_button_text)}
 				>
-					+ Lägg till inkomst
+					{category === 'income' ? '+ Lägg till inkomst' : '+ Lägg till utgift'}
 				</LinkComponent>
 			</button>
 		</ContentBox>

@@ -26,6 +26,7 @@ export const DeleteButton: React.FC<DeleteButtonProps> = ({
 			amount: income.amount,
 			monthlyTransaction: income.monthlyTransaction,
 			id: income.id,
+			categoryType: income.categoryType,
 		});
 		router.push(url);
 	};

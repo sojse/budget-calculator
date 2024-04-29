@@ -4,6 +4,7 @@ import React, { createContext, useState } from 'react';
 export type Income = {
 	title: string;
 	amount: number;
+	categoryType: CategoryType;
 	monthlyTransaction: boolean;
 	id: string;
 };
@@ -11,9 +12,20 @@ export type Income = {
 export type Expense = {
 	title: string;
 	amount: number;
-	categoryType: string;
+	categoryType: CategoryType;
 	monthlyTransaction: boolean;
 	id: string;
+};
+
+export type CategoryType = {
+	category:
+		| 'income'
+		| 'home'
+		| 'transport'
+		| 'savings'
+		| 'shopping'
+		| 'other'
+		| 'entertainment';
 };
 
 interface BudgetContextType {
@@ -25,7 +37,13 @@ interface BudgetContextType {
 
 export const BudgetIdContext = createContext<BudgetContextType>({
 	currentBudgetId: '',
-	income: { title: '', amount: 0, monthlyTransaction: true, id: '' },
+	income: {
+		title: '',
+		amount: 0,
+		monthlyTransaction: true,
+		id: '',
+		categoryType: { category: 'income' },
+	},
 	setCurrentBudgetId: () => {},
 	setIncome: () => {},
 });
@@ -39,6 +57,7 @@ export const BudgetIdProvider: React.FC<{ children: React.ReactNode }> = ({
 		amount: 0,
 		monthlyTransaction: true,
 		id: '',
+		categoryType: { category: 'income' },
 	});
 
 	const contextValue = {

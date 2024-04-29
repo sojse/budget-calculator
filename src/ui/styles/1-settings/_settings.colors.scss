@@ -9,6 +9,7 @@ $color-midnight: #061d71;
 $color-jade: #00b35d;
 $color-mustard: #fec910;
 $color-pumpkin: #ff8c4b;
+$color-henna: #b86331;
 $color-fire: #ff4b23;
 $color-blossom: #ffcce7;
 $color-barbie: #ff6dbc;
@@ -70,12 +71,13 @@ $color-category-home: $color-pumpkin;
 $color-category-transport: $color-jade;
 $color-category-savings: $color-mustard;
 $color-category-shopping: $color-eggplant;
-$color-catehory-other: $color-midnight;
-$color-catehory-fun: $color-barbie;
+$color-category-other: $color-midnight;
+$color-category-entertainment: $color-barbie;
 
 // Chart colors
 $color-income: $color-primary;
 $color-expense: $color-secondary;
+$color-expense--hover: $color-henna;
 
 // Formfield
 $color-formfield: $color-grey-900;

@@ -12,7 +12,7 @@
         & > * {
             height: $icon-size--xl;
             width: $icon-size--xl;
-            padding: $spacing--0;
+            padding: 5px;
         }
     }
 
@@ -37,10 +37,10 @@
         }
     }
 
-    &__primary {
+    &__primary,
+    &__income  {
         background-color: $color-primary;
     }
-
     &__secondary {
         background-color: $color-secondary;
     }
@@ -62,11 +62,11 @@
     }
 
     &__other {
-        background-color: $color-catehory-other;
+        background-color: $color-category-other;
     }
 
-    &__fun {
-        background-color: $color-catehory-fun;
+    &__entertainment {
+        background-color: $color-category-entertainment;
     }
 
 }

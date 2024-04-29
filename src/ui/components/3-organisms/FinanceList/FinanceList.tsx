@@ -32,14 +32,11 @@ export const FinanceList: React.FC<FinanceListProps> = async ({
 			<FinanceCreateButton category={listType} budgetId={budgetId} />
 
 			<ul className={classNames(styles.finance_list_list)}>
-				<LoadMore visibleElements={4}>
+				<LoadMore visibleElements={3}>
 					{listObjects.map((item: FinanceBoxProps, index: number) => {
 						return (
 							<li key={index}>
-								<FinanceBox
-									category={'income'}
-									expenseInformation={item.expenseInformation}
-								/>
+								<FinanceBox category={listType} data={item.data} />
 							</li>
 						);
 					})}

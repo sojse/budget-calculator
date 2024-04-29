@@ -8,12 +8,13 @@ export interface IconCircleProps {
 	style?:
 		| 'primary'
 		| 'secondary'
+		| 'income'
 		| 'home'
 		| 'transport'
 		| 'savings'
 		| 'shopping'
 		| 'other'
-		| 'fun';
+		| 'entertainment';
 	children: React.ReactNode;
 }
 
