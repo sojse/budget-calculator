@@ -8,6 +8,14 @@ export type Income = {
 	id: string;
 };
 
+export type Expense = {
+	title: string;
+	amount: number;
+	categoryType: string;
+	monthlyTransaction: boolean;
+	id: string;
+};
+
 interface BudgetContextType {
 	currentBudgetId: string;
 	income: Income;

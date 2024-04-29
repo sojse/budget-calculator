@@ -3,7 +3,7 @@ import { getClient } from '@/lib/apolloClient';
 import { buildNavigationString, capitalizeFirstLetter } from '@/helpers/string';
 import { extractYear } from '@/helpers/date';
 import { revalidatePath } from 'next/cache';
-import { Income } from '@/context/budgetIdContext';
+import { Expense, Income } from '@/context/budgetIdContext';
 
 export interface GraphQLResponse {
 	budgets: {
@@ -65,11 +65,13 @@ const GET_BUDGET = gql`
 				}
 			}
 			expenses {
-				category
 				totalSum
-				expensesByCategory {
-					amount
+				expenses {
 					title
+					amount
+					id
+					monthlyTransaction
+					categoryType
 				}
 			}
 		}
@@ -200,6 +202,7 @@ export const fetchBudget = async (slug: string[]) => {
 	});
 
 	const incomes = data.budget.incomes.incomes;
+	const expenses = data.budget.expenses.expenses;
 
 	return {
 		budgetId: id,
@@ -210,6 +213,16 @@ export const fetchBudget = async (slug: string[]) => {
 				amount: income.amount,
 				monthlyTransaction: income.monthlyTransaction,
 				id: income.id,
+			},
+		})),
+		expenses: expenses.map((expense: Expense) => ({
+			category: 'expense',
+			expenseInformation: {
+				title: expense.title,
+				amount: expense.amount,
+				monthlyTransaction: expense.monthlyTransaction,
+				id: expense.id,
+				expenseCategory: expense.categoryType,
 			},
 		})),
 	};

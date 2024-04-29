@@ -16,11 +16,18 @@ export default async function Finance({
 		<>
 			<TwoColumnLayout
 				column1={
-					<FinanceList
-						listType={'income'}
-						listObjects={budgetData.incomes}
-						budgetId={budgetData.budgetId}
-					/>
+					<>
+						<FinanceList
+							listType={'expense'}
+							listObjects={budgetData.expenses}
+							budgetId={budgetData.budgetId}
+						/>
+						<FinanceList
+							listType={'income'}
+							listObjects={budgetData.incomes}
+							budgetId={budgetData.budgetId}
+						/>
+					</>
 				}
 				column2={<div></div>}
 			/>
