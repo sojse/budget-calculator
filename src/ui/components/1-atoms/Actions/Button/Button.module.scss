@@ -29,6 +29,12 @@
 	}
 }
 
+.button_content {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .button_spinner {
 	height: 3rem;
 	width: 3rem;

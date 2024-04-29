@@ -20,3 +20,9 @@
 .modal_buttons_button {
     width: 100%;
 }
+
+.modal_buttons__delete {
+    height: $icon-size--md;
+    width: $icon-size--md;
+    margin-left: $spacing--1;
+}

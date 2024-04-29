@@ -52,7 +52,7 @@ export const Button: React.FC<ButtonProps> = ({
 			onClick={onClick}
 		>
 			<span
-				className={classNames({
+				className={classNames(styles.button_content, {
 					[styles.button_content__hidden]: loading,
 				})}
 			>

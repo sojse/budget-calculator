@@ -31,12 +31,7 @@
 }
 
 .finance_box_icon {
-    height: $icon-size--lg;
-    width: $icon-size--lg;
-
-    @include mq(md) {
-        height: $icon-size--md;
-        width: $icon-size--md;
-    }
+    height: $icon-size--md;
+    width: $icon-size--md;
 }
 

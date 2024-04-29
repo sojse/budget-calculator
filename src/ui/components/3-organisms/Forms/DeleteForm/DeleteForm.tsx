@@ -1,7 +1,7 @@
 'use client';
 import classNames from 'classnames';
 import styles from './DeleteForm.module.scss';
-import { Heading, ModalButtons, FormfieldCheckbox } from '@/ui/components';
+import { Heading, ModalButtons } from '@/ui/components';
 import { useFormState } from 'react-dom';
 import { useRouter } from 'next/navigation';
 import { showToast } from '@/helpers/toast';

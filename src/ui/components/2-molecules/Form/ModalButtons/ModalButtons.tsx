@@ -4,12 +4,17 @@ import styles from './ModalButtons.module.scss';
 import { Button } from '@/ui/components';
 import { useRouter } from 'next/navigation';
 import { useFormStatus } from 'react-dom';
+import Trash from '@/ui/icons/icon-trash.svg';
 
 export interface ModalButtonsProps {
 	buttonText: string;
+	deleteButton?: boolean;
 }
 
-export const ModalButtons: React.FC<ModalButtonsProps> = ({ buttonText }) => {
+export const ModalButtons: React.FC<ModalButtonsProps> = ({
+	buttonText,
+	deleteButton,
+}) => {
 	const router = useRouter();
 	const { pending } = useFormStatus();
 
@@ -26,6 +31,9 @@ export const ModalButtons: React.FC<ModalButtonsProps> = ({ buttonText }) => {
 				className={classNames(styles.modal_buttons_button)}
 			>
 				{pending ? 'Laddar...' : buttonText}
+				{deleteButton && !pending && (
+					<Trash className={classNames(styles.modal_buttons__delete)} />
+				)}
 			</Button>
 			<Button
 				style="secondary"
