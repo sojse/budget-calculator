@@ -30,7 +30,7 @@ Transport.args = {
 		amount: 400,
 		monthlyTransaction: false,
 		id: '563232',
-		categoryType: { category: 'transport' },
+		categoryType: { category: 'transportation' },
 	},
 };
 

@@ -81,3 +81,16 @@ export const addIncomeValidation = (currentState: any, formData: any) => {
 	}
 	return currentState;
 };
+
+export const addExpenseValidation = (currentState: any, formData: any) => {
+	if (formData.categoryType !== null) {
+		if (formData.categoryType.length < 2 || formData.categoryType.length > 20) {
+			currentState.categoryType.hasError = true;
+		} else {
+			currentState.categoryType = {
+				hasError: false,
+			};
+		}
+	}
+	return currentState;
+};

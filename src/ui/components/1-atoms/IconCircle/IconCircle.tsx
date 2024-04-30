@@ -10,7 +10,7 @@ export interface IconCircleProps {
 		| 'secondary'
 		| 'income'
 		| 'home'
-		| 'transport'
+		| 'transportation'
 		| 'savings'
 		| 'shopping'
 		| 'other'

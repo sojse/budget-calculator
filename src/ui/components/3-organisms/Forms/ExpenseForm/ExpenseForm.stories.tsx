@@ -31,7 +31,7 @@ UpdateExpense.args = {
 		title: 'Billån',
 		monthlyTransaction: true,
 		id: '1234',
-		categoryType: { category: 'transport' },
+		categoryType: { category: 'transportation' },
 	},
 	buttonText: 'Uppdatera utgift',
 };

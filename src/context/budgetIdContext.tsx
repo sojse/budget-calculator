@@ -21,7 +21,7 @@ export type CategoryType = {
 	category:
 		| 'income'
 		| 'home'
-		| 'transport'
+		| 'transportation'
 		| 'savings'
 		| 'shopping'
 		| 'other'

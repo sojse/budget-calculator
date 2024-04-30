@@ -102,8 +102,9 @@ export const ExpenseForm: React.FC<ExpenseFormProps> = ({
 					state={{ required: true }}
 				/>
 				<FormfieldSelect
-					id={'expenseCategory'}
+					id={'categoryType'}
 					label={'Välj utgiftskategori'}
+					name="categoryType"
 					options={categoryTypes}
 					value={selectedCategory}
 					onChange={(e: any) => setSelectedCategory(e.target.value)}

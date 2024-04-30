@@ -24,7 +24,7 @@ export const categories = {
 	entertainment: 'Nöjen',
 	shopping: 'Shopping',
 	savings: 'Sparande',
-	transport: 'Transport',
+	transportation: 'Transport',
 	other: 'Övrigt',
 };
 

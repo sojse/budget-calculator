@@ -1,9 +1,11 @@
 'use server';
 import {
+	addExpenseValidation,
 	addIncomeValidation,
 	createBudgetValidation,
 } from '@/helpers/formValidation';
 import { createBudget, fetchMonthData } from '@/lib/api/budget';
+import { createNewExpense } from '@/lib/api/expense';
 import { createIncome, deleteIncomeById, updateIncome } from '@/lib/api/income';
 
 import { DeleteState } from '@/ui/components/3-organisms/Forms/DeleteForm/DeleteForm';
@@ -99,5 +101,15 @@ export async function createExpense(
 	currentState: ExpenseState,
 	formData: FormData
 ) {
-	return currentState;
+	const rawFormData = Object.fromEntries(formData);
+	const newState = addExpenseValidation(currentState, rawFormData);
+	if (newState.categoryType.hasError) {
+		return newState;
+	}
+
+	const finishState = await createNewExpense(
+		rawFormData,
+		currentState.budgetId
+	);
+	return finishState;
 }
