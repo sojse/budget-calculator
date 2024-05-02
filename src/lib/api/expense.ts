@@ -18,6 +18,12 @@ const GET_CATEGORIES = gql`
 	}
 `;
 
+const DELETE_EXPENSE = gql`
+	mutation ExpenseDelete($expenseDeleteId: ID!, $budgetId: String!) {
+		expenseDelete(id: $expenseDeleteId, budgetID: $budgetId)
+	}
+`;
+
 enum ExpenseCategoryType {
 	ENTERTAINMENT = 'ENTERTAINMENT',
 	HOME = 'HOME',
@@ -70,3 +76,27 @@ const useMappedCategoryType = async (categoryType: string) => {
 		? (categoryType as ExpenseCategoryType)
 		: ExpenseCategoryType.OTHER;
 };
+
+export const deleteExpenseById = async (
+	budgetId: string,
+	expenseId: string
+) => {
+	const client = getClient();
+	try {
+		const { data } = await client.mutate({
+			variables: {
+				budgetId: budgetId,
+				expenseDeleteId: expenseId,
+			},
+			mutation: DELETE_EXPENSE,
+		});
+
+		revalidateTag('budget');
+
+		return { success: true };
+	} catch (error) {
+		console.error('An error occured', error);
+		return { error: true };
+	}
+};
+
