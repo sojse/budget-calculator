@@ -4,7 +4,7 @@ import { DeleteForm } from '../DeleteForm';
 import { deleteIncome } from '@/app/actions';
 
 export const DeleteIncomeForm: React.FC = ({}) => {
-	const { income } = useBudgetId();
+	const { data } = useBudgetId();
 
 	return (
 		<DeleteForm
@@ -12,7 +12,7 @@ export const DeleteIncomeForm: React.FC = ({}) => {
 			heading="Radera inkomst"
 			successMessage="Inkomsten har raderats"
 			errorMessage="Något gick fel när inkosmten skulle raderas"
-			incomeData={income}
+			incomeData={data}
 		/>
 	);
 };

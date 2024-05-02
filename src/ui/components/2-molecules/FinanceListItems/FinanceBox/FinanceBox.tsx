@@ -63,8 +63,10 @@ export const FinanceBox: React.FC<FinanceBoxProps> = async ({
 				</span>
 				<EditButton
 					className={classNames(styles.finance_box_icon)}
-					url="/modal/editIncome"
-					income={data}
+					url={
+						category === 'income' ? '/modal/editIncome' : 'modal/editExpense'
+					}
+					data={data}
 				/>
 				<DeleteButton
 					className={classNames(styles.finance_box_icon)}

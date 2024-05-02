@@ -19,9 +19,9 @@ export const DeleteButton: React.FC<DeleteButtonProps> = ({
 	income,
 }) => {
 	const router = useRouter();
-	const { setIncome } = useBudgetId();
+	const { setData } = useBudgetId();
 	const handleClick = () => {
-		setIncome({
+		setData({
 			title: income.title,
 			amount: income.amount,
 			monthlyTransaction: income.monthlyTransaction,

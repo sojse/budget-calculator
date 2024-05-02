@@ -5,27 +5,30 @@ import styles from './EditButton.module.scss';
 import Pen from '@/ui/icons/icon-pen.svg';
 import { useRouter } from 'next/navigation';
 import { useBudgetId } from '@/hooks/useBudgetId';
-import { Income } from '@/context/budgetIdContext';
+import { Expense, Income } from '@/context/budgetIdContext';
 
 export interface EditButtonProps {
 	className?: string;
 	url: string;
-	income: Income;
+	data: Income | Expense;
 }
 
 export const EditButton: React.FC<EditButtonProps> = ({
 	className,
 	url,
-	income,
+	data,
 }) => {
 	const router = useRouter();
-	const { setIncome } = useBudgetId();
+	const { setData } = useBudgetId();
 	const handleClick = () => {
-		setIncome({
-			title: income.title,
-			amount: income.amount,
-			monthlyTransaction: income.monthlyTransaction,
-			id: income.id,
+		setData({
+			title: data.title,
+			amount: data.amount,
+			monthlyTransaction: data.monthlyTransaction,
+			id: data.id,
+			categoryType: data.categoryType
+				? data.categoryType
+				: { category: 'income' },
 		});
 		router.push(url);
 	};

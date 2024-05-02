@@ -1,6 +1,17 @@
 'use client';
 import React, { createContext, useState } from 'react';
 
+export type CategoryType = {
+	category:
+		| 'income'
+		| 'home'
+		| 'transportation'
+		| 'savings'
+		| 'shopping'
+		| 'other'
+		| 'entertainment';
+};
+
 export type Income = {
 	title: string;
 	amount: number;
@@ -17,27 +28,16 @@ export type Expense = {
 	id: string;
 };
 
-export type CategoryType = {
-	category:
-		| 'income'
-		| 'home'
-		| 'transportation'
-		| 'savings'
-		| 'shopping'
-		| 'other'
-		| 'entertainment';
-};
-
 interface BudgetContextType {
 	currentBudgetId: string;
-	income: Income;
+	data: Income | Expense;
 	setCurrentBudgetId: (id: string) => void;
-	setIncome: (income: Income) => void;
+	setData: (income: Income) => void;
 }
 
 export const BudgetIdContext = createContext<BudgetContextType>({
 	currentBudgetId: '',
-	income: {
+	data: {
 		title: '',
 		amount: 0,
 		monthlyTransaction: true,
@@ -45,14 +45,14 @@ export const BudgetIdContext = createContext<BudgetContextType>({
 		categoryType: { category: 'income' },
 	},
 	setCurrentBudgetId: () => {},
-	setIncome: () => {},
+	setData: () => {},
 });
 
 export const BudgetIdProvider: React.FC<{ children: React.ReactNode }> = ({
 	children,
 }) => {
 	const [currentBudgetId, setCurrentBudgetId] = useState('');
-	const [income, setIncome] = useState<Income>({
+	const [data, setData] = useState<Income | Expense>({
 		title: '',
 		amount: 0,
 		monthlyTransaction: true,
@@ -62,9 +62,9 @@ export const BudgetIdProvider: React.FC<{ children: React.ReactNode }> = ({
 
 	const contextValue = {
 		currentBudgetId,
-		income,
+		data,
 		setCurrentBudgetId,
-		setIncome,
+		setData,
 	};
 
 	return (
