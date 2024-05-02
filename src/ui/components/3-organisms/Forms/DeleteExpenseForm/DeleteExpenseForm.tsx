@@ -1,14 +1,14 @@
 'use client';
 import { useBudgetId } from '@/hooks/useBudgetId';
 import { DeleteForm } from '../DeleteForm';
-import { deleteIncome } from '@/app/actions';
+import { deleteExpense } from '@/app/actions';
 
-export const DeleteIncomeForm: React.FC = ({}) => {
+export const DeleteExpenseForm: React.FC = ({}) => {
 	const { data } = useBudgetId();
 
 	return (
 		<DeleteForm
-			action={deleteIncome}
+			action={deleteExpense}
 			heading="Radera inkomst"
 			successMessage="Inkomsten har raderats"
 			errorMessage="Något gick fel när inkosmten skulle raderas"

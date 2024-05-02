@@ -12,7 +12,7 @@ export type DeleteState = {
 	success: boolean;
 	error: boolean;
 	budgetId: string;
-	incomeId?: string;
+	dataId?: string;
 };
 
 export interface DeleteFormProps {
@@ -20,7 +20,7 @@ export interface DeleteFormProps {
 	heading: string;
 	successMessage: string;
 	errorMessage: string;
-	incomeData: Income;
+	data: Income;
 }
 
 export const DeleteForm: React.FC<DeleteFormProps> = ({
@@ -28,14 +28,14 @@ export const DeleteForm: React.FC<DeleteFormProps> = ({
 	heading,
 	successMessage,
 	errorMessage,
-	incomeData,
+	data,
 }) => {
 	const { currentBudgetId } = useBudgetId();
 	const [state, formAction] = useFormState(action, {
 		success: false,
 		error: false,
 		budgetId: currentBudgetId,
-		incomeId: incomeData.id,
+		dataId: data.id,
 	});
 	const router = useRouter();
 
@@ -53,7 +53,7 @@ export const DeleteForm: React.FC<DeleteFormProps> = ({
 				{heading}
 			</Heading>
 			<form action={formAction} className={classNames(styles.delete_form)}>
-				<span>Är du säker på att du vill radera "{incomeData.title}"</span>
+				<span>Är du säker på att du vill radera "{data.title}"</span>
 				<ModalButtons buttonText="Radera" deleteButton={true} />
 			</form>
 		</>
