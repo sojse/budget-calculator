@@ -1,9 +1,11 @@
+'use client';
+import { useBudgetId } from '@/hooks/useBudgetId';
 import { createExpense } from '@/app/actions';
 import { ExpenseForm } from '../ExpenseForm';
-import { useBudgetId } from '@/hooks/useBudgetId';
 
 export const EditExpenseForm: React.FC = () => {
-	//const { data } = useBudgetId();
+	const { data } = useBudgetId();
+
 	return (
 		<ExpenseForm
 			action={createExpense}
@@ -11,7 +13,7 @@ export const EditExpenseForm: React.FC = () => {
 			successMessage={'Utigften har uppdaterats'}
 			errorMessage={'Något gick fel när din utgift skulle uppdateras'}
 			buttonText={'Uppdatera'}
-			//expenseData={data}
+			expenseData={data}
 		/>
 	);
 };

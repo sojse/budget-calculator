@@ -1,13 +1,22 @@
 import { revalidateTag } from 'next/cache';
 import { getClient } from '../apolloClient';
 import gql from 'graphql-tag';
-import { CategoryType } from '@/context/budgetIdContext';
 
 const ADD_EXPENSE = gql`
 	mutation ExpenseCreate($data: ExpenseCreateDataInput!) {
 		expenseCreate(data: $data) {
 			title
 			amount
+		}
+	}
+`;
+
+const EDIT_EXPENSE = gql`
+	mutation ExpenseUpdate($data: ExpenseUpdateDataInput!, $expenseUpdateId: ID) {
+		expenseUpdate(data: $data, id: $expenseUpdateId) {
+			title
+			amount
+			id
 		}
 	}
 `;
@@ -100,3 +109,35 @@ export const deleteExpenseById = async (
 	}
 };
 
+export const updateExpense = async (
+	expenseData: any,
+	budgetId: string,
+	incomeId: string
+) => {
+	const client = getClient();
+	try {
+		const categoryType = await useMappedCategoryType(
+			expenseData.categoryType.toUpperCase()
+		);
+		const { data } = await client.mutate({
+			variables: {
+				data: {
+					budgetID: budgetId,
+					monthlyTransaction: expenseData.monthlyTransaction ? true : false,
+					title: expenseData.incomeType,
+					amount: Number(expenseData.incomeAmount),
+					categoryType: categoryType,
+				},
+				incomeUpdateId: incomeId,
+			},
+			mutation: EDIT_EXPENSE,
+		});
+
+		revalidateTag('budget');
+
+		return { success: true };
+	} catch (error) {
+		console.error('An error occured', error);
+		return { error: true };
+	}
+};

@@ -5,7 +5,11 @@ import {
 	createBudgetValidation,
 } from '@/helpers/formValidation';
 import { createBudget, fetchMonthData } from '@/lib/api/budget';
-import { createNewExpense, deleteExpenseById } from '@/lib/api/expense';
+import {
+	createNewExpense,
+	deleteExpenseById,
+	updateExpense,
+} from '@/lib/api/expense';
 import { createIncome, deleteIncomeById, updateIncome } from '@/lib/api/income';
 
 import { DeleteState } from '@/ui/components/3-organisms/Forms/DeleteForm/DeleteForm';
@@ -126,4 +130,29 @@ export async function createExpense(
 		currentState.budgetId
 	);
 	return finishState;
+}
+
+export async function editExpense(
+	currentState: ExpenseState,
+	formData: FormData
+) {
+	const rawFormData = Object.fromEntries(formData);
+	const newState = addIncomeValidation(currentState, rawFormData);
+
+	if (newState.expenseType.hasError) {
+		return newState;
+	}
+
+	if (currentState.expenseId) {
+		const finishState = await updateExpense(
+			rawFormData,
+			currentState.budgetId,
+			currentState.expenseId
+		);
+		return finishState;
+	}
+
+	const errorState = currentState;
+	errorState.error = true;
+	return errorState;
 }
