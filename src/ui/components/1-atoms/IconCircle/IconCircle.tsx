@@ -14,7 +14,10 @@ export interface IconCircleProps {
 		| 'savings'
 		| 'shopping'
 		| 'other'
-		| 'entertainment';
+		| 'entertainment'
+		| 'negative'
+		| 'positive';
+
 	children: React.ReactNode;
 }
 

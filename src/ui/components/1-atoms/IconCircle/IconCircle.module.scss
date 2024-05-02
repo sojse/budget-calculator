@@ -69,4 +69,11 @@
         background-color: $color-category-entertainment;
     }
 
+    &__positive {
+        background-color: $color-success;
+    }
+
+    &__negative {
+        background-color: $color-error;
+    }
 }
