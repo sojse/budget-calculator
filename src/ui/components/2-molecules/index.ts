@@ -1,3 +1,4 @@
+export * from './BarChart';
 export * from './BudgetSelect';
 export * from './DynamicHeader';
 export * from './FinanceListItems';
