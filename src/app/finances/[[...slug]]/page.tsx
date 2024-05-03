@@ -1,6 +1,5 @@
 import { fetchBudget, fetchStaticParams } from '@/lib/api/budget';
-import { FinanceList, TwoColumnLayout } from '@/ui/components';
-import { BarChart } from '@/ui/components/2-molecules/BarChart/BarChart';
+import { BudgetOverview, FinanceList, TwoColumnLayout } from '@/ui/components';
 
 export async function generateStaticParams() {
 	const mappedData = await fetchStaticParams();
@@ -31,13 +30,13 @@ export default async function Finance({
 					</>
 				}
 				column2={
-					<BarChart
+					<BudgetOverview
 						chartData={{
-							labels: ['Bar 1', 'Bar 2', 'Bar 3', 'Bar 4'],
+							labels: ['Income', 'Expense'],
 							datasets: [
 								{
-									label: 'Label 1',
-									data: [1, 2, 3, 4],
+									label: 'Amount',
+									data: budgetData.budgetOverview,
 								},
 							],
 						}}

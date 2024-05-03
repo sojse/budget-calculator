@@ -47,3 +47,10 @@
 	font-size: $font-size--3;
 	line-height: $line-height--3;
 }
+
+@mixin bold-text {
+	font-family: $font-secondary;
+	font-weight: $font-weight--bold;
+	font-size: $font-size--3;
+	line-height: $line-height--3;
+}

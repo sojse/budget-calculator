@@ -228,6 +228,10 @@ export const fetchBudget = async (slug: string[]) => {
 				},
 			},
 		})),
+		budgetOverview: [
+			data.budget.incomes.totalSum,
+			data.budget.expenses.totalSum,
+		],
 	};
 };
 

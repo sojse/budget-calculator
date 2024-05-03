@@ -1,3 +1,4 @@
+export * from './BudgetOverview';
 export * from './DesktopMenu';
 export * from './FinanceList';
 export * from './Forms';
