@@ -35,10 +35,7 @@ export default function RootLayout({
 				<ToastProvider>
 					<BudgetIdProvider>
 						<Header navigation={navigation} />
-						<Main>
-							<SiteHeading />
-							{children}
-						</Main>
+						<Main>{children}</Main>
 						<div className={classNames(styles.layout_modal)}>{modal}</div>
 					</BudgetIdProvider>
 				</ToastProvider>

@@ -8,19 +8,13 @@ import { useRouter, usePathname, useParams } from 'next/navigation';
 import { capitalizeFirstLetter } from '@/helpers/string';
 
 export interface BudgetSelectProps {
-	className?: string;
 	budgetInformation: {
 		years: { value: string; caption: string }[];
 		months: { value: string; caption: string }[];
-		selected: {
-			monthIndex: number;
-			yearIndex: number;
-		};
 	};
 }
 
 export const BudgetSelect: React.FC<BudgetSelectProps> = ({
-	className,
 	budgetInformation,
 }) => {
 	const params = useParams();
@@ -31,12 +25,12 @@ export const BudgetSelect: React.FC<BudgetSelectProps> = ({
 	const [selectedYear, setSelectedYear] = useState(
 		params.slug
 			? params.slug[1]
-			: budgetInformation.years[budgetInformation.selected.yearIndex].caption
+			: budgetInformation.years[budgetInformation.years.length - 1].caption
 	);
 	const [selectedBudget, setSelectedBudget] = useState(
 		params.slug
 			? capitalizeFirstLetter(params.slug[0])
-			: budgetInformation.months[budgetInformation.selected.monthIndex].caption
+			: budgetInformation.months[budgetInformation.months.length - 1].caption
 	);
 
 	useEffect(() => {
@@ -44,8 +38,7 @@ export const BudgetSelect: React.FC<BudgetSelectProps> = ({
 		setSelectedBudget(
 			params.slug && !params.id
 				? capitalizeFirstLetter(params.slug[0])
-				: budgetInformation.months[budgetInformation.selected.monthIndex]
-						.caption
+				: budgetInformation.months[budgetInformation.months.length - 1].caption
 		);
 	}, [budgetInformation]);
 
@@ -72,7 +65,7 @@ export const BudgetSelect: React.FC<BudgetSelectProps> = ({
 	};
 
 	return (
-		<form className={classNames(styles.budget_select, className)}>
+		<form className={classNames(styles.budget_select)}>
 			<FormfieldSelect
 				id={'Year'}
 				label={'Year'}

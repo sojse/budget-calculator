@@ -9,16 +9,15 @@ import {
 	LinkComponent,
 } from '@/ui/components';
 import Wallet from '@/ui/icons/icon-wallet.svg';
-import { fetchYearData } from '@/lib/api/budget';
+import { fetchBudgets } from '@/lib/api/budget';
 
 export interface SiteHeadingProps {
 	className?: string;
+	year: string;
 }
 
-export const SiteHeading: React.FC<SiteHeadingProps> = async ({
-	className,
-}) => {
-	const budgetInformation = await fetchYearData();
+export const SiteHeading: React.FC<SiteHeadingProps> = async ({ className, year }) => {
+	const budgetInformation = await fetchBudgets(year);
 
 	return (
 		<ContentSection
@@ -30,7 +29,7 @@ export const SiteHeading: React.FC<SiteHeadingProps> = async ({
 					<Wallet className={classNames(styles.site_heading_icon)} />
 				</IconCircle>
 				<DynamicHeader
-					defaultString={`${budgetInformation.months[budgetInformation.selected.monthIndex].caption} ${budgetInformation.years[budgetInformation.selected.yearIndex].caption}`}
+					defaultString={`${budgetInformation.months[budgetInformation.months.length - 1].caption} ${budgetInformation.years[budgetInformation.years.length - 1].caption}`}
 				/>
 			</div>
 			<div className={classNames(styles.site_heading__right)}>

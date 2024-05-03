@@ -1,4 +1,3 @@
-'use client';
 import classNames from 'classnames';
 import styles from './BudgetOverview.module.scss';
 import {
@@ -9,7 +8,6 @@ import {
 	LinkComponent,
 } from '@/ui/components';
 import { formatCost } from '@/helpers/number';
-import { useEffect } from 'react';
 
 export interface BudgetOverviewProps {
 	chartData: ChartData;

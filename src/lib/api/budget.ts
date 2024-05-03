@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 import { getClient } from '@/lib/apolloClient';
 import { buildNavigationString, capitalizeFirstLetter } from '@/helpers/string';
 import { extractYear } from '@/helpers/date';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { Expense, Income } from '@/context/budgetIdContext';
 
 export interface GraphQLResponse {
@@ -12,20 +12,18 @@ export interface GraphQLResponse {
 	}[];
 }
 
-const GET_BUDGETS = {
-	query: gql`
-		query BudgetsQuery {
+const GET_BUDGETS = gql`
+	query BudgetsQuery {
+		budgets {
+			year
 			budgets {
-				year
-				budgets {
-					title
-					id
-					endDate
-				}
+				title
+				id
+				endDate
 			}
 		}
-	`,
-};
+	}
+`;
 
 const GET_BUDGETS_BY_YEAR = gql`
 	query BudgetsQuery($year: String!) {
@@ -80,7 +78,7 @@ const GET_BUDGET = gql`
 
 export const fetchStaticParams = async () => {
 	const client = getClient();
-	const { data } = await client.query(GET_BUDGETS);
+	const { data } = await client.query({ query: GET_BUDGETS });
 
 	return data.budgets.flatMap((item: { year: number; budgets: any[] }) =>
 		item.budgets.map((budget: { title: string }) => ({
@@ -89,40 +87,39 @@ export const fetchStaticParams = async () => {
 	);
 };
 
-export const fetchYearData = async () => {
+export const fetchBudgets = async (year: string) => {
 	const client = getClient();
-	const { data } = await client.query(GET_BUDGETS);
+	const { data } = await client.query({
+		query: GET_BUDGETS,
+		context: {
+			fetchOptions: {
+				next: { tags: ['budgets'] },
+			},
+		},
+	});
 
 	const { budgets } = data;
-	const latestYearBudgets = budgets[budgets.length - 1].budgets;
+
+	var selectedBudgets = [];
+	if (year === '') {
+		selectedBudgets = budgets[budgets.length - 1].budgets;
+	} else {
+		const filteredBudgets = budgets.filter(
+			(item: any) => item.year.toString() === year
+		);
+		selectedBudgets = filteredBudgets[0].budgets;
+	}
 
 	const years = budgets.map((item: any) => ({
 		value: `${item.year}`,
 		caption: `${item.year}`,
 	}));
-	const months = latestYearBudgets.map((budget: any) => ({
+	const months = selectedBudgets.map((budget: any) => ({
 		value: budget.title,
 		caption: budget.title,
 	}));
 
-	const selected = {
-		monthIndex: months.length - 1,
-		yearIndex: years.length - 1,
-	};
-
-	const navigationString = buildNavigationString(
-		months[selected.monthIndex].caption,
-		years[selected.yearIndex].caption
-	);
-
-	const budgetInformation = {
-		years,
-		months,
-		selected,
-		navigationString,
-	};
-
-	return budgetInformation;
+	return { years, months };
 };
 
 export const fetchMonthData = async (year: string) => {
@@ -132,11 +129,6 @@ export const fetchMonthData = async (year: string) => {
 		const { data } = await client.query({
 			query: GET_BUDGETS_BY_YEAR,
 			variables: { year },
-			context: {
-				fetchOptions: {
-					next: { tags: ['budgets'] },
-				},
-			},
 		});
 
 		const { budgets } = data;
@@ -177,7 +169,7 @@ export const createBudget = async (budgetData: any) => {
 
 		const slug = `${data.budgetCreate.title.toLowerCase()}/${extractYear(data.budgetCreate.endDate)}`;
 
-		revalidatePath('/', 'layout');
+		revalidateTag('budgets');
 
 		return { success: true, newRoute: `/finances/${slug}` };
 	} catch (error) {
@@ -237,7 +229,7 @@ export const fetchBudget = async (slug: string[]) => {
 
 const getBudgetId = async (year: string, month: string) => {
 	const client = getClient();
-	const { data } = await client.query(GET_BUDGETS);
+	const { data } = await client.query({ query: GET_BUDGETS });
 	var id = '';
 
 	data.budgets.forEach(

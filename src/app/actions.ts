@@ -4,7 +4,7 @@ import {
 	addIncomeValidation,
 	createBudgetValidation,
 } from '@/helpers/formValidation';
-import { createBudget, fetchMonthData } from '@/lib/api/budget';
+import { createBudget, fetchBudgets, fetchMonthData } from '@/lib/api/budget';
 import {
 	createNewExpense,
 	deleteExpenseById,
