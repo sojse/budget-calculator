@@ -4,10 +4,14 @@ import styles from './layout.module.scss';
 import classNames from 'classnames';
 import { Header, Main, SiteHeading, ToastProvider } from '@/ui/components';
 import { BudgetIdProvider } from '@/context/budgetIdContext';
+//import icon from './icon.svg';
 
 export const metadata: Metadata = {
 	title: 'Budget Calculator',
 	description: 'A tool to track your monthly budgets',
+	icons: {
+		icon: './icon.png',
+	},
 };
 
 const navigation = [
@@ -25,6 +29,7 @@ export default function RootLayout({
 	modal: React.ReactNode;
 	children: React.ReactNode;
 }>) {
+
 	return (
 		<html lang="en">
 			<body className={classNames(styles.layout)}>
