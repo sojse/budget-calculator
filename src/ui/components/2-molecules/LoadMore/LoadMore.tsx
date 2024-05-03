@@ -33,7 +33,7 @@ export const LoadMore: React.FC<LoadMoreProps> = ({
 				<>
 					{React.Children.toArray(children).slice(0, visibleElements)}
 					{shouldShowButton && (
-						<Button onClick={handleLoadMore} style="primary">
+						<Button onClick={handleLoadMore} style="primary" width="maxMobile">
 							Visa mer
 						</Button>
 					)}
