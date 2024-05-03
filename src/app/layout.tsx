@@ -4,7 +4,6 @@ import styles from './layout.module.scss';
 import classNames from 'classnames';
 import { Header, Main, SiteHeading, ToastProvider } from '@/ui/components';
 import { BudgetIdProvider } from '@/context/budgetIdContext';
-//import icon from './icon.svg';
 
 export const metadata: Metadata = {
 	title: 'Budget Calculator',
