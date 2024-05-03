@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import '@/ui/styles/globals.scss';
 import styles from './layout.module.scss';
 import classNames from 'classnames';
-import { Header, Main, SiteHeading, ToastProvider } from '@/ui/components';
+import { Header, Main, ToastProvider } from '@/ui/components';
 import { BudgetIdProvider } from '@/context/budgetIdContext';
 
 export const metadata: Metadata = {
