@@ -11,10 +11,12 @@ import { formatCost } from '@/helpers/number';
 
 export interface BudgetOverviewProps {
 	chartData: ChartData;
+	detailUrl: string;
 }
 
 export const BudgetOverview: React.FC<BudgetOverviewProps> = ({
 	chartData,
+	detailUrl,
 }) => {
 	const income = chartData.datasets[0].data[0];
 	const expense = chartData.datasets[0].data[1];
@@ -50,7 +52,7 @@ export const BudgetOverview: React.FC<BudgetOverviewProps> = ({
 				/>
 			)}
 
-			<LinkComponent style="primary" url={'#'}>
+			<LinkComponent style="primary" url={detailUrl}>
 				Se detaljerat resultat
 			</LinkComponent>
 		</div>

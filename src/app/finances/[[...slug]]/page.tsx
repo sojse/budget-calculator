@@ -18,6 +18,10 @@ export default async function Finance({
 }) {
 	const year = params.slug ? params.slug[1] : '';
 	const budgetData = await fetchBudget(params.slug);
+	const detailUrl = params.slug
+		? `/details/${params.slug.join('/')}`
+		: '/details';
+
 	return (
 		<>
 			<SiteHeading year={year} />
@@ -47,6 +51,7 @@ export default async function Finance({
 								},
 							],
 						}}
+						detailUrl={detailUrl}
 					/>
 				}
 			/>
