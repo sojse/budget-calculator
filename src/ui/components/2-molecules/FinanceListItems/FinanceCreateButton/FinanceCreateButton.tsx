@@ -26,11 +26,10 @@ export const FinanceCreateButton: React.FC<FinanceCreateButtonProps> = ({
 
 	const navigate = () => {
 		if (category === 'income') {
-			router.push('/modal/createIncome');
+			router.push('/modal/createIncome', { scroll: false });
 		} else {
-			router.push('/modal/createExpense');
+			router.push('/modal/createExpense', { scroll: false });
 		}
-		
 	};
 	return (
 		<ContentBox>

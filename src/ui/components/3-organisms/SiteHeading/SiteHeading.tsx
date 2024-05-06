@@ -38,6 +38,7 @@ export const SiteHeading: React.FC<SiteHeadingProps> = async ({ className, year 
 					asButton
 					width="maxMobile"
 					url="/modal/createBudget"
+					scroll={false}
 				>
 					Skapa ny budget
 				</LinkComponent>

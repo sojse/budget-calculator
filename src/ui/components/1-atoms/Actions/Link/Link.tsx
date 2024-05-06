@@ -15,6 +15,7 @@ export interface LinkProps {
 	asText?: boolean;
 	asButton?: boolean;
 	target?: string;
+	scroll?: boolean;
 }
 
 export const LinkComponent: React.FC<LinkProps> = ({
@@ -28,6 +29,7 @@ export const LinkComponent: React.FC<LinkProps> = ({
 	asText,
 	asButton,
 	width,
+	scroll = true,
 }) => {
 	const router = useRouter();
 	const linkClasses = classNames(
@@ -44,7 +46,7 @@ export const LinkComponent: React.FC<LinkProps> = ({
 	);
 
 	const navigate = () => {
-		router.push(url);
+		router.push(url, { scroll: scroll });
 	};
 
 	return (
@@ -75,6 +77,7 @@ export const LinkComponent: React.FC<LinkProps> = ({
 					target={target}
 					aria-label={ariaLabel}
 					className={linkClasses}
+					scroll={scroll}
 				>
 					{children}
 				</Link>
