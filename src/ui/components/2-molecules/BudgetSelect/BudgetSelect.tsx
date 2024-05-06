@@ -25,20 +25,20 @@ export const BudgetSelect: React.FC<BudgetSelectProps> = ({
 	const [selectedYear, setSelectedYear] = useState(
 		params.slug
 			? params.slug[1]
-			: budgetInformation.years[budgetInformation.years.length - 1].caption
+			: budgetInformation.years[budgetInformation.years.length - 1].value
 	);
 	const [selectedBudget, setSelectedBudget] = useState(
 		params.slug
-			? capitalizeFirstLetter(params.slug[0])
-			: budgetInformation.months[budgetInformation.months.length - 1].caption
+			? params.slug[0]
+			: budgetInformation.months[budgetInformation.months.length - 1].value
 	);
 
 	useEffect(() => {
 		setMonths(budgetInformation.months);
 		setSelectedBudget(
 			params.slug && !params.id
-				? capitalizeFirstLetter(params.slug[0])
-				: budgetInformation.months[budgetInformation.months.length - 1].caption
+				? params.slug[0]
+				: budgetInformation.months[budgetInformation.months.length - 1].value
 		);
 	}, [budgetInformation]);
 

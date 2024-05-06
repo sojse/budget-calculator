@@ -115,7 +115,7 @@ export const fetchBudgets = async (year: string) => {
 		caption: `${item.year}`,
 	}));
 	const months = selectedBudgets.map((budget: any) => ({
-		value: budget.title,
+		value: budget.title.toLowerCase(),
 		caption: budget.title,
 	}));
 
