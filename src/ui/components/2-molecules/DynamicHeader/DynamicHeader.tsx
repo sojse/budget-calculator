@@ -2,7 +2,7 @@
 import React from 'react';
 import { Heading } from '@/ui/components';
 import { useParams } from 'next/navigation';
-import { buildBudgetTitle, capitalizeFirstLetter } from '@/helpers/string';
+import { buildBudgetTitle } from '@/helpers/string';
 
 export interface DynamicHeaderProps {
 	defaultString: string;
