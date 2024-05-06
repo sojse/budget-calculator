@@ -17,7 +17,7 @@ DeleteIncome.args = {
 	heading: 'Radera inkomst',
 	successMessage: 'Inkomst raderad',
 	errorMessage: 'Något gick fel när inkomsten skulle raderas',
-	incomeData: {
+	data: {
 		amount: 2000,
 		title: 'Lön',
 		monthlyTransaction: false,
@@ -32,7 +32,7 @@ DeleteExpense.args = {
 	heading: 'Radera utgift',
 	successMessage: 'Utgift raderad',
 	errorMessage: 'Något gick fel när utgiften skulle raderas',
-	incomeData: {
+	data: {
 		amount: 149,
 		title: 'Netflix',
 		monthlyTransaction: true,
