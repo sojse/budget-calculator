@@ -2,6 +2,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import styles from './BarChart.module.scss';
+import variables from '../Chart.module.scss';
 import 'chart.js/auto';
 import { Bar } from 'react-chartjs-2';
 
@@ -48,7 +49,7 @@ export const BarChart: React.FC<BarChartProps> = ({
 		},
 		borderRadius: 4,
 	};
-	chartData.datasets[0].backgroundColor = ['#1d4eff', '#ff8c4b'];
+	chartData.datasets[0].backgroundColor = [variables.income, variables.expense];
 
 	return (
 		<div className={classNames(styles.bar_chart, className)}>
