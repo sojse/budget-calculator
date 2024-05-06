@@ -80,7 +80,7 @@ export const ExpenseForm: React.FC<ExpenseFormProps> = ({
 			</Heading>
 			<form action={formAction} className={classNames(styles.expense_form)}>
 				<FormfieldString
-					tabIndex={0}
+					autoFocus
 					id="expenseType"
 					label="Utgiftstyp"
 					type="text"

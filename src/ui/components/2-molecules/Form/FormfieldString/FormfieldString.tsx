@@ -27,7 +27,7 @@ export interface FormfieldStringProps {
 	state?: State;
 	password?: boolean;
 	value?: string;
-	tabIndex?: number;
+	autoFocus?: boolean;
 	type:
 		| 'text'
 		| 'email'
@@ -68,7 +68,7 @@ export const FormfieldString: React.FC<FormfieldStringProps> = ({
 	pattern,
 	invalidErrorMessage = ' ',
 	requiredErrorMessage = ' ',
-	tabIndex,
+	autoFocus = false,
 }) => {
 	const inputRef = useRef<HTMLInputElement>(null);
 	const { required, disabled, hasError, hiddenLabel, errorMessage } =
@@ -118,7 +118,7 @@ export const FormfieldString: React.FC<FormfieldStringProps> = ({
 				max={max}
 				pattern={pattern}
 				type={type}
-				tabIndex={tabIndex}
+				autoFocus={autoFocus}
 				ref={inputRef}
 				{...(register && {
 					...register(name, {

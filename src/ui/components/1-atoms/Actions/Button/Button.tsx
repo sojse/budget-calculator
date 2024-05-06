@@ -14,6 +14,7 @@ export interface ButtonProps {
 	width?: 'default' | 'maxMobile';
 	loading?: boolean;
 	spinnerColor?: 'dark' | 'light';
+	autoFocus?: boolean;
 	onClick?: () => void;
 }
 
@@ -28,6 +29,7 @@ export const Button: React.FC<ButtonProps> = ({
 	align,
 	width,
 	loading,
+	autoFocus,
 	onClick,
 }) => (
 	<div
@@ -50,6 +52,7 @@ export const Button: React.FC<ButtonProps> = ({
 			disabled={disabled || loading}
 			aria-disabled={disabled || loading}
 			onClick={onClick}
+			autoFocus={autoFocus}
 		>
 			<span
 				className={classNames(styles.button_content, {

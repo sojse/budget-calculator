@@ -46,7 +46,7 @@ export const CreateBudgetForm: React.FC<CreateBudgetFormProps> = () => {
 			</Heading>
 			<form action={formAction} className={classNames(styles.budget_form)}>
 				<FormfieldString
-					tabIndex={0}
+					autoFocus
 					id="budgetName"
 					label="Budgetnamn"
 					type="text"
