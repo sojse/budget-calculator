@@ -1,0 +1,40 @@
+.chart_label {
+    display: flex;
+    align-items: center;
+    gap: $spacing--1;
+}
+
+.chart_label_amount {
+    @include bold-text;
+}
+
+.chart_label_dot {
+    height: $spacing--3;
+    width: $spacing--3;
+    border-radius: $corner-circle;
+    background-color: $color-primary;
+
+    &__home {
+        background-color: $color-category-home;
+    }
+
+    &__transportation {
+        background-color: $color-category-transport;
+    }
+
+    &__savings {
+        background-color: $color-category-savings;
+    }
+
+    &__shopping {
+        background-color: $color-category-shopping;
+    }
+
+    &__other {
+        background-color: $color-category-other;
+    }
+
+    &__entertainment {
+        background-color: $color-category-entertainment;
+    }
+}

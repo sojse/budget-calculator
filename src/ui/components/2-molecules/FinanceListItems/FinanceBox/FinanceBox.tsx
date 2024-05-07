@@ -18,7 +18,10 @@ export interface FinanceBoxProps {
 	data: Expense | Income;
 }
 
-export const categories = {
+interface Categories {
+	[key: string]: string;
+}
+export const categories: Categories = {
 	income: 'Inkomst',
 	home: 'Hem',
 	entertainment: 'Nöjen',

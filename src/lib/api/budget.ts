@@ -1,9 +1,10 @@
 import gql from 'graphql-tag';
 import { getClient } from '@/lib/apolloClient';
-import { buildNavigationString, capitalizeFirstLetter } from '@/helpers/string';
+import { capitalizeFirstLetter } from '@/helpers/string';
 import { extractYear } from '@/helpers/date';
-import { revalidatePath, revalidateTag } from 'next/cache';
+import { revalidateTag } from 'next/cache';
 import { Expense, Income } from '@/context/budgetIdContext';
+import { ChartData, DonutChartProps, DonutData } from '@/ui/components';
 
 export interface GraphQLResponse {
 	budgets: {
@@ -71,6 +72,26 @@ const GET_BUDGET = gql`
 					monthlyTransaction
 					categoryType
 				}
+			}
+		}
+	}
+`;
+
+const GET_BUDGET_CATEGORY = gql`
+	query BudgetQuery($budgetId: ID!) {
+		budget(id: $budgetId) {
+			id
+			title
+			expensesByCategory {
+				expensesByCategory {
+					title
+					amount
+				}
+				totalSum
+				category
+			}
+			expenses {
+				totalSum
 			}
 		}
 	}
@@ -224,6 +245,51 @@ export const fetchBudget = async (slug: string[]) => {
 			data.budget.incomes.totalSum,
 			data.budget.expenses.totalSum,
 		],
+	};
+};
+
+export const getBudgetWithCategoryDetails = async (slug: string[]) => {
+	const year = slug ? slug[1] : '';
+	const month = slug ? capitalizeFirstLetter(slug[0]) : '';
+	const client = getClient();
+	const id = await getBudgetId(year, month);
+	const { data } = await client.query({
+		query: GET_BUDGET_CATEGORY,
+		variables: { budgetId: id },
+		context: {
+			fetchOptions: {
+				next: { tags: ['budget'] },
+			},
+		},
+	});
+
+	const budgetOverview: DonutChartProps = {
+		chartData: {
+			labels: [],
+			datasets: [
+				{
+					label: 'Amount',
+					data: [],
+					backgroundColor: [],
+				},
+			],
+		},
+
+		totalAmount: data.budget.expenses.totalSum,
+	};
+
+	data.budget.expensesByCategory.forEach(
+		(item: { category: string; totalSum: number }) => {
+			budgetOverview.chartData.labels.push(
+				capitalizeFirstLetter(item.category.toLowerCase())
+			);
+			budgetOverview.chartData.datasets[0].data.push(item.totalSum);
+		}
+	);
+
+	return {
+		budgetId: id,
+		budgetOverview,
 	};
 };
 

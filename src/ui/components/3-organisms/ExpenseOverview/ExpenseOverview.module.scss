@@ -1,0 +1,7 @@
+.expense_overview {
+    position: sticky;
+    top: 15%;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing--5;
+}

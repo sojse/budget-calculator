@@ -1,11 +1,10 @@
-import type { Metadata } from "next";
 import '@/ui/styles/globals.scss';
 import styles from './layout.module.scss';
 import classNames from 'classnames';
 import { Header, Main, ToastProvider } from '@/ui/components';
 import { BudgetIdProvider } from '@/context/budgetIdContext';
 
-export const metadata: Metadata = {
+export const metadata = {
 	title: 'Budget Calculator',
 	description: 'A tool to track your monthly budgets',
 	icons: {
@@ -28,7 +27,6 @@ export default function RootLayout({
 	modal: React.ReactNode;
 	children: React.ReactNode;
 }>) {
-
 	return (
 		<html lang="en">
 			<body className={classNames(styles.layout)}>
@@ -43,10 +41,3 @@ export default function RootLayout({
 		</html>
 	);
 }
-
-
-
-
-
-
-
