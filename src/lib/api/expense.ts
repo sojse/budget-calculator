@@ -12,7 +12,10 @@ const ADD_EXPENSE = gql`
 `;
 
 const EDIT_EXPENSE = gql`
-	mutation ExpenseUpdate($data: ExpenseUpdateDataInput!, $expenseUpdateId: ID) {
+	mutation ExpenseUpdate(
+		$data: ExpenseUpdateDataInput!
+		$expenseUpdateId: ID!
+	) {
 		expenseUpdate(data: $data, id: $expenseUpdateId) {
 			title
 			amount
@@ -112,23 +115,24 @@ export const deleteExpenseById = async (
 export const updateExpense = async (
 	expenseData: any,
 	budgetId: string,
-	incomeId: string
+	expenseId: string
 ) => {
 	const client = getClient();
 	try {
 		const categoryType = await useMappedCategoryType(
 			expenseData.categoryType.toUpperCase()
 		);
+
 		const { data } = await client.mutate({
 			variables: {
 				data: {
 					budgetID: budgetId,
 					monthlyTransaction: expenseData.monthlyTransaction ? true : false,
-					title: expenseData.incomeType,
-					amount: Number(expenseData.incomeAmount),
+					title: expenseData.expenseType,
+					amount: Number(expenseData.expenseAmount),
 					categoryType: categoryType,
 				},
-				incomeUpdateId: incomeId,
+				expenseUpdateId: expenseId,
 			},
 			mutation: EDIT_EXPENSE,
 		});

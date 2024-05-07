@@ -137,7 +137,7 @@ export async function editExpense(
 	formData: FormData
 ) {
 	const rawFormData = Object.fromEntries(formData);
-	const newState = addIncomeValidation(currentState, rawFormData);
+	const newState = addExpenseValidation(currentState, rawFormData);
 
 	if (newState.expenseType.hasError) {
 		return newState;
