@@ -13,14 +13,15 @@ const Template: StoryFn<DonutChartProps> = (args) => <DonutChart {...args} />;
 export const Default: StoryFn<DonutChartProps> = Template.bind({});
 Default.args = {
 	chartData: {
-		labels: ['Bar 1', 'Bar 2', 'Bar 3', 'Bar 4'],
+		labels: ['transport', 'shopping', 'other', 'home'],
 		datasets: [
 			{
 				label: 'Label 1',
-				data: [1, 2, 3, 4],
+				data: [100, 2500, 3433, 4000],
 				backgroundColor: [],
 			},
 		],
 	},
 	showLabels: false,
+	totalAmount: 4555,
 };

@@ -31,7 +31,7 @@ export const categories: Categories = {
 	other: 'Övrigt',
 };
 
-export const FinanceBox: React.FC<FinanceBoxProps> = async ({
+export const FinanceBox: React.FC<FinanceBoxProps> = ({
 	className,
 	category,
 	data,

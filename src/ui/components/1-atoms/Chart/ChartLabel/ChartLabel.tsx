@@ -1,7 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
 import styles from './ChartLabel.module.scss';
-import { Expense, Income } from '@/context/budgetIdContext';
 import { categories } from '@/ui/components';
 
 export interface ChartLabelProps {
