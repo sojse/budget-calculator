@@ -1,0 +1,12 @@
+.accordion_item {
+    padding: $spacing--2;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s;
+
+    &__open {
+        max-height: 200px;
+        transition: max-height 0.5s cubic-bezier(0.895, 0.03, 0.685, 0.22);
+    }
+}
+
