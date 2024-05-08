@@ -1,21 +1,21 @@
-.accordion_item_button {
+.accordion_button_button {
     @include action;
     width: 100%;
 }
 
-.accordion_item {
+.accordion_button {
     display: flex;
     justify-content: space-between;
     padding: $spacing--5;
 }
 
-.accordion_item_content {
+.accordion_button_content {
     display: flex;
     align-items: center;
     gap: $spacing--2;
 }
 
-.accordion_item_text {
+.accordion_button_text {
     font-family: $font-secondary;
     font-weight: $font-weight--semibold;
 
@@ -30,7 +30,7 @@
     }
 }
 
-.accordion_item_icon {
+.accordion_button_icon {
     width: $icon-size--lg;
     height: $icon-size--lg;
     transition: 300ms;
