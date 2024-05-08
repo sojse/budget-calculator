@@ -1,3 +1,4 @@
+export * from './AccordionItem';
 export * from './Charts';
 export * from './BudgetSelect';
 export * from './DynamicHeader';

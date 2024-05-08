@@ -1,0 +1,43 @@
+.accordion_item_button {
+    @include action;
+    width: 100%;
+}
+
+.accordion_item {
+    display: flex;
+    justify-content: space-between;
+    padding: $spacing--5;
+}
+
+.accordion_item_content {
+    display: flex;
+    align-items: center;
+    gap: $spacing--2;
+}
+
+.accordion_item_text {
+    font-family: $font-secondary;
+    font-weight: $font-weight--semibold;
+
+    &__light {
+        font-weight: $font-weight--normal;
+        color: $color-primary-grey;
+        display: none;
+
+        @include mq(md) {
+            display: block;
+        }
+    }
+}
+
+.accordion_item_icon {
+    width: $icon-size--lg;
+    height: $icon-size--lg;
+    transition: 300ms;
+
+    &__open {
+        transition: 300ms;
+		transform: rotate(180deg);
+    }
+}
+
