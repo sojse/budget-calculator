@@ -1,10 +1,6 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import {
-	Paragraph,
-	ContentSection,
-	ContentSectionProps,
-} from '@/ui/components';
+import { ContentSection, ContentSectionProps } from '@/ui/components';
 
 export default {
 	title: 'Habitats/ContentSection',

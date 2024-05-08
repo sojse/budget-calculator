@@ -1,6 +1,6 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { IconCircle, IconCircleProps } from './IconCircle';
+import { IconCircle, IconCircleProps } from '@/ui/components';
 import Wallet from '@/ui/icons/icon-wallet.svg';
 
 export default {

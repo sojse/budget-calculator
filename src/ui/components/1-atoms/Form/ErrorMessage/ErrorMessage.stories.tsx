@@ -1,6 +1,6 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { ErrorMessage, ErrorMessageProps } from './ErrorMessage';
+import { ErrorMessage, ErrorMessageProps } from '@/ui/components';
 
 export default {
 	title: 'Atoms/Form/ErrorMessage',

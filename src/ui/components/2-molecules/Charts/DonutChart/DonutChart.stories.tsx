@@ -1,6 +1,6 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { DonutChart, DonutChartProps } from './DonutChart';
+import { DonutChart, DonutChartProps } from '@/ui/components';
 
 export default {
 	title: 'Molecules/Charts/DonutChart',

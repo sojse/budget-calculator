@@ -1,9 +1,6 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import {
-	InformationMessage,
-	InformationMessageProps,
-} from './InformationMessage';
+import { InformationMessage, InformationMessageProps } from '@/ui/components';
 
 export default {
 	title: 'Molecules/InformationMessage',

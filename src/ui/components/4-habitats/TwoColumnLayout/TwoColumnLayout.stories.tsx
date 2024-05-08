@@ -1,6 +1,6 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { TwoColumnLayout, TwoColumnLayoutProps } from './TwoColumnLayout';
+import { TwoColumnLayout, TwoColumnLayoutProps } from '@/ui/components';
 
 export default {
 	title: 'Habitats/TwoColumnLayout',

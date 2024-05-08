@@ -7,10 +7,7 @@ export interface ExpenseOverviewProps {
 	slug: string[];
 }
 
-export const ExpenseOverview: React.FC<ExpenseOverviewProps> = async ({
-	slug,
-}) => {
-	const year = slug ? slug[1] : '';
+export const ExpenseOverview: React.FC<ExpenseOverviewProps> = async ({ slug }) => {
 	const budgetData = await getBudgetWithCategoryDetails(slug);
 
 	return (

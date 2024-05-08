@@ -1,6 +1,6 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { EditButton, EditButtonProps } from './EditButton';
+import { EditButton, EditButtonProps } from '@/ui/components';
 
 export default {
 	title: 'Atoms/Actions/EditButton',

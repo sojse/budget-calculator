@@ -1,6 +1,6 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { DeleteButton, DeleteButtonProps } from './DeleteButton';
+import { DeleteButton, DeleteButtonProps } from '@/ui/components';
 
 export default {
 	title: 'Atoms/Actions/DeleteButton',

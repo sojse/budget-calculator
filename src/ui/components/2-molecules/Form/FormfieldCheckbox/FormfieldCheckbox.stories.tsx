@@ -1,6 +1,6 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { FormfieldCheckbox, FormfieldCheckboxProps } from './FormfieldCheckbox';
+import { FormfieldCheckbox, FormfieldCheckboxProps } from '@/ui/components';
 
 export default {
 	title: 'Molecules/Form/FormfieldCheckbox',

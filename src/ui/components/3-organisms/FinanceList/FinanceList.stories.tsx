@@ -1,6 +1,6 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { FinanceList, FinanceListProps } from './FinanceList';
+import { FinanceList, FinanceListProps } from '@/ui/components';
 
 export default {
 	title: 'Organisms/FinanceList',

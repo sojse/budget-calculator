@@ -1,6 +1,6 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { DateRangePicker, DateRangePickerProps } from './DateRangePicker';
+import { DateRangePicker, DateRangePickerProps } from '@/ui/components';
 
 export default {
 	title: 'Molecules/Form/DateRangePicker',

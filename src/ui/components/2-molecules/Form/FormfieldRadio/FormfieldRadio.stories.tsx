@@ -1,6 +1,6 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { FormfieldRadio, FormfieldRadioProps } from './FormfieldRadio';
+import { FormfieldRadio, FormfieldRadioProps } from '@/ui/components';
 
 export default {
 	title: 'Molecules/Form/FormfieldRadio',

@@ -1,9 +1,6 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import {
-	FinanceCreateButton,
-	FinanceCreateButtonProps,
-} from './FinanceCreateButton';
+import { FinanceCreateButton, FinanceCreateButtonProps } from '@/ui/components';
 
 export default {
 	title: 'Molecules/FinanceListItems/FinanceCreateButton',

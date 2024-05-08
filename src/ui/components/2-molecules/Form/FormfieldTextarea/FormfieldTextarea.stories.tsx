@@ -1,6 +1,6 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { FormfieldTextarea, FormfieldTextareaProps } from './FormfieldTextarea';
+import { FormfieldTextarea, FormfieldTextareaProps } from '@/ui/components';
 
 export default {
 	title: 'Molecules/Form/FormfieldTextarea',

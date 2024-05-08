@@ -1,6 +1,6 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { Header, HeaderProps } from './Header';
+import { Header, HeaderProps } from '@/ui/components';
 
 export default {
 	title: 'Habitats/Header',

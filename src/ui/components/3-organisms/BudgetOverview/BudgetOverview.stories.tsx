@@ -23,4 +23,5 @@ Default.args = {
 			},
 		],
 	},
+	detailUrl: '#',
 };

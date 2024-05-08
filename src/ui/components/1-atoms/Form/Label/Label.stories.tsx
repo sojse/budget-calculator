@@ -1,6 +1,6 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { Label, LabelProps } from './Label';
+import { Label, LabelProps } from '@/ui/components';
 
 export default {
 	title: 'Atoms/Form/Label',

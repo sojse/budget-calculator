@@ -1,6 +1,6 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { LoadMore, LoadMoreProps } from './LoadMore';
+import { LoadMore, LoadMoreProps } from '@/ui/components';
 
 export default {
 	title: 'Molecules/LoadMore',

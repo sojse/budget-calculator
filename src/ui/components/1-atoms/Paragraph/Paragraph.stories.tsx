@@ -1,6 +1,6 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { Paragraph, ParagraphProps } from './Paragraph';
+import { Paragraph, ParagraphProps } from '@/ui/components';
 
 export default {
 	title: 'Atoms/Paragraph',

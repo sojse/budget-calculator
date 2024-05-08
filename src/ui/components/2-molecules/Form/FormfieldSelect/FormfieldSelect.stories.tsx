@@ -1,6 +1,6 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { FormfieldSelect, FormfieldSelectProps } from './FormfieldSelect';
+import { FormfieldSelect, FormfieldSelectProps } from '@/ui/components';
 
 export default {
 	title: 'Molecules/Form/FormfieldSelect',

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { FormfieldString, FormfieldStringProps } from './FormfieldString';
+import { FormfieldString, FormfieldStringProps } from '@/ui/components';
 
 export default {
 	title: 'Molecules/Form/FormfieldString',

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { FinanceBox, FinanceBoxProps } from './FinanceBox';
+import { FinanceBox, FinanceBoxProps } from '@/ui/components';
 
 export default {
 	title: 'Molecules/FinanceListItems/FinanceBox',

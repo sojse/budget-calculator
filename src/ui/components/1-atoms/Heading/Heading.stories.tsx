@@ -1,6 +1,6 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { Heading, HeadingProps } from './Heading';
+import { Heading, HeadingProps } from '@/ui/components';
 
 export default {
 	title: 'Atoms/Heading',

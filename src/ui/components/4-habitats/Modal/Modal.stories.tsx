@@ -1,7 +1,6 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { Modal, ModalProps } from './Modal';
-import { CreateBudgetForm } from '@/ui/components';
+import { CreateBudgetForm, Modal, ModalProps } from '@/ui/components';
 
 export default {
 	title: 'Habitats/Modal',

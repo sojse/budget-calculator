@@ -1,7 +1,6 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { LinkComponent, LinkProps } from './Link';
-import { fn } from '@storybook/test';
+import { LinkComponent, LinkProps } from '@/ui/components';
 
 export default {
 	title: 'Atoms/Actions/Link',

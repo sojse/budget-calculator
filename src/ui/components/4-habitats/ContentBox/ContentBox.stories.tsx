@@ -1,6 +1,6 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { ContentBox, ContentBoxProps } from './ContentBox';
+import { ContentBox, ContentBoxProps } from '@/ui/components';
 
 export default {
 	title: 'Habitats/ContentBox',

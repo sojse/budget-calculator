@@ -1,6 +1,6 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { BarChart, BarChartProps } from './BarChart';
+import { BarChart, BarChartProps } from '@/ui/components';
 
 export default {
 	title: 'Molecules/Charts/BarChart',
