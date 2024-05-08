@@ -1,0 +1,34 @@
+.finance_table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.finance_table_row {
+    &:last-of-type {
+        .finance_table_left {
+            @include bold-text;
+            border-bottom: none;
+        }
+
+        .finance_table_right {
+            @include heading--xxs;
+            border-bottom: none;
+            font-weight: $font-weight--black;
+        }
+    }
+}
+
+.finance_table_left, .finance_table_right {
+    padding: $spacing--1;
+    border-bottom: solid $color-primary-grey $border--sm;
+}
+
+.finance_table_left {
+    @include paragraph;
+    text-align: left;
+}
+
+.finance_table_right {
+    @include bold-text;
+    text-align: right;
+}
