@@ -24,7 +24,7 @@ export const CreateBudgetForm: React.FC<CreateBudgetFormProps> = () => {
 	const router = useRouter();
 
 	if (state?.success) {
-		router.push(state.newRoute);
+		router.push(state.newRoute, { scroll: false });
 		showToast('success', <span>Din budget har skapats</span>);
 	} else if (state?.success) {
 		router.back();

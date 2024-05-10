@@ -29,7 +29,7 @@ export const LinkComponent: React.FC<LinkProps> = ({
 	asText,
 	asButton,
 	width,
-	scroll = true,
+	scroll = false,
 }) => {
 	const router = useRouter();
 	const linkClasses = classNames(

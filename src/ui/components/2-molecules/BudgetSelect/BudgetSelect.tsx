@@ -61,7 +61,7 @@ export const BudgetSelect: React.FC<BudgetSelectProps> = ({
 			basePath = pathName;
 		}
 		const newPath = `${basePath}/${budgetString}/${selectedYear}`;
-		router.push(newPath);
+		router.push(newPath, { scroll: false });
 	};
 
 	return (
