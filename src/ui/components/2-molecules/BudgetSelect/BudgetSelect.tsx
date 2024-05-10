@@ -5,7 +5,6 @@ import styles from './BudgetSelect.module.scss';
 import { FormfieldSelect } from '@/ui/components';
 import { getMonthData } from '@/app/actions';
 import { useRouter, usePathname, useParams } from 'next/navigation';
-import { capitalizeFirstLetter } from '@/helpers/string';
 
 export interface BudgetSelectProps {
 	budgetInformation: {
