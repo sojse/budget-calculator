@@ -1,20 +1,12 @@
 import {
-	fetchStaticParams,
-	getBudgetWithCategoryDetails,
-} from '@/lib/api/budget';
-import { SiteHeading, TwoColumnLayout, ExpenseOverview } from '@/ui/components';
+	SiteHeading,
+	TwoColumnLayout,
+	ExpenseOverview,
+	FinanceAccordion,
+} from '@/ui/components';
+import { Suspense } from 'react';
 
-/*
-export async function generateStaticParams() {
-	const mappedData = await fetchStaticParams();
-	return mappedData;
-}*/
-
-export default async function Finance({
-	params,
-}: {
-	params: { slug: string[] };
-}) {
+export default function Finance({ params }: { params: { slug: string[] } }) {
 	const year = params.slug ? params.slug[1] : '';
 	return (
 		<>
@@ -22,10 +14,18 @@ export default async function Finance({
 			<TwoColumnLayout
 				column1={
 					<>
-						<div>hej</div>
+						<Suspense fallback={<div>Loading...</div>}>
+							<FinanceAccordion slug={params.slug} />
+						</Suspense>
 					</>
 				}
-				column2={<ExpenseOverview slug={params.slug} />}
+				column2={
+					<>
+						<Suspense fallback={<div>Loading...</div>}>
+							<ExpenseOverview slug={params.slug} />
+						</Suspense>
+					</>
+				}
 			/>
 		</>
 	);
