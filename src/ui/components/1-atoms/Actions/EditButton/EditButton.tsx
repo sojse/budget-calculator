@@ -33,7 +33,11 @@ export const EditButton: React.FC<EditButtonProps> = ({
 		router.push(url);
 	};
 	return (
-		<button className={classNames(styles.edit_button)} onClick={handleClick}>
+		<button
+			className={classNames(styles.edit_button)}
+			onClick={handleClick}
+			aria-label="edit"
+		>
 			<Pen className={classNames(styles.edit_button_icon, className)} />
 		</button>
 	);

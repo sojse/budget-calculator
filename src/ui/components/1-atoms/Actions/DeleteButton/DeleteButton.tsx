@@ -31,7 +31,11 @@ export const DeleteButton: React.FC<DeleteButtonProps> = ({
 		router.push(url);
 	};
 	return (
-		<button className={classNames(styles.delete_button)} onClick={handleClick}>
+		<button
+			className={classNames(styles.delete_button)}
+			onClick={handleClick}
+			aria-label="delete"
+		>
 			<Trash className={classNames(styles.delete_button_icon, className)} />
 		</button>
 	);
