@@ -9,6 +9,9 @@
     background-color: $color-surface-primary;
 
     @include mq(md) {
+        position: sticky;
+        top: 0;
+        z-index: 3;
         padding: 0 $spacing--5;
 	}
     

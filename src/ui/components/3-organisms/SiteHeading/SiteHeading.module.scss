@@ -2,8 +2,12 @@
     display: flex;
     flex-direction: column;
     gap: $spacing--4;
+    background-color: $color-surface-primary;
 
     @include mq(md) {
+        position: sticky;
+        top: $header-height;
+        z-index: 3;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
