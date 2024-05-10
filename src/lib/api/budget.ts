@@ -4,7 +4,7 @@ import { capitalizeFirstLetter } from '@/helpers/string';
 import { extractYear } from '@/helpers/date';
 import { revalidateTag } from 'next/cache';
 import { Expense, Income } from '@/context/budgetIdContext';
-import { ChartData, DonutChartProps, DonutData } from '@/ui/components';
+import { DonutChartProps } from '@/ui/components';
 
 export interface GraphQLResponse {
 	budgets: {
@@ -92,6 +92,33 @@ const GET_BUDGET_CATEGORY = gql`
 			}
 			expenses {
 				totalSum
+			}
+		}
+	}
+`;
+
+const GET_FINANCE_DETAILS = gql`
+	query BudgetQuery($budgetId: ID!) {
+		budget(id: $budgetId) {
+			id
+			title
+			expensesByCategory {
+				expensesByCategory {
+					title
+					amount
+				}
+				totalSum
+				category
+			}
+			expenses {
+				totalSum
+			}
+			incomes {
+				totalSum
+				incomes {
+					amount
+					title
+				}
 			}
 		}
 	}
@@ -292,6 +319,44 @@ export const getBudgetWithCategoryDetails = async (slug: string[]) => {
 		budgetOverview,
 	};
 };
+
+export const getFinanceDetailData = async (slug: string[]) => {
+	const year = slug ? slug[1] : '';
+	const month = slug ? capitalizeFirstLetter(slug[0]) : '';
+	const client = getClient();
+	const id = await getBudgetId(year, month);
+	const { data } = await client.query({
+		query: GET_FINANCE_DETAILS,
+		variables: { budgetId: id },
+		context: {
+			fetchOptions: {
+				next: { tags: ['budget'] },
+			},
+		},
+	});
+
+	const budgetData = data.budget.expensesByCategory.map(
+		(
+			item: { expensesByCategory: any; totalSum: any; category: string },
+			index: number
+		) => {
+			return {
+				data: item.expensesByCategory,
+				amount: item.totalSum,
+				categoryType: { category: item.category.toLowerCase() },
+			};
+		}
+	);
+
+	budgetData.push({
+		data: data.budget.incomes.incomes,
+		amount: data.budget.incomes.totalSum,
+		categoryType: { category: 'income' },
+	});
+
+	return budgetData;
+};
+
 
 const getBudgetId = async (year: string, month: string) => {
 	const client = getClient();

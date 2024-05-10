@@ -13,7 +13,7 @@ export const ExpenseOverview: React.FC<ExpenseOverviewProps> = async ({ slug }) 
 	return (
 		<div className={classNames(styles.expense_overview)}>
 			<Heading headingLevel={'h2'} style="md" color="dark">
-				Översikt
+				Utgiftsöversikt
 			</Heading>
 			<div className={classNames(styles.expense_overview_chart)}>
 				<DonutChart

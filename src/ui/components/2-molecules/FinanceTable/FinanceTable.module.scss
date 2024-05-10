@@ -1,10 +1,14 @@
+.finance_table_container {
+    padding: $spacing--2 $spacing--4;
+}
+
 .finance_table {
     width: 100%;
     border-collapse: collapse;
 }
 
-.finance_table_row {
-    &:last-of-type {
+.finance_table_row_last {
+
         .finance_table_left {
             @include bold-text;
             border-bottom: none;
@@ -15,7 +19,7 @@
             border-bottom: none;
             font-weight: $font-weight--black;
         }
-    }
+
 }
 
 .finance_table_left, .finance_table_right {

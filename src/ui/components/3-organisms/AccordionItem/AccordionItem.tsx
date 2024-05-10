@@ -18,22 +18,24 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
 
-	return (
-		<>
-			<AccordionButton
-				categoryType={categoryType}
-				amount={amount}
-				isOpen={isOpen}
-				onClick={setIsOpen}
-			/>
-			<div
-				className={classNames(
-					styles.accordion_item,
-					isOpen && styles.accordion_item__open
-				)}
-			>
-				<FinanceTable data={data} totalAmount={amount} />
+    console.log(data);
+
+		return (
+			<div className={classNames(styles.accordion_item)}>
+				<AccordionButton
+					categoryType={categoryType}
+					amount={amount}
+					isOpen={isOpen}
+					onClick={setIsOpen}
+				/>
+				<div
+					className={classNames(
+						styles.accordion_item_content,
+						isOpen && styles.accordion_item_content__open
+					)}
+				>
+					<FinanceTable data={data} totalAmount={amount} />
+				</div>
 			</div>
-		</>
-	);
+		);
 };

@@ -22,11 +22,6 @@
     &__light {
         font-weight: $font-weight--normal;
         color: $color-primary-grey;
-        display: none;
-
-        @include mq(md) {
-            display: block;
-        }
     }
 }
 
