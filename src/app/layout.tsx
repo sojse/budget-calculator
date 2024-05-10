@@ -15,7 +15,7 @@ export const metadata = {
 const navigation = [
 	{ url: '/overview', label: 'Översikt', isActive: false },
 	{ url: '/finances', label: 'Ekonomi', isActive: false },
-	{ url: '/details', label: 'Detaljer', isActive: false },
+	{ url: '/details', label: 'Utgiftsdetaljer', isActive: false },
 ];
 
 export const revalidate = 10;

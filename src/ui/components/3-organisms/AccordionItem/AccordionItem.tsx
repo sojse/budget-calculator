@@ -18,8 +18,6 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
 
-    console.log(data);
-
 		return (
 			<div className={classNames(styles.accordion_item)}>
 				<AccordionButton

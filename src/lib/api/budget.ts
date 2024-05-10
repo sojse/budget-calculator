@@ -113,13 +113,6 @@ const GET_FINANCE_DETAILS = gql`
 			expenses {
 				totalSum
 			}
-			incomes {
-				totalSum
-				incomes {
-					amount
-					title
-				}
-			}
 		}
 	}
 `;
@@ -347,12 +340,6 @@ export const getFinanceDetailData = async (slug: string[]) => {
 			};
 		}
 	);
-
-	budgetData.push({
-		data: data.budget.incomes.incomes,
-		amount: data.budget.incomes.totalSum,
-		categoryType: { category: 'income' },
-	});
 
 	return budgetData;
 };
