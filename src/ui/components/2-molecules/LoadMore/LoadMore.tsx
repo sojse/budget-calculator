@@ -24,18 +24,26 @@ export const LoadMore: React.FC<LoadMoreProps> = ({
 				<>
 					{children}
 					{shouldShowButton && (
-						<Button onClick={handleLoadMore} style="primary">
-							Visa mindre
-						</Button>
+						<li>
+							<Button onClick={handleLoadMore} style="primary">
+								Visa mindre
+							</Button>
+						</li>
 					)}
 				</>
 			) : (
 				<>
 					{React.Children.toArray(children).slice(0, visibleElements)}
 					{shouldShowButton && (
-						<Button onClick={handleLoadMore} style="primary" width="maxMobile">
-							Visa mer
-						</Button>
+						<li>
+							<Button
+								onClick={handleLoadMore}
+								style="primary"
+								width="maxMobile"
+							>
+								Visa mer
+							</Button>
+						</li>
 					)}
 				</>
 			)}
