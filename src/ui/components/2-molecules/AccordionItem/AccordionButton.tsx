@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import styles from './AccordionButton.module.scss';
 import { formatCost } from '@/helpers/number';
@@ -13,24 +13,22 @@ export interface AccordionButtonProps {
 	className?: string;
 	categoryType: CategoryType;
 	amount: number;
-	isOpen: boolean;
-	onClick: (openState: boolean) => void;
 }
 
 export const AccordionButton: React.FC<AccordionButtonProps> = ({
 	amount,
 	className,
 	categoryType,
-	isOpen,
-	onClick,
 }) => {
+	const [isOpen, setIsOpen] = useState(false);
+
 	const IconComponent =
 		Icons[capitalizeFirstLetter(categoryType.category) as keyof typeof Icons];
 
 	return (
 		<button
 			className={classNames(styles.accordion_button_button)}
-			onClick={() => onClick(!isOpen)}
+			onClick={() => setIsOpen(!isOpen)}
 		>
 			<ContentBox className={classNames(styles.accordion_button, className)}>
 				<div className={classNames(styles.accordion_button_content)}>
