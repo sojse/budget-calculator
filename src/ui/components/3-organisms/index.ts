@@ -2,6 +2,7 @@ export * from './AccordionItem';
 export * from './BudgetOverview';
 export * from './DesktopMenu';
 export * from './ExpenseOverview';
+export * from './ExpenseOverviewChart';
 export * from './FinanceAccordion';
 export * from './FinanceList';
 export * from './Forms';

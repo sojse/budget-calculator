@@ -3,6 +3,7 @@ import {
 	TwoColumnLayout,
 	ExpenseOverview,
 	FinanceAccordion,
+	StaticSiteHeading,
 } from '@/ui/components';
 import { Suspense } from 'react';
 
@@ -10,10 +11,13 @@ export default function Finance({ params }: { params: { slug: string[] } }) {
 	const year = params.slug ? params.slug[1] : '';
 	return (
 		<>
-			<SiteHeading year={year} />
+			<Suspense fallback={<div>Loading...</div>}>
+				<SiteHeading year={year} />
+			</Suspense>
 			<TwoColumnLayout
 				column1={
 					<>
+						<StaticSiteHeading>Detaljer</StaticSiteHeading>
 						<Suspense fallback={<div>Loading...</div>}>
 							<FinanceAccordion slug={params.slug} />
 						</Suspense>
@@ -21,9 +25,7 @@ export default function Finance({ params }: { params: { slug: string[] } }) {
 				}
 				column2={
 					<>
-						<Suspense fallback={<div>Loading...</div>}>
-							<ExpenseOverview slug={params.slug} />
-						</Suspense>
+						<ExpenseOverview slug={params.slug} />
 					</>
 				}
 			/>

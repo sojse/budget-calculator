@@ -1,27 +1,23 @@
 import classNames from 'classnames';
 import styles from './ExpenseOverview.module.scss';
-import { DonutChart, Heading } from '@/ui/components';
-import { getBudgetWithCategoryDetails } from '@/lib/api/budget';
+import {
+	ExpenseOverviewChart,
+	Heading,
+	StaticSiteHeading,
+} from '@/ui/components';
+import { Suspense } from 'react';
 
 export interface ExpenseOverviewProps {
 	slug: string[];
 }
 
-export const ExpenseOverview: React.FC<ExpenseOverviewProps> = async ({ slug }) => {
-	const budgetData = await getBudgetWithCategoryDetails(slug);
-
+export const ExpenseOverview: React.FC<ExpenseOverviewProps> = ({ slug }) => {
 	return (
 		<div className={classNames(styles.expense_overview)}>
-			<Heading headingLevel={'h2'} style="md" color="dark">
-				Översikt
-			</Heading>
-			<div className={classNames(styles.expense_overview_chart)}>
-				<DonutChart
-					chartData={budgetData.budgetOverview.chartData}
-					totalAmount={budgetData.budgetOverview.totalAmount}
-					showLabels={true}
-				/>
-			</div>
+			<StaticSiteHeading>Översikt</StaticSiteHeading>
+			<Suspense fallback={<div>Loading...</div>}>
+				<ExpenseOverviewChart slug={slug} />
+			</Suspense>
 		</div>
 	);
 };
