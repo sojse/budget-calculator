@@ -41,7 +41,7 @@ export const LoadMore: React.FC<LoadMoreProps> = ({
 								style="primary"
 								width="maxMobile"
 							>
-								Visa mer
+								Visa alla
 							</Button>
 						</li>
 					)}
