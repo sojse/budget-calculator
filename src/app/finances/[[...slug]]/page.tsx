@@ -2,51 +2,37 @@ import {
 	BudgetOverview,
 	FinanceList,
 	SiteHeading,
+	StaticSiteHeading,
 	TwoColumnLayout,
 } from '@/ui/components';
+import { Suspense } from 'react';
 
-export default async function Finance({
-	params,
-}: {
-	params: { slug: string[] };
-}) {
+export default function Finance({ params }: { params: { slug: string[] } }) {
 	const year = params.slug ? params.slug[1] : '';
-	const budgetData = await fetchBudget(params.slug);
-	const detailUrl = params.slug
-		? `/details/${params.slug.join('/')}`
-		: '/details';
 
 	return (
 		<>
-			<SiteHeading year={year} />
+			<Suspense fallback={<div>Loading...</div>}>
+				<SiteHeading year={year} />
+			</Suspense>
 			<TwoColumnLayout
 				column1={
 					<>
-						<FinanceList
-							listType={'expense'}
-							listObjects={budgetData.expenses}
-							budgetId={budgetData.budgetId}
-						/>
-						<FinanceList
-							listType={'income'}
-							listObjects={budgetData.incomes}
-							budgetId={budgetData.budgetId}
-						/>
+						<StaticSiteHeading>Utgifter</StaticSiteHeading>
+						<Suspense fallback={<div>Loading...</div>}>
+							<FinanceList slug={params.slug} listType={'expense'} />
+						</Suspense>
+
+						<StaticSiteHeading>Inkomster</StaticSiteHeading>
+						<Suspense fallback={<div>Loading...</div>}>
+							<FinanceList listType={'income'} slug={params.slug} />
+						</Suspense>
 					</>
 				}
 				column2={
-					<BudgetOverview
-						chartData={{
-							labels: ['Income', 'Expense'],
-							datasets: [
-								{
-									label: 'Amount',
-									data: budgetData.budgetOverview,
-								},
-							],
-						}}
-						detailUrl={detailUrl}
-					/>
+					<>
+						<BudgetOverview slug={params.slug} />
+					</>
 				}
 			/>
 		</>

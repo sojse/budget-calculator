@@ -14,14 +14,5 @@ const Template: StoryFn<BudgetOverviewProps> = (args) => (
 
 export const Default: StoryFn<BudgetOverviewProps> = Template.bind({});
 Default.args = {
-	chartData: {
-		labels: ['Income', 'Expense'],
-		datasets: [
-			{
-				label: 'Amount',
-				data: [43000, 21677],
-			},
-		],
-	},
-	detailUrl: '#',
+	slug: ['April', '2024'],
 };

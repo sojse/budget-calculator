@@ -1,4 +1,5 @@
 export * from './AccordionItem';
+export * from './BudgetChart';
 export * from './BudgetOverview';
 export * from './DesktopMenu';
 export * from './ExpenseOverview';

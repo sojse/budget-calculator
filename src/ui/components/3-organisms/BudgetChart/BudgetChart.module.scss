@@ -1,0 +1,24 @@
+.budget_overview_chart {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: solid $border--lg $color-primary-grey;
+    padding-bottom: $spacing--3;
+}
+
+.budget_overview_chart_text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-end;
+}
+
+.budget_overview_sum {
+    @include bold-text;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.budget_overview_amount {
+    @include heading--xs;
+}
