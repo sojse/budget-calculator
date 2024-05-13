@@ -1,17 +1,13 @@
-import { fetchStaticParams } from '@/lib/api/budget';
 import { SiteHeading } from '@/ui/components';
-
-/*
-export async function generateStaticParams() {
-	const mappedData = await fetchStaticParams();
-	return mappedData;
-}*/
+import { Suspense } from 'react';
 
 export default function Overview({ params }: { params: { slug: string[] } }) {
 	const year = params.slug ? params.slug[1] : '';
 	return (
 		<>
-			<SiteHeading year={year} />
+			<Suspense fallback={<div>Loading...</div>}>
+				<SiteHeading year={year} />
+			</Suspense>
 			<div>Overview</div>
 		</>
 	);
