@@ -3,6 +3,21 @@ import styles from './layout.module.scss';
 import classNames from 'classnames';
 import { Header, Main, ToastProvider } from '@/ui/components';
 import { BudgetIdProvider } from '@/context/budgetIdContext';
+import { Comfortaa, Montserrat } from 'next/font/google';
+
+const comfortaa = Comfortaa({
+	weight: ['300', '400', '500', '600', '700'],
+	subsets: ['latin'],
+	variable: '--font-comfortaa',
+	display: 'swap',
+});
+
+const montserrat = Montserrat({
+	weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+	subsets: ['latin'],
+	variable: '--font-montserrat',
+	display: 'swap',
+});
 
 export const metadata = {
 	title: 'Budget Calculator',
@@ -28,7 +43,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en">
+		<html lang="en" className={`${comfortaa.variable} ${montserrat.variable}`}>
 			<body className={classNames(styles.layout)}>
 				<ToastProvider>
 					<BudgetIdProvider>
