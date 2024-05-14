@@ -1,4 +1,4 @@
-import { fetchMonthData } from '@/lib/api/budget';
+import { fetchMonthData } from '@/lib/api/budget/fetch';
 import { extractYear, isValidDate } from './date';
 
 export const createBudgetValidation = async (

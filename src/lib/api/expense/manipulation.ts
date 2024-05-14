@@ -1,6 +1,6 @@
 import { revalidateTag } from 'next/cache';
-import { getClient } from '../apolloClient';
 import gql from 'graphql-tag';
+import { getClient } from '@/lib/apolloClient';
 
 const ADD_EXPENSE = gql`
 	mutation ExpenseCreate($data: ExpenseCreateDataInput!) {
@@ -60,7 +60,7 @@ export const createNewExpense = async (expenseData: any, id: string) => {
 			expenseData.categoryType.toUpperCase()
 		);
 
-		const { data } = await client.mutate({
+		await client.mutate({
 			variables: {
 				data: {
 					budgetID: id,
@@ -95,7 +95,7 @@ export const deleteExpenseById = async (
 ) => {
 	const client = getClient();
 	try {
-		const { data } = await client.mutate({
+		await client.mutate({
 			variables: {
 				budgetId: budgetId,
 				expenseDeleteId: expenseId,
@@ -123,7 +123,7 @@ export const updateExpense = async (
 			expenseData.categoryType.toUpperCase()
 		);
 
-		const { data } = await client.mutate({
+		await client.mutate({
 			variables: {
 				data: {
 					budgetID: budgetId,

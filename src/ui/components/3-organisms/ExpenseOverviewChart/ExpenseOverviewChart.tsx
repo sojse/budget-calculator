@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import styles from './ExpenseOverviewChart.module.scss';
 import { DonutChart } from '@/ui/components';
-import { getBudgetWithCategoryDetails } from '@/lib/api/budget';
+import { getBudgetWithCategoryDetails } from '@/lib/api/expense/fetch';
 
 export interface ExpenseOverviewChartProps {
 	slug: string[];

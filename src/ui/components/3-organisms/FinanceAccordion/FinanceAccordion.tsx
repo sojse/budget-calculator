@@ -2,7 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import styles from './FinanceAccordion.module.scss';
 import { AccordionItem, AccordionItemProps, Heading } from '@/ui/components';
-import { getFinanceDetailData } from '@/lib/api/budget';
+import { getFinanceDetailData } from '@/lib/api/expense/fetch';
 
 export interface FinanceAccordionProps {
 	slug: string[];

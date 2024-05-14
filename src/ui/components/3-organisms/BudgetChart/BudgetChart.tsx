@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import styles from './BudgetChart.module.scss';
 import { BarChart, ChartData, InformationMessage } from '@/ui/components';
 import { formatCost } from '@/helpers/number';
-import { fetchBudget } from '@/lib/api/budget';
+import { fetchBudget } from '@/lib/api/budget/fetch';
 
 export interface BudgetChartProps {
 	slug: string[];

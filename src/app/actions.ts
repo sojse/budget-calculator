@@ -4,14 +4,18 @@ import {
 	addIncomeValidation,
 	createBudgetValidation,
 } from '@/helpers/formValidation';
-import { createBudget, fetchBudgets, fetchMonthData } from '@/lib/api/budget';
+import { fetchMonthData } from '@/lib/api/budget/fetch';
+import { createBudget } from '@/lib/api/budget/manipulations';
 import {
-	createNewExpense,
 	deleteExpenseById,
+	createNewExpense,
 	updateExpense,
-} from '@/lib/api/expense';
-import { createIncome, deleteIncomeById, updateIncome } from '@/lib/api/income';
-
+} from '@/lib/api/expense/manipulation';
+import {
+	createIncome,
+	updateIncome,
+	deleteIncomeById,
+} from '@/lib/api/income/manipulation';
 import { DeleteState } from '@/ui/components/3-organisms/Forms/DeleteForm/DeleteForm';
 import { ExpenseState } from '@/ui/components/3-organisms/Forms/ExpenseForm';
 import { State } from '@/ui/components/3-organisms/Forms/IncomeForm';

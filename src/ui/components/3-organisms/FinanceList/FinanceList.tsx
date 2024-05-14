@@ -9,7 +9,7 @@ import {
 	FinanceCreateButton,
 	LoadMore,
 } from '@/ui/components';
-import { fetchBudget } from '@/lib/api/budget';
+import { fetchBudget } from '@/lib/api/budget/fetch';
 
 export interface FinanceListProps {
 	listType: 'income' | 'expense';

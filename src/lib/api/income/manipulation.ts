@@ -1,5 +1,5 @@
+import { getClient } from '@/lib/apolloClient';
 import gql from 'graphql-tag';
-import { getClient } from '../apolloClient';
 import { revalidateTag } from 'next/cache';
 
 const EDIT_INCOME = gql`

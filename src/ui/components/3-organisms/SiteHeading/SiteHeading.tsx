@@ -9,7 +9,7 @@ import {
 	LinkComponent,
 } from '@/ui/components';
 import Wallet from '@/ui/icons/icon-wallet.svg';
-import { fetchBudgets } from '@/lib/api/budget';
+import { fetchBudgets } from '@/lib/api/budget/fetch';
 
 export interface SiteHeadingProps {
 	className?: string;
