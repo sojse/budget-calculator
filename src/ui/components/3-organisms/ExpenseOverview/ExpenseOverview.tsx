@@ -1,10 +1,6 @@
 import classNames from 'classnames';
 import styles from './ExpenseOverview.module.scss';
-import {
-	ExpenseOverviewChart,
-	Heading,
-	StaticSiteHeading,
-} from '@/ui/components';
+import { ExpenseOverviewChart, StaticSiteHeading } from '@/ui/components';
 import { Suspense } from 'react';
 
 export interface ExpenseOverviewProps {
@@ -15,7 +11,7 @@ export const ExpenseOverview: React.FC<ExpenseOverviewProps> = ({ slug }) => {
 	return (
 		<div className={classNames(styles.expense_overview)}>
 			<StaticSiteHeading>Översikt</StaticSiteHeading>
-			<Suspense fallback={<div>Loading...</div>}>
+			<Suspense fallback={<ExpenseOverviewChart slug={slug} loading />}>
 				<ExpenseOverviewChart slug={slug} />
 			</Suspense>
 		</div>

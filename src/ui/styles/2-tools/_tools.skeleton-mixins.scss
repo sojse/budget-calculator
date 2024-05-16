@@ -1,4 +1,4 @@
-@mixin skeleton {
+@mixin skeleton($includeAnimation: true)  {
     position: relative;
 
     &::after {
@@ -11,6 +11,9 @@
         width: 100%;
         border-radius: $corner-size--2;
         background-color: $skeleton-color;
-        animation: pulse-skeleton 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        
+        @if $includeAnimation {
+            animation: pulse-skeleton 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
     }
 }

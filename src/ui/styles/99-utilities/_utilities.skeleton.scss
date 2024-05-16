@@ -12,7 +12,11 @@
 
 .u-skeleton-text {
     @include skeleton;
-    height: 24px;
+    height: 3rem;
+
+    &--thin {
+        height: 2rem;
+    }
 
     &--short {
         width: 7rem;
@@ -24,5 +28,18 @@
 
     &--long {
         width: 15rem;
+    }
+}
+
+.u-skeleton-donut {
+    @include skeleton($includeAnimation: false);
+    height: 300px;
+    width: 300px;
+
+    &::after {
+        border-radius: $corner-circle;
+        border: solid $skeleton-color 7rem;
+        background-color: transparent;
+        animation: pulse-border 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     }
 }

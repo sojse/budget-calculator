@@ -2,4 +2,10 @@
     50% {
         background-color: $skeleton-color--pulse;
     }
-}    
+}
+
+@keyframes pulse-border {
+    50% {
+        border-color: $skeleton-color--pulse;
+    }
+}

@@ -10,19 +10,18 @@ import { ChartLabel } from '@/ui/components';
 
 export type DonutData = {
 	labels: string[];
-	datasets: [
-		{
-			label: string;
-			data: number[];
-			backgroundColor: string[];
-		},
-	];
+	datasets: {
+		label: string;
+		data: number[];
+		backgroundColor: string[];
+	}[];
 };
 export interface DonutChartProps {
 	chartData: DonutData;
 	totalAmount: number;
 	showLabels?: boolean;
 	showGrid?: boolean;
+	loading: boolean;
 }
 
 export const DonutChart: React.FC<DonutChartProps> = ({
@@ -30,6 +29,7 @@ export const DonutChart: React.FC<DonutChartProps> = ({
 	totalAmount,
 	showLabels = true,
 	showGrid = false,
+	loading,
 }) => {
 	const options = {
 		plugins: { legend: { display: false } },
@@ -66,25 +66,46 @@ export const DonutChart: React.FC<DonutChartProps> = ({
 	});
 
 	return (
-		<div className={classNames(styles.bar_chart)}>
-			<div className={classNames(styles.bar_chart_chart)}>
-				<Doughnut data={chartData} options={options} />
-				<div className={classNames(styles.bar_chart_middle)}>
+		<div className={classNames(styles.donut_chart)}>
+			<div className={classNames(styles.donut_chart_chart)}>
+				<div>
+					{!loading ? (
+						<Doughnut data={chartData} options={options} />
+					) : (
+						<div className="u-skeleton-donut"></div>
+					)}
+				</div>
+
+				<div className={classNames(styles.donut_chart_middle)}>
 					<span
-						className={classNames(styles.bar_chart_amount)}
+						className={classNames(
+							styles.donut_chart_amount,
+							loading && 'u-skeleton-text u-skeleton-text--long'
+						)}
 					>{`${formatCost(totalAmount)} kr`}</span>
-					<span className={classNames(styles.bar_chart_text)}>Spenderat</span>
+					<span
+						className={classNames(
+							styles.donut_chart_text,
+							loading && 'u-skeleton'
+						)}
+					>
+						Spenderat
+					</span>
 				</div>
 			</div>
 
 			{showLabels && (
-				<div className={classNames(styles.bar_chart_labels)}>
+				<div className={classNames(styles.donut_chart_labels)}>
 					{chartData.labels.map((label: string, index: number) => {
 						const itemAmount = chartData.datasets[0].data[index];
 						const percentage = Math.round((itemAmount / totalAmount) * 100);
 						return (
 							<div key={index}>
-								<ChartLabel label={label} amount={`${percentage} %`} />
+								<ChartLabel
+									label={label}
+									amount={`${percentage} %`}
+									loading={loading}
+								/>
 							</div>
 						);
 					})}
