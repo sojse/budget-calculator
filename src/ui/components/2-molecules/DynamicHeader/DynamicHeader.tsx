@@ -6,10 +6,12 @@ import { buildBudgetTitle } from '@/helpers/string';
 
 export interface DynamicHeaderProps {
 	defaultString: string;
+	loading?: boolean;
 }
 
 export const DynamicHeader: React.FC<DynamicHeaderProps> = ({
 	defaultString,
+	loading = false,
 }) => {
 	const params = useParams();
 	var title: string;
@@ -22,7 +24,7 @@ export const DynamicHeader: React.FC<DynamicHeaderProps> = ({
 
 	return (
 		<Heading headingLevel="h1" color="primary" style="lg">
-			{title}
+			{loading ? 'Laddar...' : title}
 		</Heading>
 	);
 };

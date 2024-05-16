@@ -11,7 +11,7 @@ export default function Finance({ params }: { params: { slug: string[] } }) {
 	const year = params.slug ? params.slug[1] : '';
 	return (
 		<>
-			<Suspense fallback={<div>Loading...</div>}>
+			<Suspense fallback={<SiteHeading year={year} loading={true} />}>
 				<SiteHeading year={year} />
 			</Suspense>
 			<TwoColumnLayout

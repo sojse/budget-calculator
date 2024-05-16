@@ -7,14 +7,19 @@ import { getMonthData } from '@/app/actions';
 import { useRouter, usePathname, useParams } from 'next/navigation';
 
 export interface BudgetSelectProps {
-	budgetInformation: {
+	budgetInformation?: {
 		years: { value: string; caption: string }[];
 		months: { value: string; caption: string }[];
 	};
+	loading: boolean;
 }
 
 export const BudgetSelect: React.FC<BudgetSelectProps> = ({
-	budgetInformation,
+	budgetInformation = {
+		years: [{ value: '', caption: '' }],
+		months: [{ value: '', caption: '' }],
+	},
+	loading = false,
 }) => {
 	const params = useParams();
 	const router = useRouter();
@@ -31,15 +36,16 @@ export const BudgetSelect: React.FC<BudgetSelectProps> = ({
 			? params.slug[0]
 			: budgetInformation.months[budgetInformation.months.length - 1].value
 	);
-
-	useEffect(() => {
-		setMonths(budgetInformation.months);
-		setSelectedBudget(
-			params.slug && !params.id
-				? params.slug[0]
-				: budgetInformation.months[budgetInformation.months.length - 1].value
-		);
-	}, [budgetInformation]);
+	if (!loading) {
+		useEffect(() => {
+			setMonths(budgetInformation.months);
+			setSelectedBudget(
+				params.slug && !params.id
+					? params.slug[0]
+					: budgetInformation.months[budgetInformation.months.length - 1].value
+			);
+		}, [budgetInformation]);
+	}
 
 	const fetchNewBudgets = async (e: any) => {
 		setSelectedYear(e.target.value);
@@ -65,24 +71,43 @@ export const BudgetSelect: React.FC<BudgetSelectProps> = ({
 
 	return (
 		<form className={classNames(styles.budget_select)}>
-			<FormfieldSelect
-				id={'Year'}
-				label={'Year'}
-				options={budgetInformation.years}
-				state={{ hiddenLabel: true }}
-				value={selectedYear}
-				placeHolderValue="Välj år"
-				onChange={fetchNewBudgets}
-			/>
-			<FormfieldSelect
-				id={'Budget'}
-				label={'Budget'}
-				options={months}
-				state={{ hiddenLabel: true }}
-				value={selectedBudget}
-				placeHolderValue={placeHolderValue}
-				onChange={changeCurrentBudget}
-			/>
+			{loading ? (
+				<>
+					<FormfieldSelect
+						id={'Year'}
+						label={'Year'}
+						options={[]}
+						state={{ hiddenLabel: true, disabled: true }}
+					/>
+					<FormfieldSelect
+						id={'Budget'}
+						label={'Budget'}
+						options={[]}
+						state={{ hiddenLabel: true, disabled: true }}
+					/>
+				</>
+			) : (
+				<>
+					<FormfieldSelect
+						id={'Year'}
+						label={'Year'}
+						options={budgetInformation.years}
+						state={{ hiddenLabel: true, disabled: loading }}
+						value={selectedYear}
+						placeHolderValue="Välj år"
+						onChange={fetchNewBudgets}
+					/>
+					<FormfieldSelect
+						id={'Budget'}
+						label={'Budget'}
+						options={months}
+						state={{ hiddenLabel: true, disabled: loading }}
+						value={selectedBudget}
+						placeHolderValue={placeHolderValue}
+						onChange={changeCurrentBudget}
+					/>
+				</>
+			)}
 		</form>
 	);
 };

@@ -14,10 +14,23 @@ import { fetchBudgets } from '@/lib/api/budget/fetch';
 export interface SiteHeadingProps {
 	className?: string;
 	year: string;
+	loading?: boolean;
 }
 
-export const SiteHeading: React.FC<SiteHeadingProps> = async ({ className, year }) => {
-	const budgetInformation = await fetchBudgets(year);
+export const SiteHeading: React.FC<SiteHeadingProps> = async ({
+	className,
+	year,
+	loading = false,
+}) => {
+	let budgetInformation = {
+		months: [{ caption: '', value: '' }],
+		years: [{ caption: '', value: '' }],
+	};
+	let defaultString = 'Laddar...';
+	if (!loading) {
+		budgetInformation = await fetchBudgets(year);
+		defaultString = `${budgetInformation.months[budgetInformation.months.length - 1].caption} ${budgetInformation.years[budgetInformation.years.length - 1].caption}`;
+	}
 
 	return (
 		<ContentSection
@@ -28,9 +41,7 @@ export const SiteHeading: React.FC<SiteHeadingProps> = async ({ className, year 
 				<IconCircle style="secondary" size="lg">
 					<Wallet className={classNames(styles.site_heading_icon)} />
 				</IconCircle>
-				<DynamicHeader
-					defaultString={`${budgetInformation.months[budgetInformation.months.length - 1].caption} ${budgetInformation.years[budgetInformation.years.length - 1].caption}`}
-				/>
+				<DynamicHeader defaultString={defaultString} loading={loading} />
 			</div>
 			<div className={classNames(styles.site_heading__right)}>
 				<LinkComponent
@@ -39,10 +50,11 @@ export const SiteHeading: React.FC<SiteHeadingProps> = async ({ className, year 
 					width="maxMobile"
 					url="/modal/createBudget"
 					scroll={false}
+					disabled={loading}
 				>
 					Skapa ny budget
 				</LinkComponent>
-				<BudgetSelect budgetInformation={budgetInformation} />
+				<BudgetSelect budgetInformation={budgetInformation} loading={loading} />
 			</div>
 		</ContentSection>
 	);

@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 
 export interface LinkProps {
 	children: React.ReactNode;
-	style?: 'primary' | 'dark' | 'disabled';
+	style?: 'primary' | 'dark';
 	overrideStyle?: any;
 	width?: 'default' | 'maxMobile';
 	ariaLabel?: string;
@@ -16,6 +16,7 @@ export interface LinkProps {
 	asButton?: boolean;
 	target?: string;
 	scroll?: boolean;
+	disabled?: boolean;
 }
 
 export const LinkComponent: React.FC<LinkProps> = ({
@@ -30,12 +31,14 @@ export const LinkComponent: React.FC<LinkProps> = ({
 	asButton,
 	width,
 	scroll = false,
+	disabled = false,
 }) => {
 	const router = useRouter();
 	const linkClasses = classNames(
 		styles.link,
 		styles[`link__${style}`],
 		styles[`link__${width}`],
+		disabled && styles.link__disabled,
 		className
 	);
 
@@ -67,6 +70,8 @@ export const LinkComponent: React.FC<LinkProps> = ({
 					aria-label={ariaLabel}
 					onClick={navigate}
 					className={buttonClasses}
+					disabled={disabled}
+					aria-disabled={disabled}
 				>
 					{children}
 				</button>
