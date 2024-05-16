@@ -1,0 +1,16 @@
+@mixin skeleton {
+    position: relative;
+
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: inline-block;
+        height: 100%;
+        width: 100%;
+        border-radius: $corner-size--2;
+        background-color: $skeleton-color;
+        animation: pulse-skeleton 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+}
