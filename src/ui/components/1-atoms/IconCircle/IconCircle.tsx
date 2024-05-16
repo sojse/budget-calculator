@@ -5,6 +5,7 @@ import styles from './IconCircle.module.scss';
 export interface IconCircleProps {
 	className?: string;
 	size?: 'sm' | 'lg';
+	loading?: boolean;
 	style?:
 		| 'primary'
 		| 'secondary'
@@ -26,13 +27,14 @@ export const IconCircle: React.FC<IconCircleProps> = ({
 	children,
 	size = 'sm',
 	style = 'primary',
+	loading = false,
 }) => {
 	return (
 		<div
 			className={classNames(
 				styles.icon_circle,
 				styles[`icon_circle__${size}`],
-				styles[`icon_circle__${style}`],
+				!loading ? styles[`icon_circle__${style}`] : 'u-skeleton-circle',
 				className
 			)}
 		>

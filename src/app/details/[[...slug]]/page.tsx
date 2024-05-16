@@ -18,7 +18,9 @@ export default function Finance({ params }: { params: { slug: string[] } }) {
 				column1={
 					<>
 						<StaticSiteHeading>Detaljer</StaticSiteHeading>
-						<Suspense fallback={<div>Loading...</div>}>
+						<Suspense
+							fallback={<FinanceAccordion slug={params.slug} loading />}
+						>
 							<FinanceAccordion slug={params.slug} />
 						</Suspense>
 					</>

@@ -50,7 +50,8 @@ export const FinanceBox: React.FC<FinanceBoxProps> = ({
 				<span
 					className={classNames(
 						styles.finance_box_text,
-						styles.finance_box_text__light
+						styles.finance_box_text__light,
+						'u-skeleton'
 					)}
 				>
 					{categories[data.categoryType.category]}

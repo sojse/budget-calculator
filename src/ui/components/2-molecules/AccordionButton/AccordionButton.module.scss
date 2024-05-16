@@ -1,11 +1,16 @@
 .accordion_button_button {
     @include action;
     width: 100%;
+
+    &__loading {
+        cursor: wait;
+    }
 }
 
 .accordion_button {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: $spacing--5;
 }
 
