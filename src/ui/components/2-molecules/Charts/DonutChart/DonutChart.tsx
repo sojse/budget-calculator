@@ -21,7 +21,7 @@ export interface DonutChartProps {
 	totalAmount: number;
 	showLabels?: boolean;
 	showGrid?: boolean;
-	loading: boolean;
+	loading?: boolean;
 }
 
 export const DonutChart: React.FC<DonutChartProps> = ({
@@ -29,7 +29,7 @@ export const DonutChart: React.FC<DonutChartProps> = ({
 	totalAmount,
 	showLabels = true,
 	showGrid = false,
-	loading,
+	loading = false,
 }) => {
 	const options = {
 		plugins: { legend: { display: false } },

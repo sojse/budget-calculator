@@ -28,7 +28,8 @@ export const Disabled: StoryFn<LinkProps> = Template.bind({});
 Disabled.args = {
 	children: 'Disabled Link',
 	url: '#',
-	style: 'disabled',
+	style: 'primary',
+	disabled: true,
 };
 
 export const AsButton: StoryFn<LinkProps> = Template.bind({});
