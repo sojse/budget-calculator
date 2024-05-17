@@ -1,6 +1,6 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
-import { CreateBudgetForm, CreateBudgetFormProps } from './CreateBudgetForm';
+import { CreateBudgetForm } from './CreateBudgetForm';
 
 export default {
 	title: 'Organisms/Forms/CreateBudget',
@@ -8,6 +8,6 @@ export default {
 	tags: ['autodocs'],
 } as Meta;
 
-const Template: StoryFn<CreateBudgetFormProps> = () => <CreateBudgetForm />;
+const Template: StoryFn = () => <CreateBudgetForm />;
 
-export const Default: StoryFn<CreateBudgetFormProps> = Template.bind({});
+export const Default: StoryFn = Template.bind({});
