@@ -11,7 +11,7 @@ export const DeleteIncomeForm: React.FC = ({}) => {
 			action={deleteIncome}
 			heading="Radera inkomst"
 			successMessage="Inkomsten har raderats"
-			errorMessage="Något gick fel när inkosmten skulle raderas"
+			errorMessage="Något gick fel när inkomsten skulle raderas"
 			data={data}
 		/>
 	);

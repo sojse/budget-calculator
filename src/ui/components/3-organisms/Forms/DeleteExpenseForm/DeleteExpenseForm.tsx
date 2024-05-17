@@ -9,9 +9,9 @@ export const DeleteExpenseForm: React.FC = ({}) => {
 	return (
 		<DeleteForm
 			action={deleteExpense}
-			heading="Radera inkomst"
-			successMessage="Inkomsten har raderats"
-			errorMessage="Något gick fel när inkosmten skulle raderas"
+			heading="Radera utgift"
+			successMessage="Utgiften har raderats"
+			errorMessage="Något gick fel när utgiften skulle raderas"
 			data={data}
 		/>
 	);
