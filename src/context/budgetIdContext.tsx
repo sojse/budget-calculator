@@ -31,6 +31,8 @@ export type Expense = {
 interface BudgetContextType {
 	currentBudgetId: string;
 	data: Income | Expense;
+	currentPathName: string;
+	setCurrentPathName: (slug: string) => void;
 	setCurrentBudgetId: (id: string) => void;
 	setData: (income: Income) => void;
 }
@@ -44,6 +46,8 @@ export const BudgetIdContext = createContext<BudgetContextType>({
 		id: '',
 		categoryType: { category: 'income' },
 	},
+	currentPathName: '',
+	setCurrentPathName: () => {},
 	setCurrentBudgetId: () => {},
 	setData: () => {},
 });
@@ -59,10 +63,13 @@ export const BudgetIdProvider: React.FC<{ children: React.ReactNode }> = ({
 		id: '',
 		categoryType: { category: 'income' },
 	});
+	const [currentPathName, setCurrentPathName] = useState<string>('');
 
 	const contextValue = {
 		currentBudgetId,
 		data,
+		currentPathName,
+		setCurrentPathName,
 		setCurrentBudgetId,
 		setData,
 	};

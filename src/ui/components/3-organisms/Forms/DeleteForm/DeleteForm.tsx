@@ -2,12 +2,9 @@
 import classNames from 'classnames';
 import styles from './DeleteForm.module.scss';
 import { Heading, ModalButtons } from '@/ui/components';
-import { useFormState } from 'react-dom';
-import { useRouter } from 'next/navigation';
-import { showToast } from '@/helpers/toast';
 import { useBudgetId } from '@/hooks/useBudgetId';
 import { Income } from '@/context/budgetIdContext';
-import { useEffect, useRef } from 'react';
+import { useFormStateHook } from '@/hooks/useFormState';
 
 export type DeleteState = {
 	success: boolean;
@@ -32,21 +29,17 @@ export const DeleteForm: React.FC<DeleteFormProps> = ({
 	data,
 }) => {
 	const { currentBudgetId } = useBudgetId();
-	const [state, formAction] = useFormState(action, {
-		success: false,
-		error: false,
-		budgetId: currentBudgetId,
-		dataId: data.id,
-	});
-	const router = useRouter();
-
-	if (state?.success) {
-		router.back();
-		showToast('success', <span>{successMessage}</span>);
-	} else if (state?.error) {
-		router.back();
-		showToast('error', <span>{errorMessage}</span>);
-	}
+	const { formAction } = useFormStateHook(
+		action,
+		{
+			success: false,
+			error: false,
+			budgetId: currentBudgetId,
+			dataId: data.id,
+		},
+		successMessage,
+		errorMessage
+	);
 
 	return (
 		<>

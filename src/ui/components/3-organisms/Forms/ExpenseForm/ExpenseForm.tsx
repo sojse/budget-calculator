@@ -9,12 +9,10 @@ import {
 	FormfieldSelect,
 	categories,
 } from '@/ui/components';
-import { useFormState } from 'react-dom';
-import { useRouter } from 'next/navigation';
-import { showToast } from '@/helpers/toast';
 import { useBudgetId } from '@/hooks/useBudgetId';
 import { Expense } from '@/context/budgetIdContext';
 import { useState } from 'react';
+import { useFormStateHook } from '@/hooks/useFormState';
 
 export type ExpenseState = {
 	expenseType: { hasError: boolean };
@@ -42,13 +40,19 @@ export const ExpenseForm: React.FC<ExpenseFormProps> = ({
 	buttonText,
 }) => {
 	const { currentBudgetId } = useBudgetId();
-	const [state, formAction] = useFormState(action, {
-		expenseType: { hasError: false },
-		success: false,
-		error: false,
-		budgetId: currentBudgetId,
-		expenseId: expenseData?.id,
-	});
+	const { state, formAction } = useFormStateHook(
+		action,
+		{
+			expenseType: { hasError: false },
+			success: false,
+			error: false,
+			budgetId: currentBudgetId,
+			expenseId: expenseData?.id,
+		},
+		successMessage,
+		errorMessage
+	);
+
 	const categoryOptions = Object.entries(categories).map(([key, value]) => {
 		return { value: key, text: value };
 	});
@@ -58,15 +62,6 @@ export const ExpenseForm: React.FC<ExpenseFormProps> = ({
 	const [categoryTypes, setCategories] = useState(
 		categoryOptions.filter((option) => option.value !== 'income')
 	);
-	const router = useRouter();
-
-	if (state?.success) {
-		router.back();
-		showToast('success', <span>{successMessage}</span>);
-	} else if (state?.error) {
-		router.back();
-		showToast('error', <span>{errorMessage}</span>);
-	}
 
 	return (
 		<>

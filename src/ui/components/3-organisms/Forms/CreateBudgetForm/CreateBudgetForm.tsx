@@ -9,30 +9,21 @@ import {
 	ModalButtons,
 } from '@/ui/components';
 import { submitNewBudget } from '@/app/actions';
-import { useFormState } from 'react-dom';
-import { useRouter } from 'next/navigation';
-import { showToast } from '@/helpers/toast';
+import { useFormStateHook } from '@/hooks/useFormState';
 
-export interface CreateBudgetFormProps {}
-const initialState = {
-	budgetName: { id: '', hasError: false },
-	budgetDates: { id: '', hasError: false },
-};
-
-export const CreateBudgetForm: React.FC<CreateBudgetFormProps> = () => {
-	const [state, formAction] = useFormState(submitNewBudget, initialState);
-	const router = useRouter();
-
-	if (state?.success) {
-		router.push(state.newRoute, { scroll: false });
-		showToast('success', <span>Din budget har skapats</span>);
-	} else if (state?.success) {
-		router.back();
-		showToast(
-			'error',
-			<span>Något gick fel när din budget skulle skapas</span>
-		);
-	}
+export const CreateBudgetForm: React.FC = () => {
+	const { formAction, state } = useFormStateHook(
+		submitNewBudget,
+		{
+			budgetName: { id: '', hasError: false },
+			budgetDates: { id: '', hasError: false },
+			success: false,
+			error: false,
+			newRoute: '',
+		},
+		'Din budget har skapats',
+		'Något gick fel när din budget skulle skapas'
+	);
 
 	return (
 		<>

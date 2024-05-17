@@ -7,11 +7,9 @@ import {
 	ModalButtons,
 	FormfieldCheckbox,
 } from '@/ui/components';
-import { useFormState } from 'react-dom';
-import { useRouter } from 'next/navigation';
-import { showToast } from '@/helpers/toast';
 import { useBudgetId } from '@/hooks/useBudgetId';
 import { Income } from '@/context/budgetIdContext';
+import { useFormStateHook } from '@/hooks/useFormState';
 
 export type State = {
 	incomeType: { hasError: boolean };
@@ -39,22 +37,18 @@ export const IncomeForm: React.FC<IncomeFormProps> = ({
 	buttonText,
 }) => {
 	const { currentBudgetId } = useBudgetId();
-	const [state, formAction] = useFormState(action, {
-		incomeType: { hasError: false },
-		success: false,
-		error: false,
-		budgetId: currentBudgetId,
-		incomeId: incomeData?.id,
-	});
-	const router = useRouter();
-
-	if (state?.success) {
-		router.back();
-		showToast('success', <span>{successMessage}</span>);
-	} else if (state?.error) {
-		router.back();
-		showToast('error', <span>{errorMessage}</span>);
-	}
+	const { formAction, state } = useFormStateHook(
+		action,
+		{
+			incomeType: { hasError: false },
+			success: false,
+			error: false,
+			budgetId: currentBudgetId,
+			incomeId: incomeData?.id,
+		},
+		successMessage,
+		errorMessage
+	);
 
 	return (
 		<>
