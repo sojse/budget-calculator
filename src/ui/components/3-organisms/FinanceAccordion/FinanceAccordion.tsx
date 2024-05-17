@@ -1,6 +1,8 @@
 import React from 'react';
 import { AccordionItem, AccordionItemProps } from '@/ui/components';
 import { getFinanceDetailData } from '@/lib/api/expense/fetch';
+import classNames from 'classnames';
+import styles from './FinanceAccordion.module.scss';
 
 export interface FinanceAccordionProps {
 	slug: string[];
@@ -17,17 +19,17 @@ export const FinanceAccordion: React.FC<FinanceAccordionProps> = async ({
 	}
 
 	return (
-		<>
+		<ul className={classNames(styles.finance_accordion)}>
 			{budgetData.map((item: AccordionItemProps, index: number) => (
-				<div key={index}>
+				<li key={index}>
 					<AccordionItem
 						data={item.data}
 						categoryType={item.categoryType}
 						amount={item.amount}
 						loading={loading}
 					/>
-				</div>
+				</li>
 			))}
-		</>
+		</ul>
 	);
 };
