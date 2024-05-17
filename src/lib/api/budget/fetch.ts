@@ -69,7 +69,7 @@ export const fetchBudgets = async (year: string) => {
 
 	const { budgets } = data;
 
-	var selectedBudgets = [];
+	let selectedBudgets = [];
 	if (year === '') {
 		selectedBudgets = budgets[budgets.length - 1].budgets;
 	} else {
@@ -173,7 +173,7 @@ export const fetchBudget = async (slug: string[]) => {
 export const getBudgetId = async (year: string, month: string) => {
 	const client = getClient();
 	const { data } = await client.query({ query: GET_BUDGETS });
-	var id = '';
+	let id = '';
 
 	data.budgets.forEach(
 		(element: {

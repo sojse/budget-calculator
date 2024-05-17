@@ -12,7 +12,7 @@ export const ExpenseOverviewChart: React.FC<ExpenseOverviewChartProps> = async (
 	slug,
 	loading = false,
 }) => {
-	var budgetData = {
+	let budgetData = {
 		budgetOverview: {
 			chartData: {
 				labels: ['', '', '', '', '', ''],

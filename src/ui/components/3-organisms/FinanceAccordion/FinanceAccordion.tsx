@@ -13,7 +13,8 @@ export const FinanceAccordion: React.FC<FinanceAccordionProps> = async ({
 	slug,
 	loading = false,
 }) => {
-	var budgetData = new Array(6).fill(0);
+	let budgetData = new Array(6).fill(0);
+
 	if (!loading) {
 		budgetData = await getFinanceDetailData(slug);
 	}

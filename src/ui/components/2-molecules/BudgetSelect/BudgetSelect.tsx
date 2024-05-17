@@ -58,7 +58,7 @@ export const BudgetSelect: React.FC<BudgetSelectProps> = ({
 		setSelectedBudget(e.target.value);
 		const budgetString = e.target.value.toString().toLowerCase();
 		const pathSegments = pathName.split('/');
-		var basePath: string;
+		let basePath: string;
 
 		if (pathSegments.length > 2) {
 			basePath = `${pathSegments[0]}/${pathSegments[1]}`;

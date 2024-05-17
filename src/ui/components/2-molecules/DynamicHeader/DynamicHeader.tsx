@@ -14,7 +14,7 @@ export const DynamicHeader: React.FC<DynamicHeaderProps> = ({
 	loading = false,
 }) => {
 	const params = useParams();
-	var title: string;
+	let title: string;
 
 	if (params.slug === undefined) {
 		title = defaultString;

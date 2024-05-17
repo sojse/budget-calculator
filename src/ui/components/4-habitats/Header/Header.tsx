@@ -32,7 +32,7 @@ export const Header = ({ navigation }: HeaderProps) => {
 	const dynamicNavigation = navigation.map((item) => {
 		let isActive = false;
 
-		var url: string;
+		let url: string;
 
 		if (segment.length >= 1) {
 			url = '/' + segment[0];
