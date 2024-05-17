@@ -12,7 +12,6 @@ import { useRouter } from 'next/navigation';
 import { showToast } from '@/helpers/toast';
 import { useBudgetId } from '@/hooks/useBudgetId';
 import { Income } from '@/context/budgetIdContext';
-import { useRef } from 'react';
 
 export type State = {
 	incomeType: { hasError: boolean };
