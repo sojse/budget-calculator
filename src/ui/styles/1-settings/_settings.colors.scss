@@ -8,8 +8,10 @@ $color-cobalt: #1d4eff;
 $color-midnight: #061d71;
 $color-jade: #00b35d;
 $color-mustard: #fec910;
+$color-peach: #f3a273;
 $color-pumpkin: #ff8c4b;
-$color-henna: #b86331;
+$color-henna: #D14900;
+$color-amber: #802d00;
 $color-fire: #ff4b23;
 $color-blossom: #ffcce7;
 $color-barbie: #ff6dbc;
@@ -77,7 +79,6 @@ $color-category-entertainment: $color-barbie;
 // Chart colors
 $color-income: $color-primary;
 $color-expense: $color-secondary;
-$color-expense--hover: $color-henna;
 
 // Formfield
 $color-formfield: $color-grey-900;
@@ -120,6 +121,9 @@ $color-label: $color-text-dark;
 $link-primary: $color-primary;
 $link-primary--hover: $color-midnight;
 $link-primary--disabled: $color-sky;
+$link-secondary: $color-henna;
+$link-secondary--hover: $color-amber;
+$link-secondary--disabled: $color-peach;
 $link-dark: $color-grey-700;
 $link-dark--hover: $color-grey-1000;
 $link-dark--disabled: $color-grey-400;

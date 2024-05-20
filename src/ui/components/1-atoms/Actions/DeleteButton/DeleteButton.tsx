@@ -11,12 +11,14 @@ export interface DeleteButtonProps {
 	className?: string;
 	url: string;
 	data: Income | Expense;
+	loading: boolean;
 }
 
 export const DeleteButton: React.FC<DeleteButtonProps> = ({
 	className,
 	url,
 	data,
+	loading,
 }) => {
 	const router = useRouter();
 	const { setData } = useBudgetId();
@@ -32,11 +34,17 @@ export const DeleteButton: React.FC<DeleteButtonProps> = ({
 	};
 	return (
 		<button
-			className={classNames(styles.delete_button)}
+			className={classNames(
+				styles.delete_button,
+				loading && 'u-skeleton-circle'
+			)}
 			onClick={handleClick}
+			disabled={loading}
 			aria-label="delete"
 		>
-			<Trash className={classNames(styles.delete_button_icon, className)} />
+			{!loading && (
+				<Trash className={classNames(styles.delete_button_icon, className)} />
+			)}
 		</button>
 	);
 };

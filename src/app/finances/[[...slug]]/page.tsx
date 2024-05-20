@@ -19,12 +19,20 @@ export default function Finance({ params }: { params: { slug: string[] } }) {
 				column1={
 					<>
 						<StaticSiteHeading>Utgifter</StaticSiteHeading>
-						<Suspense fallback={<div>Loading...</div>}>
+						<Suspense
+							fallback={
+								<FinanceList listType={'expense'} slug={params.slug} loading />
+							}
+						>
 							<FinanceList slug={params.slug} listType={'expense'} />
 						</Suspense>
 
 						<StaticSiteHeading>Inkomster</StaticSiteHeading>
-						<Suspense fallback={<div>Loading...</div>}>
+						<Suspense
+							fallback={
+								<FinanceList listType={'income'} slug={params.slug} loading />
+							}
+						>
 							<FinanceList listType={'income'} slug={params.slug} />
 						</Suspense>
 					</>

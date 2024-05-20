@@ -11,12 +11,14 @@ export interface EditButtonProps {
 	className?: string;
 	url: string;
 	data: Income | Expense;
+	loading: boolean;
 }
 
 export const EditButton: React.FC<EditButtonProps> = ({
 	className,
 	url,
 	data,
+	loading,
 }) => {
 	const router = useRouter();
 	const { setData } = useBudgetId();
@@ -34,11 +36,14 @@ export const EditButton: React.FC<EditButtonProps> = ({
 	};
 	return (
 		<button
-			className={classNames(styles.edit_button)}
+			className={classNames(styles.edit_button, loading && 'u-skeleton-circle')}
 			onClick={handleClick}
+			disabled={loading}
 			aria-label="edit"
 		>
-			<Pen className={classNames(styles.edit_button_icon, className)} />
+			{!loading && (
+				<Pen className={classNames(styles.edit_button_icon, className)} />
+			)}
 		</button>
 	);
 };

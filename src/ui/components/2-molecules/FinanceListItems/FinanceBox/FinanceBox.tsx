@@ -15,7 +15,8 @@ import { capitalizeFirstLetter } from '@/helpers/string';
 export interface FinanceBoxProps {
 	className?: string;
 	category: 'income' | 'expense';
-	data: Expense | Income;
+	data?: Expense | Income;
+	loading: boolean;
 }
 
 interface Categories {
@@ -34,33 +35,60 @@ export const categories: Categories = {
 export const FinanceBox: React.FC<FinanceBoxProps> = ({
 	className,
 	category,
-	data,
+	data = {
+		title: '',
+		amount: 0,
+		id: '',
+		categoryType: { category: 'other' },
+		monthlyTransaction: false,
+	},
+	loading,
 }) => {
-	const IconComponent =
-		Icons[
-			capitalizeFirstLetter(data.categoryType.category) as keyof typeof Icons
-		];
+	let IconComponent = null;
+	if (!loading) {
+		IconComponent =
+			Icons[
+				capitalizeFirstLetter(data.categoryType.category) as keyof typeof Icons
+			];
+	}
 
 	return (
 		<ContentBox className={classNames(styles.finance_box, className)}>
 			<div className={classNames(styles.finance_box_left)}>
-				<IconCircle style={data.categoryType.category} size="sm">
-					<IconComponent />
-				</IconCircle>
+				{!loading ? (
+					<IconCircle style={data.categoryType.category} size="sm">
+						<IconComponent />
+					</IconCircle>
+				) : (
+					<IconCircle size="sm" loading={loading}>
+						<></>
+					</IconCircle>
+				)}
 				<span
 					className={classNames(
 						styles.finance_box_text,
-						styles.finance_box_text__light
+						styles.finance_box_text__light,
+						loading && 'u-skeleton-text u-skeleton-text--medium'
 					)}
 				>
 					{categories[data.categoryType.category]}
 				</span>
-				<span className={classNames(styles.finance_box_text)}>
+				<span
+					className={classNames(
+						styles.finance_box_text,
+						loading && 'u-skeleton-text u-skeleton-text--short'
+					)}
+				>
 					{data.title}
 				</span>
 			</div>
 			<div className={classNames(styles.finance_box_right)}>
-				<span className={classNames(styles.finance_box_text)}>
+				<span
+					className={classNames(
+						styles.finance_box_text,
+						loading && 'u-skeleton-text u-skeleton-text--short'
+					)}
+				>
 					{category === 'expense' && '- '}
 					{formatCost(data.amount)} kr
 				</span>
@@ -70,6 +98,7 @@ export const FinanceBox: React.FC<FinanceBoxProps> = ({
 						category === 'income' ? '/modal/editIncome' : '/modal/editExpense'
 					}
 					data={data}
+					loading={loading}
 				/>
 				<DeleteButton
 					className={classNames(styles.finance_box_icon)}
@@ -79,6 +108,7 @@ export const FinanceBox: React.FC<FinanceBoxProps> = ({
 							: '/modal/deleteExpense'
 					}
 					data={data}
+					loading={loading}
 				/>
 			</div>
 		</ContentBox>

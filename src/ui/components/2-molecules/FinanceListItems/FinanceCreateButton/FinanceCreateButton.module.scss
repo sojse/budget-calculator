@@ -7,31 +7,47 @@
     font-family: $font-secondary;
     font-weight: $font-weight--semibold;
 
-    &:hover {
+    &:hover:not([disabled]) {
         .finance_button_text {
             text-decoration: underline;
         }
     }
 
-    &__expense {
-        .finance_button_text {
-            color: $color-expense;
+    &__disabled {
+        cursor: not-allowed;
+        
+        &.finance_button__income {
+            .finance_button_text {
+                color: $link-primary--disabled;
+            }
         }
 
-        &:hover {
+        &.finance_button__expense {
             .finance_button_text {
-                color: $color-expense--hover
+                color: $link-secondary--disabled;
+            }
+        }
+    }
+
+    &__expense {
+        .finance_button_text {
+            color: $link-secondary;
+        }
+
+        &:hover:not([disabled]) {
+            .finance_button_text {
+                color: $link-secondary--hover;
             }
         }
     }
 
     &__income {
         .finance_button_text {
-            color: $color-income;
+            color: $link-primary;
         }
-        &:hover {
+        &:hover:not([disabled]) {
             .finance_button_text {
-                color: $color-button--hover
+                color: $link-primary--hover;
             }
         }
     }

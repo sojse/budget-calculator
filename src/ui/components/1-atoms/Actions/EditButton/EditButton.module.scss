@@ -2,6 +2,12 @@
     @include action;
     display: flex;
     align-items: center;
+    height: $icon-size--lg;
+    width: $icon-size--lg;
+
+    &:disabled {
+        cursor: not-allowed;
+    }
 }
 
 .edit_button_icon {

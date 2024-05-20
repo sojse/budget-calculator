@@ -2,9 +2,14 @@
     @include action;
     display: flex;
     align-items: center;
+    height: $icon-size--lg;
+    width: $icon-size--lg;
+
+    &:disabled {
+        cursor: not-allowed;
+    }
 }
 
 .delete_button_icon {
     color: $color-error;
-
 }

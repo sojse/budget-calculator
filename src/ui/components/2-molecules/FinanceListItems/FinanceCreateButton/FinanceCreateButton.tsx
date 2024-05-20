@@ -10,12 +10,14 @@ export interface FinanceCreateButtonProps {
 	className?: string;
 	category: 'income' | 'expense';
 	budgetId: string;
+	loading: boolean;
 }
 
 export const FinanceCreateButton: React.FC<FinanceCreateButtonProps> = ({
 	className,
 	category,
 	budgetId,
+	loading,
 }) => {
 	const router = useRouter();
 	const { setCurrentBudgetId } = useBudgetId();
@@ -37,9 +39,12 @@ export const FinanceCreateButton: React.FC<FinanceCreateButtonProps> = ({
 				className={classNames(
 					styles.finance_button,
 					styles[`finance_button__${category}`],
+					loading && styles.finance_button__disabled,
 					className
 				)}
 				onClick={navigate}
+				disabled={loading}
+				aria-disabled={loading}
 			>
 				<LinkComponent
 					asText
