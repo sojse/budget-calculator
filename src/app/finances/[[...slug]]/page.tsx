@@ -1,8 +1,7 @@
 import {
 	BudgetOverview,
-	FinanceList,
+	FinanceSection,
 	SiteHeading,
-	StaticSiteHeading,
 	TwoColumnLayout,
 } from '@/ui/components';
 import { Suspense } from 'react';
@@ -18,30 +17,11 @@ export default function Finance({ params }: { params: { slug: string[] } }) {
 			<TwoColumnLayout
 				column1={
 					<>
-						<StaticSiteHeading>Utgifter</StaticSiteHeading>
-						<Suspense
-							fallback={
-								<FinanceList listType={'expense'} slug={params.slug} loading />
-							}
-						>
-							<FinanceList slug={params.slug} listType={'expense'} />
-						</Suspense>
-
-						<StaticSiteHeading>Inkomster</StaticSiteHeading>
-						<Suspense
-							fallback={
-								<FinanceList listType={'income'} slug={params.slug} loading />
-							}
-						>
-							<FinanceList listType={'income'} slug={params.slug} />
-						</Suspense>
+						<FinanceSection listType={'expense'} slug={params.slug} />
+						<FinanceSection listType={'income'} slug={params.slug} />
 					</>
 				}
-				column2={
-					<>
-						<BudgetOverview slug={params.slug} />
-					</>
-				}
+				column2={<BudgetOverview slug={params.slug} />}
 			/>
 		</>
 	);

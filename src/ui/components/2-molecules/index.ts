@@ -7,4 +7,4 @@ export * from './FinanceTable';
 export * from './Form';
 export * from './InformationMessage';
 export * from './LoadMore';
-export * from './StaticSiteHeading';
+export * from './StaticSectionHeading';
