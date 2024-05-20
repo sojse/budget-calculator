@@ -13,7 +13,7 @@ export const BudgetOverview: React.FC<BudgetOverviewProps> = ({ slug }) => {
 	return (
 		<div className={classNames(styles.budget_overview)}>
 			<StaticSiteHeading>Översikt</StaticSiteHeading>
-			<Suspense fallback={<div>Loading...</div>}>
+			<Suspense fallback={<BudgetChart slug={slug} loading />}>
 				<BudgetChart slug={slug} />
 			</Suspense>
 			<LinkComponent style="primary" url={detailUrl}>
