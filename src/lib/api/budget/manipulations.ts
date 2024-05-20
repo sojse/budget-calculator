@@ -14,13 +14,20 @@ const CREATE_BUDGET = gql`
 	}
 `;
 
-export const createBudget = async (budgetData: any) => {
+export type Budget = {
+	title: string;
+	description: string;
+	startDate: string;
+	endDate: string;
+};
+
+export const createBudget = async (budgetData: Budget) => {
 	const client = getClient();
 	try {
 		const { data } = await client.mutate({
 			variables: {
 				data: {
-					title: budgetData.budgetTitle,
+					title: budgetData.title,
 					description: budgetData.description,
 					startDate: budgetData.startDate,
 					endDate: budgetData.endDate,

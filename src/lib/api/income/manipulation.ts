@@ -30,7 +30,7 @@ const DELETE_INCOME = gql`
 export const createIncome = async (incomeData: any, id: string) => {
 	const client = getClient();
 	try {
-		const { data } = await client.mutate({
+		await client.mutate({
 			variables: {
 				data: {
 					budgetID: id,
@@ -57,7 +57,7 @@ export const updateIncome = async (
 ) => {
 	const client = getClient();
 	try {
-		const { data } = await client.mutate({
+		await client.mutate({
 			variables: {
 				data: {
 					budgetID: budgetId,
@@ -82,7 +82,7 @@ export const updateIncome = async (
 export const deleteIncomeById = async (budgetId: string, incomeId: string) => {
 	const client = getClient();
 	try {
-		const { data } = await client.mutate({
+		await client.mutate({
 			variables: {
 				budgetId: budgetId,
 				incomeDeleteId: incomeId,

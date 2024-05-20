@@ -11,7 +11,7 @@ import { useBudgetId } from '@/hooks/useBudgetId';
 import { Income } from '@/context/budgetIdContext';
 import { useFormStateHook } from '@/hooks/useFormState';
 
-export type State = {
+export type IncomeState = {
 	incomeType: { hasError: boolean };
 	success: boolean;
 	error: boolean;
@@ -20,7 +20,7 @@ export type State = {
 };
 
 export interface IncomeFormProps {
-	action: (currentState: State, formData: FormData) => Promise<any>;
+	action: (currentState: IncomeState, formData: FormData) => Promise<any>;
 	heading: string;
 	successMessage: string;
 	errorMessage: string;

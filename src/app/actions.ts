@@ -1,11 +1,12 @@
 'use server';
+import { getDateRange } from '@/helpers/date';
 import {
 	addExpenseValidation,
 	addIncomeValidation,
 	createBudgetValidation,
 } from '@/helpers/formValidation';
 import { fetchMonthData } from '@/lib/api/budget/fetch';
-import { createBudget } from '@/lib/api/budget/manipulations';
+import { Budget, createBudget } from '@/lib/api/budget/manipulations';
 import {
 	deleteExpenseById,
 	createNewExpense,
@@ -16,19 +17,19 @@ import {
 	updateIncome,
 	deleteIncomeById,
 } from '@/lib/api/income/manipulation';
+import { BudgetState } from '@/ui/components';
 import { DeleteState } from '@/ui/components/3-organisms/Forms/DeleteForm/DeleteForm';
 import { ExpenseState } from '@/ui/components/3-organisms/Forms/ExpenseForm';
-import { State } from '@/ui/components/3-organisms/Forms/IncomeForm';
+import { IncomeState } from '@/ui/components/3-organisms/Forms/IncomeForm';
 
-export async function getMonthData(year: string) {
-	return await fetchMonthData(year);
-}
-
-export async function submitNewBudget(currentState: any, formData: FormData) {
+export async function submitNewBudget(
+	currentState: BudgetState,
+	formData: FormData
+) {
 	const rawFormData = {
-		budgetTitle: formData.get('budgetName'),
-		description: formData.get('budgetDescription'),
-		budgetDates: formData.get('budgetDates'),
+		budgetTitle: formData.get('budgetName') as string,
+		description: formData.get('budgetDescription') as string,
+		budgetDates: formData.get('budgetDates') as string,
 	};
 
 	const validatedForm = await createBudgetValidation(currentState, rawFormData);
@@ -37,44 +38,53 @@ export async function submitNewBudget(currentState: any, formData: FormData) {
 		return validatedForm;
 	}
 
+	const { startDate, endDate } = getDateRange(rawFormData.budgetDates);
 	const validAndFilteredData = {
-		budgetTitle: rawFormData.budgetTitle,
+		title: rawFormData.budgetTitle,
 		description: rawFormData.description,
-		startDate: '',
-		endDate: '',
+		startDate,
+		endDate,
 	};
 
-	if (rawFormData.budgetDates !== null) {
-		const [startDateStr, endDateStr] = rawFormData.budgetDates
-			.toString()
-			.split(' - ');
-		validAndFilteredData.startDate = new Date(startDateStr).toISOString();
-		validAndFilteredData.endDate = new Date(endDateStr).toISOString();
-	}
+	const finishState = await createBudget(validAndFilteredData);
 
-	const status = await createBudget(validAndFilteredData);
-
-	return status;
+	return finishState;
 }
 
-export async function addNewIncome(currentState: State, formData: FormData) {
-	const rawFormData = Object.fromEntries(formData);
-	const newState = addIncomeValidation(currentState, rawFormData);
+export async function addNewIncome(
+	currentState: IncomeState,
+	formData: FormData
+) {
+	const rawFormData = {
+		incomeType: formData.get('incomeType') as string,
+		incomeAmount: formData.get('incomeAmount') as string,
+		monthlyTransaction: formData.get('monthlyTransaction') as string,
+	};
 
-	if (newState.incomeType.hasError) {
-		return newState;
+	const validatedForm = addIncomeValidation(currentState, rawFormData);
+
+	if (validatedForm.incomeType.hasError) {
+		return validatedForm;
 	}
 
 	const finishState = await createIncome(rawFormData, currentState.budgetId);
 	return finishState;
 }
 
-export async function editIncome(currentState: State, formData: FormData) {
-	const rawFormData = Object.fromEntries(formData);
-	const newState = addIncomeValidation(currentState, rawFormData);
+export async function editIncome(
+	currentState: IncomeState,
+	formData: FormData
+) {
+	const rawFormData = {
+		incomeType: formData.get('incomeType') as string,
+		incomeAmount: formData.get('incomeAmount') as string,
+		monthlyTransaction: formData.get('monthlyTransaction') as string,
+	};
 
-	if (newState.incomeType.hasError) {
-		return newState;
+	const validatedForm = addIncomeValidation(currentState, rawFormData);
+
+	if (validatedForm.incomeType.hasError) {
+		return validatedForm;
 	}
 
 	if (currentState.incomeId) {
@@ -123,10 +133,16 @@ export async function createExpense(
 	currentState: ExpenseState,
 	formData: FormData
 ) {
-	const rawFormData = Object.fromEntries(formData);
-	const newState = addExpenseValidation(currentState, rawFormData);
-	if (newState.categoryType.hasError) {
-		return newState;
+	const rawFormData = {
+		expenseType: formData.get('expenseType') as string,
+		expenseAmount: formData.get('expenseAmount') as string,
+		monthlyTransaction: formData.get('monthlyTransaction') as string,
+		categoryType: formData.get('categoryType') as string,
+	};
+
+	const validatedForm = addExpenseValidation(currentState, rawFormData);
+	if (validatedForm.expenseType.hasError) {
+		return validatedForm;
 	}
 
 	const finishState = await createNewExpense(
@@ -140,11 +156,16 @@ export async function editExpense(
 	currentState: ExpenseState,
 	formData: FormData
 ) {
-	const rawFormData = Object.fromEntries(formData);
-	const newState = addExpenseValidation(currentState, rawFormData);
+	const rawFormData = {
+		expenseType: formData.get('expenseType') as string,
+		expenseAmount: formData.get('expenseAmount') as string,
+		monthlyTransaction: formData.get('monthlyTransaction') as string,
+		categoryType: formData.get('categoryType') as string,
+	};
+	const validatedForm = addExpenseValidation(currentState, rawFormData);
 
-	if (newState.expenseType.hasError) {
-		return newState;
+	if (validatedForm.expenseType.hasError) {
+		return validatedForm;
 	}
 
 	if (currentState.expenseId) {
@@ -159,4 +180,8 @@ export async function editExpense(
 	const errorState = currentState;
 	errorState.error = true;
 	return errorState;
+}
+
+export async function getMonthData(year: string) {
+	return await fetchMonthData(year);
 }

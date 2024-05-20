@@ -1,22 +1,45 @@
 import { fetchMonthData } from '@/lib/api/budget/fetch';
 import { extractYear, isValidDate } from './date';
+import { IncomeState } from '@/ui/components/3-organisms/Forms/IncomeForm';
+import { ExpenseState } from '@/ui/components/3-organisms/Forms/ExpenseForm';
+import { BudgetState } from '@/ui/components';
+
+export const addIncomeValidation = (
+	currentState: IncomeState,
+	formData: { [key: string]: string }
+) => {
+	if (formData.incomeType !== null) {
+		if (formData.incomeType.length < 2 || formData.incomeType.length > 20) {
+			currentState.incomeType.hasError = true;
+		} else {
+			currentState.incomeType.hasError = false;
+		}
+	}
+	return currentState;
+};
+
+export const addExpenseValidation = (
+	currentState: ExpenseState,
+	formData: { [key: string]: string }
+) => {
+	if (formData.expenseType.length < 2 || formData.expenseType.length > 20) {
+		currentState.expenseType.hasError = true;
+	} else {
+		currentState.expenseType.hasError = false;
+	}
+
+	return currentState;
+};
 
 export const createBudgetValidation = async (
-	currentState: any,
-	formData: any
+	currentState: BudgetState,
+	formData: { [key: string]: string }
 ) => {
-	currentState = {
-		budgetName: { id: '', hasError: false },
-		budgetDates: { id: '', hasError: false },
-	};
-
 	const validDates: { startDate: string | Date; endDate: string | Date } = {
 		startDate: '',
 		endDate: '',
 	};
-	const [startDateStr, endDateStr] = formData.budgetDates
-		.toString()
-		.split(' - ');
+	const [startDateStr, endDateStr] = formData.budgetDates.split(' - ');
 
 	validDates.startDate = new Date(startDateStr);
 	validDates.endDate = new Date(endDateStr);
@@ -24,18 +47,13 @@ export const createBudgetValidation = async (
 	const validationBudgets = await fetchMonthData(extractYear(endDateStr));
 
 	if (formData.budgetTitle !== null) {
-		if (
-			formData.budgetTitle.toString().length < 3 ||
-			formData.budgetTitle.toString().length > 16
-		) {
+		if (formData.budgetTitle.length < 3 || formData.budgetTitle.length > 16) {
 			currentState.budgetName = {
-				id: 'budgetName',
 				hasError: true,
 				notUnique: false,
 			};
 		} else {
 			currentState.budgetName = {
-				id: 'budgetName',
 				hasError: false,
 				notUnique: false,
 			};
@@ -44,7 +62,6 @@ export const createBudgetValidation = async (
 			validationBudgets.map((item: { value: string; caption: string }) => {
 				if (item.value.toUpperCase() === formData.budgetTitle.toUpperCase()) {
 					currentState.budgetName = {
-						id: 'budgetName',
 						hasError: true,
 						notUnique: true,
 					};
@@ -55,42 +72,11 @@ export const createBudgetValidation = async (
 	}
 
 	if (!isValidDate(startDateStr) || !isValidDate(endDateStr)) {
-		currentState.budgetDates = {
-			id: 'budgetDates',
-			hasError: true,
-		};
+		currentState.budgetDates.hasError = true;
 	} else {
-		currentState.budgetDates = {
-			id: 'budgetDates',
-			hasError: false,
-		};
+		currentState.budgetDates.hasError = false;
 	}
 
 	return currentState;
 };
 
-export const addIncomeValidation = (currentState: any, formData: any) => {
-	if (formData.incomeType !== null) {
-		if (formData.incomeType.length < 2 || formData.incomeType.length > 20) {
-			currentState.incomeType.hasError = true;
-		} else {
-			currentState.incomeType = {
-				hasError: false,
-			};
-		}
-	}
-	return currentState;
-};
-
-export const addExpenseValidation = (currentState: any, formData: any) => {
-	if (formData.categoryType !== null) {
-		if (formData.categoryType.length < 2 || formData.categoryType.length > 20) {
-			currentState.categoryType.hasError = true;
-		} else {
-			currentState.categoryType = {
-				hasError: false,
-			};
-		}
-	}
-	return currentState;
-};

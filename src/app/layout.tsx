@@ -33,8 +33,6 @@ const navigation = [
 	{ url: '/details', label: 'Utgiftsdetaljer', isActive: false },
 ];
 
-export const revalidate = 10;
-
 export default function RootLayout({
 	modal,
 	children,

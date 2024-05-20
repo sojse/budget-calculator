@@ -11,6 +11,14 @@ import {
 import { submitNewBudget } from '@/app/actions';
 import { useFormStateHook } from '@/hooks/useFormState';
 
+export type BudgetState = {
+	budgetName: { hasError: boolean; notUnique: boolean };
+	budgetDates: { hasError: boolean };
+	success: boolean;
+	error: boolean;
+	newRoute: '';
+};
+
 export const CreateBudgetForm: React.FC = () => {
 	const { formAction, state } = useFormStateHook(
 		submitNewBudget,
