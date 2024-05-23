@@ -5,16 +5,18 @@ import styles from './BarChart.module.scss';
 import variables from '../Chart.module.scss';
 import 'chart.js/auto';
 import { Bar } from 'react-chartjs-2';
+import { getChartOptions } from '@/helpers/chart';
+import { useChartData } from '@/hooks/useChartData';
+import { LegendButtons } from '../LegendButtons';
 
 export type ChartData = {
 	labels: string[];
-	datasets: [
-		{
-			label: string;
-			data: number[];
-			backgroundColor?: string | string[];
-		},
-	];
+	datasets: {
+		label: string;
+		data: number[];
+		backgroundColor?: string | string[];
+		hidden?: boolean;
+	}[];
 };
 export interface BarChartProps {
 	className?: string;
@@ -31,31 +33,14 @@ export const BarChart: React.FC<BarChartProps> = ({
 	showLabels = true,
 	showGrid = false,
 }) => {
-	const options = {
-		plugins: { legend: { display: false } },
-		scales: {
-			x: {
-				grid: {
-					drawOnChartArea: showGrid,
-				},
-				display: showLabels,
-			},
-			y: {
-				grid: {
-					drawOnChartArea: showGrid,
-				},
-				display: showLabels,
-			},
-		},
-		borderRadius: 4,
-	};
-	chartData.datasets[0].backgroundColor = [variables.income, variables.expense];
+	const [data, setData] = useChartData(chartData, variables);
+	const chartOptions = getChartOptions(showGrid, showLabels, horizontal);
 
 	return (
 		<div className={classNames(styles.bar_chart, className)}>
 			<Bar
-				data={chartData}
-				options={{ ...options, indexAxis: horizontal ? 'y' : 'x' }}
+				data={data}
+				options={{ ...chartOptions, indexAxis: horizontal ? 'y' : 'x' }}
 			/>
 		</div>
 	);
