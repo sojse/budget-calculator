@@ -1,0 +1,42 @@
+.bar_chart {
+    position: relative;
+    min-width: 300px;
+    min-height: 150px;
+    max-width: $scrollable-bar-chart--width;
+}
+
+.bar_chart_scrollable {
+    display: flex;
+}
+.bar_chart_scrollable_fixed_scale {
+    width: 40px;
+    min-height: $scrollable-bar-chart--height;
+}
+
+.bar_chart_scrollable_chart {
+    overflow-x: scroll;
+    direction: rtl;
+
+    &::-webkit-scrollbar {
+        height: 1rem;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: $color-scroll-bar-bg;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: $color-scroll-bar;
+        border-radius: $corner-size--2;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: $color-scroll-bar--hover;
+    }
+}
+
+.bar_chart_scrollable_chart_container {
+    width: calc($scrollable-bar-chart--width - 40px);
+    min-height: $scrollable-bar-chart--height;
+    margin-bottom: $spacing--3;
+}
