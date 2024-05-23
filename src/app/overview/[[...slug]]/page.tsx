@@ -1,4 +1,8 @@
-import { SiteHeading } from '@/ui/components';
+import {
+	ScrollChartSection,
+	SiteHeading,
+	TwoColumnLayout,
+} from '@/ui/components';
 import { Suspense } from 'react';
 
 export default function Overview({ params }: { params: { slug: string[] } }) {
@@ -8,7 +12,10 @@ export default function Overview({ params }: { params: { slug: string[] } }) {
 			<Suspense fallback={<SiteHeading year={year} loading={true} />}>
 				<SiteHeading year={year} />
 			</Suspense>
-			<div>Overview</div>
+			<TwoColumnLayout
+				column1={<ScrollChartSection slug={params.slug} year={year} />}
+				column2={<div>Second column</div>}
+			/>
 		</>
 	);
 }
