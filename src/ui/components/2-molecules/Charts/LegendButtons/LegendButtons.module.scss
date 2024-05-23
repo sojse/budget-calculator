@@ -1,0 +1,22 @@
+.legend_buttons {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: $spacing--3;
+}
+
+.legend_buttons_legend {
+    @include action;
+    display: flex;
+    align-items: center;
+    gap: $spacing--0;
+    cursor: pointer;
+}
+
+.legend_buttons_legend__dot {
+    display: inline-block;
+    border-radius: $corner-circle;
+    height: $icon-size--md;
+    width: $icon-size--md;
+    border: solid 0.4rem;
+}
