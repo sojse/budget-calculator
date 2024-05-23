@@ -23,7 +23,7 @@ export const SiteHeading: React.FC<SiteHeadingProps> = async ({
 	loading = false,
 }) => {
 	let budgetInformation = {
-		months: [{ caption: '', value: '' }],
+		months: [{ caption: '', value: '', index: 0 }],
 		years: [{ caption: '', value: '' }],
 	};
 	let defaultString = 'Laddar...';
