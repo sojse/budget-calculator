@@ -2,6 +2,7 @@ import gql from 'graphql-tag';
 import { getClient } from '@/lib/apolloClient';
 import { capitalizeFirstLetter } from '@/helpers/string';
 import { Expense, Income } from '@/context/budgetIdContext';
+import { ChartData } from '@/ui/components';
 
 const GET_BUDGETS = gql`
 	query BudgetsQuery {
@@ -23,6 +24,24 @@ const GET_BUDGETS_BY_YEAR = gql`
 			budgets {
 				title
 				id
+			}
+		}
+	}
+`;
+
+const GET_BUDGET_OVERVIEW = gql`
+	query BudgetsQuery($year: String!) {
+		budgets(year: $year) {
+			year
+			budgets {
+				title
+				id
+				expenses {
+					totalSum
+				}
+				incomes {
+					totalSum
+				}
 			}
 		}
 	}
@@ -79,11 +98,11 @@ export const fetchBudgets = async (year: string) => {
 		selectedBudgets = filteredBudgets[0].budgets;
 	}
 
-	const years = budgets.map((item: any) => ({
+	const years = budgets.map((item: any, index: number) => ({
 		value: `${item.year}`,
 		caption: `${item.year}`,
 	}));
-	const months = selectedBudgets.map((budget: any) => ({
+	const months = selectedBudgets.map((budget: any, index: number) => ({
 		value: budget.title.toLowerCase(),
 		caption: budget.title,
 	}));
@@ -110,12 +129,59 @@ export const fetchMonthData = async (year: string) => {
 			return [];
 		}
 
-		const months = matchingYearBudgets.budgets.map((budget: any) => ({
-			value: budget.title,
-			caption: budget.title,
-		}));
+		const months = matchingYearBudgets.budgets.map(
+			(budget: any, index: number) => ({
+				value: budget.title,
+				caption: budget.title,
+			})
+		);
 
 		return months;
+	} catch (error) {
+		console.error(`Error fetching budgets for year ${year}:`, error);
+	}
+};
+
+export const getBudgetOverview = async (
+	year: string
+): Promise<ChartData | undefined> => {
+	const client = getClient();
+	try {
+		const { data } = await client.query({
+			query: GET_BUDGET_OVERVIEW,
+			variables: { year },
+			context: {
+				fetchOptions: {
+					next: { tags: ['overview'] },
+				},
+			},
+		});
+		const { budgets } = data;
+
+		const budgetInformation: {
+			labels: string[];
+			datasets: { label: string; data: number[] }[];
+		} = {
+			labels: [],
+			datasets: [
+				{ label: 'Utgifter', data: [] },
+				{ label: 'Inkomster', data: [] },
+			],
+		};
+
+		budgets[0].budgets.forEach(
+			(element: {
+				title: string;
+				expenses: { totalSum: number };
+				incomes: { totalSum: number };
+			}) => {
+				budgetInformation.labels.push(element.title);
+				budgetInformation.datasets[0].data.push(element.expenses.totalSum);
+				budgetInformation.datasets[1].data.push(element.incomes.totalSum);
+			}
+		);
+
+		return budgetInformation;
 	} catch (error) {
 		console.error(`Error fetching budgets for year ${year}:`, error);
 	}

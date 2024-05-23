@@ -42,6 +42,7 @@ export const createIncome = async (incomeData: any, id: string) => {
 			mutation: ADD_INCOME,
 		});
 		revalidateTag('budget');
+		revalidateTag('overview');
 
 		return { success: true };
 	} catch (error) {
@@ -71,6 +72,7 @@ export const updateIncome = async (
 		});
 
 		revalidateTag('budget');
+		revalidateTag('overview');
 
 		return { success: true };
 	} catch (error) {
@@ -91,6 +93,7 @@ export const deleteIncomeById = async (budgetId: string, incomeId: string) => {
 		});
 
 		revalidateTag('budget');
+		revalidateTag('overview');
 
 		return { success: true };
 	} catch (error) {
