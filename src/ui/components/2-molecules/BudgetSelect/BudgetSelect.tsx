@@ -5,11 +5,12 @@ import styles from './BudgetSelect.module.scss';
 import { FormfieldSelect } from '@/ui/components';
 import { getMonthData } from '@/app/actions';
 import { useRouter, usePathname, useParams } from 'next/navigation';
+import { useBudgetId } from '@/hooks/useBudgetId';
 
 export interface BudgetSelectProps {
 	budgetInformation?: {
 		years: { value: string; caption: string }[];
-		months: { value: string; caption: string }[];
+		months: { value: string; caption: string; index: number }[];
 	};
 	loading: boolean;
 }
@@ -24,6 +25,7 @@ export const BudgetSelect: React.FC<BudgetSelectProps> = ({
 	const params = useParams();
 	const router = useRouter();
 	const pathName = usePathname();
+	const { setSelectedIndex } = useBudgetId();
 	const placeHolderValue = 'Välj budget';
 	const [months, setMonths] = useState(budgetInformation.months);
 	const [selectedYear, setSelectedYear] = useState(
@@ -44,6 +46,12 @@ export const BudgetSelect: React.FC<BudgetSelectProps> = ({
 					? params.slug[0]
 					: budgetInformation.months[budgetInformation.months.length - 1].value
 			);
+			const selectElement =
+				document.querySelector<HTMLSelectElement>('#Budget');
+			const selectedIndex = selectElement?.selectedIndex;
+			if (selectedIndex) {
+				setSelectedIndex(selectedIndex);
+			}
 		}, [budgetInformation]);
 	}
 

@@ -32,6 +32,8 @@ interface BudgetContextType {
 	currentBudgetId: string;
 	data: Income | Expense;
 	currentPathName: string;
+	selectedIndex: number;
+	setSelectedIndex: (index: number) => void;
 	setCurrentPathName: (slug: string) => void;
 	setCurrentBudgetId: (id: string) => void;
 	setData: (income: Income) => void;
@@ -47,6 +49,8 @@ export const BudgetIdContext = createContext<BudgetContextType>({
 		categoryType: { category: 'income' },
 	},
 	currentPathName: '',
+	selectedIndex: 0,
+	setSelectedIndex: () => {},
 	setCurrentPathName: () => {},
 	setCurrentBudgetId: () => {},
 	setData: () => {},
@@ -64,11 +68,14 @@ export const BudgetIdProvider: React.FC<{ children: React.ReactNode }> = ({
 		categoryType: { category: 'income' },
 	});
 	const [currentPathName, setCurrentPathName] = useState<string>('');
+	const [selectedIndex, setSelectedIndex] = useState<number>(0);
 
 	const contextValue = {
 		currentBudgetId,
 		data,
 		currentPathName,
+		selectedIndex,
+		setSelectedIndex,
 		setCurrentPathName,
 		setCurrentBudgetId,
 		setData,
