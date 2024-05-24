@@ -40,3 +40,9 @@
     min-height: $scrollable-bar-chart--height;
     margin-bottom: $spacing--3;
 }
+
+.bar_chart__loading {
+    background-color: red;
+    width: 100%;
+    height: 100%;
+}

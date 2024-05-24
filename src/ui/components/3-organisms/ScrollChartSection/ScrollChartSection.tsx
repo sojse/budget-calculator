@@ -1,26 +1,18 @@
-import {
-	ChartData,
-	ContentBox,
-	ScrollableBarChart,
-	StaticSectionHeading,
-} from '@/ui/components';
+import { ChartData, ScrollableBarChart } from '@/ui/components';
 import classNames from 'classnames';
-import { Suspense } from 'react';
 import styles from './ScrollChartSection.module.scss';
 import { getBudgetOverview } from '@/lib/api/budget/fetch';
 
 export default interface ScrollChartSectionProps {
-	slug: string[];
 	year: string;
+	loading?: boolean;
 }
 
 export const ScrollChartSection: React.FC<ScrollChartSectionProps> = async ({
-	slug,
 	year,
+	loading = false,
 }) => {
-	const budgetInformation = await getBudgetOverview(year);
-
-	const defaultChartData: ChartData = {
+	const defaultData: ChartData = {
 		labels: [],
 		datasets: [
 			{ label: 'Utgifter', data: [] },
@@ -28,17 +20,19 @@ export const ScrollChartSection: React.FC<ScrollChartSectionProps> = async ({
 		],
 	};
 
+	let budgetInformation: ChartData | undefined;
+
+	if (!loading) {
+		budgetInformation = await getBudgetOverview(year);
+	}
+
 	return (
-		<ContentBox className={classNames(styles.scroll_chart_section)}>
-			<StaticSectionHeading>Översikt</StaticSectionHeading>
-			<Suspense fallback={<div>hej</div>}>
-				<div className={classNames(styles.scroll_chart_chart)}>
-					<ScrollableBarChart
-						chartData={budgetInformation || defaultChartData}
-						legend
-					/>
-				</div>
-			</Suspense>
-		</ContentBox>
+		<div className={classNames(styles.scroll_chart_chart)}>
+			<ScrollableBarChart
+				chartData={budgetInformation || defaultData}
+				legend
+				loading={loading}
+			/>
+		</div>
 	);
 };

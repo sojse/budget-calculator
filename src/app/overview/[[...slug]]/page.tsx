@@ -1,8 +1,4 @@
-import {
-	ScrollChartSection,
-	SiteHeading,
-	TwoColumnLayout,
-} from '@/ui/components';
+import { SiteHeading, OverviewChart, TwoColumnLayout } from '@/ui/components';
 import { Suspense } from 'react';
 
 export default function Overview({ params }: { params: { slug: string[] } }) {
@@ -13,7 +9,7 @@ export default function Overview({ params }: { params: { slug: string[] } }) {
 				<SiteHeading year={year} />
 			</Suspense>
 			<TwoColumnLayout
-				column1={<ScrollChartSection slug={params.slug} year={year} />}
+				column1={<OverviewChart year={year} />}
 				column2={<div>Second column</div>}
 			/>
 		</>

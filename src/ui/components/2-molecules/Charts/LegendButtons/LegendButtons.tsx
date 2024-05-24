@@ -9,11 +9,13 @@ export interface LegendButtonsProps {
 	className?: string;
 	chartData: ChartData;
 	setData: (data: any) => void;
+	loading: boolean;
 }
 
 export const LegendButtons: React.FC<LegendButtonsProps> = ({
 	chartData,
 	setData,
+	loading,
 }) => {
 	const initialData: boolean[] = [];
 	chartData.datasets.forEach((e) => initialData.push(true));
@@ -38,11 +40,16 @@ export const LegendButtons: React.FC<LegendButtonsProps> = ({
 				<button
 					className={classNames(styles.legend_buttons_legend)}
 					onClick={() => toggleData(index)}
+					disabled
 					key={index}
 				>
 					<span
-						className={classNames(styles.legend_buttons_legend__dot)}
+						className={classNames(
+							styles.legend_buttons_legend__dot,
+							loading && 'u-skeleton-circle'
+						)}
 						style={{
+							border: loading ? 'none' : '',
 							borderColor: Array.isArray(item.backgroundColor)
 								? item.backgroundColor[0]
 								: item.backgroundColor,
@@ -53,7 +60,9 @@ export const LegendButtons: React.FC<LegendButtonsProps> = ({
 									: item.backgroundColor,
 						}}
 					></span>
-					<span>{item.label}</span>
+					<span className={classNames(loading && 'u-skeleton')}>
+						{item.label}
+					</span>
 				</button>
 			))}
 		</div>

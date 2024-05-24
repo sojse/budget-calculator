@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import classNames from 'classnames';
 import styles from './ScrollableBarChart.module.scss';
 import variables from '../Chart.module.scss';
@@ -20,6 +20,7 @@ export interface ScrollableBarChartProps {
 	showLabels?: boolean;
 	showGrid?: boolean;
 	legend?: boolean;
+	loading: boolean;
 }
 
 export const ScrollableBarChart: React.FC<ScrollableBarChartProps> = ({
@@ -28,6 +29,7 @@ export const ScrollableBarChart: React.FC<ScrollableBarChartProps> = ({
 	showLabels = true,
 	showGrid = false,
 	legend = false,
+	loading,
 }) => {
 	const { selectedIndex } = useBudgetId();
 	const scrollableContainerRef = useRef<HTMLDivElement>(null);
@@ -49,22 +51,36 @@ export const ScrollableBarChart: React.FC<ScrollableBarChartProps> = ({
 		[chartData.datasets]
 	);
 
-	useEffect(() => {
-		if (scrollableContainerRef.current && isScrollable) {
-			const additionalWidthPerDataPoint = 132;
-			const scrollPosition =
-				selectedIndex * additionalWidthPerDataPoint - baseWidth;
-			scrollableContainerRef.current.scrollTo({
-				left: scrollPosition,
-				behavior: 'smooth',
-			});
-		}
-	}, [selectedIndex, isScrollable]);
+	if (!loading) {
+		useEffect(() => {
+			if (scrollableContainerRef.current && isScrollable) {
+				const additionalWidthPerDataPoint = 132;
+				const scrollPosition =
+					selectedIndex * additionalWidthPerDataPoint - baseWidth;
+				scrollableContainerRef.current.scrollTo({
+					left: scrollPosition,
+					behavior: 'smooth',
+				});
+			}
+		}, [selectedIndex, isScrollable]);
+	}
 
 	return (
 		<div className={classNames(styles.bar_chart, className)}>
-			{legend && <LegendButtons chartData={chartData} setData={setData} />}
-			<div className={classNames(styles.bar_chart_scrollable)}>
+			{legend && (
+				<LegendButtons
+					chartData={chartData}
+					setData={setData}
+					loading={loading}
+				/>
+			)}
+
+			<div
+				className={classNames(
+					styles.bar_chart_scrollable,
+					loading && 'u-skeleton-diagram'
+				)}
+			>
 				<div className={classNames(styles.bar_chart_scrollable_fixed_scale)}>
 					<Bar data={data} options={{ ...fixedScale, indexAxis: 'x' }} />
 				</div>

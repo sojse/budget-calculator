@@ -10,5 +10,6 @@ export * from './FinanceList';
 export * from './FinanceSection';
 export * from './Forms';
 export * from './MobileMenu';
+export * from './OverviewChart';
 export * from './ScrollChartSection';
 export * from './SiteHeading';
