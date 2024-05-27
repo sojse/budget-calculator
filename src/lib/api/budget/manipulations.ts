@@ -1,18 +1,6 @@
-import gql from 'graphql-tag';
 import { extractYear } from '@/helpers/date';
-import { revalidateTag } from 'next/cache';
 import { getClient } from '@/lib/apolloClient';
-
-const CREATE_BUDGET = gql`
-	mutation BudgetCreate($data: BudgetCreateDataInput!) {
-		budgetCreate(data: $data) {
-			description
-			endDate
-			startDate
-			title
-		}
-	}
-`;
+import { CREATE_BUDGET } from './graphql';
 
 export type Budget = {
 	title: string;

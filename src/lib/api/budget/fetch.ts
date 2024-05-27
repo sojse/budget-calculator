@@ -1,126 +1,36 @@
-import gql from 'graphql-tag';
 import { getClient } from '@/lib/apolloClient';
 import { capitalizeFirstLetter } from '@/helpers/string';
-import { Expense, Income } from '@/context/budgetIdContext';
 import { ChartData } from '@/ui/components';
-
-const GET_BUDGETS = gql`
-	query BudgetsQuery {
-		budgets {
-			year
-			budgets {
-				title
-				id
-				endDate
-			}
-		}
-	}
-`;
-
-const GET_BUDGETS_BY_YEAR = gql`
-	query BudgetsQuery($year: String!) {
-		budgets(year: $year) {
-			year
-			budgets {
-				title
-				id
-			}
-		}
-	}
-`;
-
-const GET_BUDGET_OVERVIEW = gql`
-	query BudgetsQuery($year: String!) {
-		budgets(year: $year) {
-			year
-			budgets {
-				title
-				id
-				expenses {
-					totalSum
-				}
-				incomes {
-					totalSum
-				}
-			}
-		}
-	}
-`;
-
-const SPENDING_OVERVIEW = gql`
-	query BudgetQuery($budgetId: ID!) {
-		budget(id: $budgetId) {
-			incomes {
-				totalSum
-			}
-			expenses {
-				totalSum
-			}
-		}
-	}
-`;
-
-const GET_BUDGET = gql`
-	query BudgetQuery($budgetId: ID!) {
-		budget(id: $budgetId) {
-			id
-			title
-			incomes {
-				totalSum
-				incomes {
-					title
-					amount
-					id
-					monthlyTransaction
-				}
-			}
-			expenses {
-				totalSum
-				expenses {
-					title
-					amount
-					id
-					monthlyTransaction
-					categoryType
-				}
-			}
-		}
-	}
-`;
+import {
+	GET_BUDGETS,
+	GET_BUDGETS_BY_YEAR,
+	GET_BUDGET_OVERVIEW,
+	SPENDING_OVERVIEW,
+	GET_BUDGET,
+} from './graphql';
+import {
+	processBudgetData,
+	processMonthData,
+	processOverviewData,
+	processSelectData,
+	processSpendingData,
+} from '@/helpers/dataProcessing';
 
 export const fetchBudgets = async (year: string) => {
 	const client = getClient();
-	const { data } = await client.query({
-		query: GET_BUDGETS,
-		context: {
-			fetchOptions: {
-				next: { tags: ['budgets'] },
+	try {
+		const { data } = await client.query({
+			query: GET_BUDGETS,
+			context: {
+				fetchOptions: {
+					next: { tags: ['budgets'] },
+				},
 			},
-		},
-	});
-
-	const { budgets } = data;
-
-	let selectedBudgets = [];
-	if (year === '') {
-		selectedBudgets = budgets[budgets.length - 1].budgets;
-	} else {
-		const filteredBudgets = budgets.filter(
-			(item: any) => item.year.toString() === year
-		);
-		selectedBudgets = filteredBudgets[0].budgets;
+		});
+		return processSelectData(data, year);
+	} catch (error) {
+		console.error(`Error fetching budgets for year ${year}:`, error);
 	}
-
-	const years = budgets.map((item: any, index: number) => ({
-		value: `${item.year}`,
-		caption: `${item.year}`,
-	}));
-	const months = selectedBudgets.map((budget: any, index: number) => ({
-		value: budget.title.toLowerCase(),
-		caption: budget.title,
-	}));
-
-	return { years, months };
 };
 
 export const fetchMonthData = async (year: string) => {
@@ -131,25 +41,7 @@ export const fetchMonthData = async (year: string) => {
 			query: GET_BUDGETS_BY_YEAR,
 			variables: { year },
 		});
-
-		const { budgets } = data;
-
-		const matchingYearBudgets = budgets.find(
-			(item: any) => item.year === parseInt(year, 10)
-		);
-
-		if (!matchingYearBudgets) {
-			return [];
-		}
-
-		const months = matchingYearBudgets.budgets.map(
-			(budget: any, index: number) => ({
-				value: budget.title,
-				caption: budget.title,
-			})
-		);
-
-		return months;
+		return processMonthData(data, year);
 	} catch (error) {
 		console.error(`Error fetching budgets for year ${year}:`, error);
 	}
@@ -169,122 +61,54 @@ export const getBudgetOverview = async (
 				},
 			},
 		});
-		const { budgets } = data;
-
-		const budgetInformation: {
-			labels: string[];
-			datasets: { label: string; data: number[] }[];
-		} = {
-			labels: [],
-			datasets: [
-				{ label: 'Utgifter', data: [] },
-				{ label: 'Inkomster', data: [] },
-			],
-		};
-
-		budgets[0].budgets.forEach(
-			(element: {
-				title: string;
-				expenses: { totalSum: number };
-				incomes: { totalSum: number };
-			}) => {
-				budgetInformation.labels.push(element.title);
-				budgetInformation.datasets[0].data.push(element.expenses.totalSum);
-				budgetInformation.datasets[1].data.push(element.incomes.totalSum);
-			}
-		);
-
-		return budgetInformation;
+		return processOverviewData(data);
 	} catch (error) {
 		console.error(`Error fetching budgets for year ${year}:`, error);
 	}
 };
 
 export const getSpendingOverview = async (slug: string[]) => {
-	const year = slug ? slug[1] : '';
-	const month = slug ? capitalizeFirstLetter(slug[0]) : '';
 	const client = getClient();
-	const id = await getBudgetId(year, month);
-	const { data } = await client.query({
-		query: SPENDING_OVERVIEW,
-		variables: { budgetId: id },
-		context: {
-			fetchOptions: {
-				next: { tags: ['budget'] },
-			},
-		},
-	});
+	const id = await getBudgetId(slug);
 
-	const expense = data.budget.expenses.totalSum;
-	const surplus = data.budget.incomes.totalSum - data.budget.expenses.totalSum;
-
-	return {
-		chartData: {
-			labels: ['Expense', 'Surplus'],
-			datasets: [
-				{
-					label: 'Amount',
-					data: [expense, surplus],
-					backgroundColor: [],
+	try {
+		const { data } = await client.query({
+			query: SPENDING_OVERVIEW,
+			variables: { budgetId: id },
+			context: {
+				fetchOptions: {
+					next: { tags: ['budget'] },
 				},
-			],
-		},
-		totalAmount: expense,
-		income: data.budget.incomes.totalSum,
-		surplus,
-	};
+			},
+		});
+		return processSpendingData(data);
+	} catch (error) {
+		console.error(`Error fetching budgets:`, error);
+	}
 };
 
 export const fetchBudget = async (slug: string[]) => {
-	const year = slug ? slug[1] : '';
-	const month = slug ? capitalizeFirstLetter(slug[0]) : '';
 	const client = getClient();
-	const id = await getBudgetId(year, month);
-	const { data } = await client.query({
-		query: GET_BUDGET,
-		variables: { budgetId: id },
-		context: {
-			fetchOptions: {
-				next: { tags: ['budget'] },
-			},
-		},
-	});
-
-	const incomes = data.budget.incomes.incomes;
-	const expenses = data.budget.expenses.expenses;
-
-	return {
-		budgetId: id,
-		incomes: incomes.map((income: Income) => ({
-			category: 'income',
-			data: {
-				title: income.title,
-				amount: income.amount,
-				monthlyTransaction: income.monthlyTransaction,
-				id: income.id,
-				categoryType: { category: 'income' },
-			},
-		})),
-		expenses: expenses.map((expense: Expense) => ({
-			category: 'expense',
-			data: {
-				title: expense.title,
-				amount: expense.amount,
-				monthlyTransaction: expense.monthlyTransaction,
-				id: expense.id,
-				categoryType: {
-					category: expense.categoryType?.toString().toLowerCase(),
+	const id = await getBudgetId(slug);
+	try {
+		const { data } = await client.query({
+			query: GET_BUDGET,
+			variables: { budgetId: id },
+			context: {
+				fetchOptions: {
+					next: { tags: ['budget'] },
 				},
 			},
-		})),
-		budgetOverview: [
-			data.budget.incomes.totalSum,
-			data.budget.expenses.totalSum,
-		],
-	};
+		});
+		return processBudgetData(data, id);
+	} catch (error) {
+		console.error(`Error fetching budget with id ${id}:`, error);
+	}
 };
 
-export const getBudgetId = async (year: string, month: string) => {
+export const getBudgetId = async (slug: string[]) => {
+	const year = slug ? slug[1] : '';
+	const month = slug ? capitalizeFirstLetter(slug[0]) : '';
 	const client = getClient();
 	const { data } = await client.query({ query: GET_BUDGETS });
 	let id = '';

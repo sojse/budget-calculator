@@ -1,40 +1,10 @@
-import { revalidateTag } from 'next/cache';
-import gql from 'graphql-tag';
 import { getClient } from '@/lib/apolloClient';
-
-const ADD_EXPENSE = gql`
-	mutation ExpenseCreate($data: ExpenseCreateDataInput!) {
-		expenseCreate(data: $data) {
-			title
-			amount
-		}
-	}
-`;
-
-const EDIT_EXPENSE = gql`
-	mutation ExpenseUpdate(
-		$data: ExpenseUpdateDataInput!
-		$expenseUpdateId: ID!
-	) {
-		expenseUpdate(data: $data, id: $expenseUpdateId) {
-			title
-			amount
-			id
-		}
-	}
-`;
-
-const GET_CATEGORIES = gql`
-	query CategoryTypes {
-		expenseCategoryTypes
-	}
-`;
-
-const DELETE_EXPENSE = gql`
-	mutation ExpenseDelete($expenseDeleteId: ID!, $budgetId: String!) {
-		expenseDelete(id: $expenseDeleteId, budgetID: $budgetId)
-	}
-`;
+import {
+	ADD_EXPENSE,
+	DELETE_EXPENSE,
+	EDIT_EXPENSE,
+	GET_CATEGORIES,
+} from './graphql';
 
 enum ExpenseCategoryType {
 	ENTERTAINMENT = 'ENTERTAINMENT',
@@ -133,7 +103,6 @@ export const updateExpense = async (
 			},
 			mutation: EDIT_EXPENSE,
 		});
-
 
 		return { success: true };
 	} catch (error) {

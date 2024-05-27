@@ -1,31 +1,6 @@
 import { getClient } from '@/lib/apolloClient';
 import gql from 'graphql-tag';
-import { revalidateTag } from 'next/cache';
-
-const EDIT_INCOME = gql`
-	mutation IncomeUpdate($data: IncomeUpdateDataInput!, $incomeUpdateId: ID) {
-		incomeUpdate(data: $data, id: $incomeUpdateId) {
-			title
-			amount
-			id
-		}
-	}
-`;
-
-const ADD_INCOME = gql`
-	mutation IncomeCreate($data: IncomeCreateDataInput!) {
-		incomeCreate(data: $data) {
-			title
-			amount
-		}
-	}
-`;
-
-const DELETE_INCOME = gql`
-	mutation IncomeDelete($incomeDeleteId: ID!, $budgetId: String!) {
-		incomeDelete(id: $incomeDeleteId, budgetID: $budgetId)
-	}
-`;
+import { ADD_INCOME, DELETE_INCOME, EDIT_INCOME } from './graphql';
 
 export const createIncome = async (incomeData: any, id: string) => {
 	const client = getClient();
@@ -86,7 +61,6 @@ export const deleteIncomeById = async (budgetId: string, incomeId: string) => {
 			},
 			mutation: DELETE_INCOME,
 		});
-
 
 		return { success: true };
 	} catch (error) {
