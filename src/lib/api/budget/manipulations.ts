@@ -39,7 +39,6 @@ export const createBudget = async (budgetData: Budget) => {
 		const slug = `${data.budgetCreate.title.toLowerCase()}/${extractYear(data.budgetCreate.endDate)}`;
 
 		revalidateTag('budgets');
-		revalidateTag('overview');
 
 		return { success: true, newRoute: `/finances/${slug}` };
 	} catch (error) {

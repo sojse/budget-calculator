@@ -73,7 +73,6 @@ export const createNewExpense = async (expenseData: any, id: string) => {
 			mutation: ADD_EXPENSE,
 		});
 		revalidateTag('budget');
-		revalidateTag('overview');
 
 		return { success: true };
 	} catch (error) {
@@ -105,7 +104,6 @@ export const deleteExpenseById = async (
 		});
 
 		revalidateTag('budget');
-		revalidateTag('overview');
 
 		return { success: true };
 	} catch (error) {
@@ -140,7 +138,6 @@ export const updateExpense = async (
 		});
 
 		revalidateTag('budget');
-		revalidateTag('overview');
 
 		return { success: true };
 	} catch (error) {
