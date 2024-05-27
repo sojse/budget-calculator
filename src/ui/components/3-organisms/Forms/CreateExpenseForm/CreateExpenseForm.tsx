@@ -1,4 +1,4 @@
-import { createExpense } from '@/app/actions';
+import { createExpense } from '@/app/(actions)/expenseActions';
 import { ExpenseForm } from '../ExpenseForm';
 
 export const CreateExpenseForm: React.FC = async () => {

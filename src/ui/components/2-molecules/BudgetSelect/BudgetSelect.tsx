@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import styles from './BudgetSelect.module.scss';
 import { FormfieldSelect } from '@/ui/components';
-import { getMonthData } from '@/app/actions';
 import { useRouter, usePathname, useParams } from 'next/navigation';
 import { useBudgetId } from '@/hooks/useBudgetId';
+import { getMonthData } from '@/app/(actions)/budgetActions';
 
 export interface BudgetSelectProps {
 	budgetInformation?: {

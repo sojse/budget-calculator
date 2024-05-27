@@ -1,7 +1,7 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import { IncomeForm, IncomeFormProps } from './IncomeForm';
-import { addNewIncome } from '@/app/actions';
+import { addNewIncome } from '@/app/(actions)/incomeActions';
 
 export default {
 	title: 'Organisms/Forms/IncomeForm',

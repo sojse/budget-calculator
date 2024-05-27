@@ -8,8 +8,8 @@ import {
 	DateRangePicker,
 	ModalButtons,
 } from '@/ui/components';
-import { submitNewBudget } from '@/app/actions';
 import { useFormStateHook } from '@/hooks/useFormState';
+import { submitNewBudget } from '@/app/(actions)/budgetActions';
 
 export type BudgetState = {
 	budgetName: { hasError: boolean; notUnique: boolean };

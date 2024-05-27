@@ -1,7 +1,7 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import { DeleteForm, DeleteFormProps } from './DeleteForm';
-import { deleteIncome } from '@/app/actions';
+import { deleteIncome } from '@/app/(actions)/incomeActions';
 
 export default {
 	title: 'Organisms/Forms/DeleteForm',

@@ -1,5 +1,5 @@
 'use client';
-import { editIncome } from '@/app/actions';
+import { editIncome } from '@/app/(actions)/incomeActions';
 import { IncomeForm } from '../IncomeForm';
 import { useBudgetId } from '@/hooks/useBudgetId';
 

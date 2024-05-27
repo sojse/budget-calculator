@@ -1,7 +1,7 @@
 import React from 'react';
 import { StoryFn, Meta } from '@storybook/react';
 import { ExpenseForm, ExpenseFormProps } from './ExpenseForm';
-import { createExpense } from '@/app/actions';
+import { createExpense } from '@/app/(actions)/expenseActions';
 
 export default {
 	title: 'Organisms/Forms/ExpenseForm',

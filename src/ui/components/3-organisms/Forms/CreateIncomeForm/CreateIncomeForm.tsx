@@ -1,4 +1,4 @@
-import { addNewIncome } from '@/app/actions';
+import { addNewIncome } from '@/app/(actions)/incomeActions';
 import { IncomeForm } from '../IncomeForm';
 
 export const CreateIncomeForm: React.FC = async () => {

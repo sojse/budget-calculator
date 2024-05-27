@@ -1,7 +1,7 @@
 'use client';
 import { useBudgetId } from '@/hooks/useBudgetId';
-import { editExpense } from '@/app/actions';
 import { ExpenseForm } from '../ExpenseForm';
+import { editExpense } from '@/app/(actions)/expenseActions';
 
 export const EditExpenseForm: React.FC = () => {
 	const { data } = useBudgetId();
