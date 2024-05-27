@@ -16,7 +16,10 @@ export const BudgetChart: React.FC<BudgetChartProps> = async ({
 	let budgetData = { budgetOverview: [0, 0] };
 
 	if (!loading) {
-		budgetData = await fetchBudget(slug);
+		const fetchData = await fetchBudget(slug);
+		if (fetchData) {
+			budgetData = fetchData;
+		}	
 	}
 
 	const chartData: ChartData = {

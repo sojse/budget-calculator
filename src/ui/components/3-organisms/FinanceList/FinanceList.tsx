@@ -29,9 +29,12 @@ export const FinanceList: React.FC<FinanceListProps> = async ({
 	let listObjects = new Array(3).fill(0);
 
 	if (!loading) {
-		budgetData = await fetchBudget(slug);
-		listObjects =
-			listType === 'income' ? budgetData.incomes : budgetData.expenses;
+		const fetchData = await fetchBudget(slug);
+		if (fetchData) {
+			budgetData = fetchData;
+			listObjects =
+				listType === 'income' ? budgetData.incomes : budgetData.expenses;
+		}
 	}
 
 	return (

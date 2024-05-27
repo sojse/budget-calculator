@@ -29,7 +29,10 @@ export const ExpenseOverviewChart: React.FC<ExpenseOverviewChartProps> = async (
 	};
 
 	if (!loading) {
-		budgetData = await getBudgetWithCategoryDetails(slug);
+		const fetchData = await getBudgetWithCategoryDetails(slug);
+		if (fetchData) {
+			budgetData = fetchData;
+		}
 	}
 
 	return (

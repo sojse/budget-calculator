@@ -6,6 +6,11 @@ const nextConfig = {
 	experimental: {
 		ppr: true,
 	},
+	logging: {
+		fetches: {
+			fullUrl: true,
+		},
+	},
 	sassOptions: {
 		includePaths: [path.join(__dirname, 'styles')],
 		prependData: `@import '@/ui/styles/variables.scss';`,

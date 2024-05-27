@@ -28,8 +28,11 @@ export const SiteHeading: React.FC<SiteHeadingProps> = async ({
 	};
 	let defaultString = 'Laddar...';
 	if (!loading) {
-		budgetInformation = await fetchBudgets(year);
-		defaultString = `${budgetInformation.months[budgetInformation.months.length - 1].caption} ${budgetInformation.years[budgetInformation.years.length - 1].caption}`;
+		const fetchData = await fetchBudgets(year);
+		if (fetchData) {
+			budgetInformation = fetchData;
+			defaultString = `${budgetInformation.months[budgetInformation.months.length - 1].caption} ${budgetInformation.years[budgetInformation.years.length - 1].caption}`;
+		}
 	}
 
 	return (
