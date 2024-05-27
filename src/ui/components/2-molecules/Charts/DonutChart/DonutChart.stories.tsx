@@ -25,3 +25,20 @@ Default.args = {
 	showLabels: false,
 	totalAmount: 4555,
 };
+
+export const SingleValue: StoryFn<DonutChartProps> = Template.bind({});
+SingleValue.args = {
+	chartData: {
+		labels: ['Expense', 'Income'],
+		datasets: [
+			{
+				label: 'Amount',
+				data: [400, 300],
+				backgroundColor: [],
+			},
+		],
+	},
+	showLabels: false,
+	totalAmount: 700,
+	singleValue: true,
+};

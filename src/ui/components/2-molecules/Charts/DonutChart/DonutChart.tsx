@@ -17,19 +17,23 @@ export type DonutData = {
 	}[];
 };
 export interface DonutChartProps {
+	className?: string;
 	chartData: DonutData;
 	totalAmount: number;
 	showLabels?: boolean;
 	showGrid?: boolean;
 	loading?: boolean;
+	singleValue?: boolean;
 }
 
 export const DonutChart: React.FC<DonutChartProps> = ({
+	className,
 	chartData,
 	totalAmount,
 	showLabels = true,
 	showGrid = false,
 	loading = false,
+	singleValue = false,
 }) => {
 	const options = {
 		plugins: { legend: { display: false } },
@@ -62,11 +66,15 @@ export const DonutChart: React.FC<DonutChartProps> = ({
 			} else {
 				chartData.datasets[0].backgroundColor.push(colors['income']);
 			}
+
+			if (singleValue) {
+				chartData.datasets[0].backgroundColor.push(colors['empty']);
+			}
 		}
 	});
 
 	return (
-		<div className={classNames(styles.donut_chart)}>
+		<div className={classNames(styles.donut_chart, className)}>
 			<div className={classNames(styles.donut_chart_chart)}>
 				<div>
 					{!loading ? (
