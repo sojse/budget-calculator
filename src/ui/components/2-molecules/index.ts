@@ -6,5 +6,6 @@ export * from './FinanceListItems';
 export * from './FinanceTable';
 export * from './Form';
 export * from './InformationMessage';
+export * from './LabeledAmount';
 export * from './LoadMore';
 export * from './StaticSectionHeading';

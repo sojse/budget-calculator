@@ -1,0 +1,11 @@
+.labeled_amount {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: $spacing--0;
+}
+
+.labeled_amount_amount {
+    @include bold-text;
+}
