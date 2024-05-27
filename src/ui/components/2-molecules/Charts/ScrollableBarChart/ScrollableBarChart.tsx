@@ -74,7 +74,6 @@ export const ScrollableBarChart: React.FC<ScrollableBarChartProps> = ({
 					loading={loading}
 				/>
 			)}
-
 			<div
 				className={classNames(
 					styles.bar_chart_scrollable,
