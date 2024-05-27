@@ -47,6 +47,19 @@ const GET_BUDGET_OVERVIEW = gql`
 	}
 `;
 
+const SPENDING_OVERVIEW = gql`
+	query BudgetQuery($budgetId: ID!) {
+		budget(id: $budgetId) {
+			incomes {
+				totalSum
+			}
+			expenses {
+				totalSum
+			}
+		}
+	}
+`;
+
 const GET_BUDGET = gql`
 	query BudgetQuery($budgetId: ID!) {
 		budget(id: $budgetId) {
@@ -152,7 +165,7 @@ export const getBudgetOverview = async (
 			variables: { year },
 			context: {
 				fetchOptions: {
-					next: { tags: ['overview'] },
+					next: { tags: ['budget', 'budgets'] },
 				},
 			},
 		});
@@ -185,6 +198,41 @@ export const getBudgetOverview = async (
 	} catch (error) {
 		console.error(`Error fetching budgets for year ${year}:`, error);
 	}
+};
+
+export const getSpendingOverview = async (slug: string[]) => {
+	const year = slug ? slug[1] : '';
+	const month = slug ? capitalizeFirstLetter(slug[0]) : '';
+	const client = getClient();
+	const id = await getBudgetId(year, month);
+	const { data } = await client.query({
+		query: SPENDING_OVERVIEW,
+		variables: { budgetId: id },
+		context: {
+			fetchOptions: {
+				next: { tags: ['budget'] },
+			},
+		},
+	});
+
+	const expense = data.budget.expenses.totalSum;
+	const surplus = data.budget.incomes.totalSum - data.budget.expenses.totalSum;
+
+	return {
+		chartData: {
+			labels: ['Expense', 'Surplus'],
+			datasets: [
+				{
+					label: 'Amount',
+					data: [expense, surplus],
+					backgroundColor: [],
+				},
+			],
+		},
+		totalAmount: expense,
+		income: data.budget.incomes.totalSum,
+		surplus,
+	};
 };
 
 export const fetchBudget = async (slug: string[]) => {

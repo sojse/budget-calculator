@@ -13,3 +13,4 @@ export * from './MobileMenu';
 export * from './OverviewChart';
 export * from './ScrollChartSection';
 export * from './SiteHeading';
+export * from './SpendingDonut';
