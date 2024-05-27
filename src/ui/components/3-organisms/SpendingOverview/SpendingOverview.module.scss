@@ -1,0 +1,11 @@
+.spending_overview_section {
+    padding: $spacing--3 $spacing--5;
+
+    @include mq(md) {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        padding: $spacing--3 $spacing--5 $spacing--8 $spacing--5;
+    }
+}
