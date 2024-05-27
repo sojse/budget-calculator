@@ -27,12 +27,12 @@ export const ScrollChartSection: React.FC<ScrollChartSectionProps> = async ({
 	}
 
 	return (
-		<div className={classNames(styles.scroll_chart_chart)}>
+		<section className={classNames(styles.scroll_chart_chart)}>
 			<ScrollableBarChart
 				chartData={budgetInformation || defaultData}
 				legend
 				loading={loading}
 			/>
-		</div>
+		</section>
 	);
 };
