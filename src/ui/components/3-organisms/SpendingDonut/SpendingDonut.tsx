@@ -15,7 +15,7 @@ export const SpendingDonut: React.FC<SpendingDonut> = async ({
 	let budgetInformation = {
 		chartData: {
 			labels: [''],
-			datasets: [{ label: '', data: [0], backgroundColor: [] }],
+			datasets: [{ label: '', data: [0], backgroundColor: [''] }],
 		},
 		totalAmount: 0,
 		income: 0,
@@ -23,7 +23,10 @@ export const SpendingDonut: React.FC<SpendingDonut> = async ({
 	};
 
 	if (!loading) {
-		budgetInformation = await getSpendingOverview(slug);
+		const fetchedData = await getSpendingOverview(slug);
+		if (fetchedData) {
+			budgetInformation = fetchedData;
+		}
 	}
 
 	return (
@@ -43,7 +46,7 @@ export const SpendingDonut: React.FC<SpendingDonut> = async ({
 					loading={loading}
 				/>
 				<LabeledAmount
-					label={'Överskott'}
+					label={budgetInformation.surplus <= 0 ? 'Underskott' : 'Överskott'}
 					amount={budgetInformation.surplus}
 					loading={loading}
 				/>

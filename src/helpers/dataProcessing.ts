@@ -80,6 +80,10 @@ export const processSpendingData = (data: {
 }) => {
 	const expense = data.budget.expenses.totalSum;
 	const surplus = data.budget.incomes.totalSum - data.budget.expenses.totalSum;
+	let secondValue = surplus;
+	if (surplus <= 0) {
+		secondValue = 0;
+	}
 
 	return {
 		chartData: {
@@ -87,7 +91,7 @@ export const processSpendingData = (data: {
 			datasets: [
 				{
 					label: 'Amount',
-					data: [expense, surplus],
+					data: [expense, secondValue],
 					backgroundColor: [],
 				},
 			],
