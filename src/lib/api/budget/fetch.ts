@@ -26,6 +26,7 @@ export const fetchBudgets = async (year: string) => {
 					next: { tags: ['budgets'] },
 				},
 			},
+			errorPolicy: 'all',
 		});
 		return processSelectData(data, year);
 	} catch (error) {
@@ -40,6 +41,7 @@ export const fetchMonthData = async (year: string) => {
 		const { data } = await client.query({
 			query: GET_BUDGETS_BY_YEAR,
 			variables: { year },
+			errorPolicy: 'all',
 		});
 		return processMonthData(data, year);
 	} catch (error) {
@@ -60,6 +62,7 @@ export const getBudgetOverview = async (
 					next: { tags: ['budget', 'budgets'] },
 				},
 			},
+			errorPolicy: 'all',
 		});
 		return processOverviewData(data);
 	} catch (error) {
@@ -80,10 +83,12 @@ export const getSpendingOverview = async (slug: string[]) => {
 					next: { tags: ['budget'] },
 				},
 			},
+			errorPolicy: 'all',
 		});
 		return processSpendingData(data);
 	} catch (error) {
 		console.error(`Error fetching budgets:`, error);
+		console.error(`Error fetching budget`, error);
 	}
 };
 
@@ -99,6 +104,7 @@ export const fetchBudget = async (slug: string[]) => {
 					next: { tags: ['budget'] },
 				},
 			},
+			errorPolicy: 'all',
 		});
 		return processBudgetData(data, id);
 	} catch (error) {

@@ -63,12 +63,16 @@ export const processOverviewData = (data: { budgets: any }) => {
 	budgets[0].budgets.forEach(
 		(element: {
 			title: string;
-			expenses: { totalSum: number };
-			incomes: { totalSum: number };
+			expenses: { totalSum: number } | null;
+			incomes: { totalSum: number } | null;
 		}) => {
 			budgetInformation.labels.push(element.title);
-			budgetInformation.datasets[0].data.push(element.expenses.totalSum);
-			budgetInformation.datasets[1].data.push(element.incomes.totalSum);
+			budgetInformation.datasets[0].data.push(
+				element.expenses ? element.expenses.totalSum : 0
+			);
+			budgetInformation.datasets[1].data.push(
+				element.incomes ? element.incomes.totalSum : 0
+			);
 		}
 	);
 

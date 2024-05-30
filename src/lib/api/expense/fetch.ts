@@ -16,6 +16,7 @@ export const getBudgetWithCategoryDetails = async (slug: string[]) => {
 					next: { tags: ['budget'] },
 				},
 			},
+			errorPolicy: 'all',
 		});
 
 		const budgetOverview: DonutChartProps = {
@@ -63,6 +64,7 @@ export const getFinanceDetailData = async (slug: string[]) => {
 					next: { tags: ['budget'] },
 				},
 			},
+			errorPolicy: 'all',
 		});
 
 		const budgetData = data.budget.expensesByCategory.map(
