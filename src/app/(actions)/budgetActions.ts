@@ -31,7 +31,7 @@ export async function submitNewBudget(
 	};
 
 	const finishState = await createBudget(validAndFilteredData);
-	revalidateTag('budgets');
+	revalidateTag('budget');
 	return finishState;
 }
 

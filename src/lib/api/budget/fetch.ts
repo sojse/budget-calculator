@@ -23,7 +23,7 @@ export const fetchBudgets = async (year: string) => {
 			query: GET_BUDGETS,
 			context: {
 				fetchOptions: {
-					next: { tags: ['budgets'] },
+					next: { tags: ['budget'] },
 				},
 			},
 			errorPolicy: 'all',
@@ -53,13 +53,14 @@ export const getBudgetOverview = async (
 	year: string
 ): Promise<ChartData | undefined> => {
 	const client = getClient();
+
 	try {
 		const { data } = await client.query({
 			query: GET_BUDGET_OVERVIEW,
 			variables: { year },
 			context: {
 				fetchOptions: {
-					next: { tags: ['budget', 'budgets'] },
+					next: { tags: ['budget'] },
 				},
 			},
 			errorPolicy: 'all',
@@ -87,7 +88,6 @@ export const getSpendingOverview = async (slug: string[]) => {
 		});
 		return processSpendingData(data);
 	} catch (error) {
-		console.error(`Error fetching budgets:`, error);
 		console.error(`Error fetching budget`, error);
 	}
 };

@@ -16,8 +16,8 @@ export async function deleteExpense(currentState: DeleteState, _: FormData) {
 			currentState.budgetId,
 			currentState.dataId
 		);
-		revalidateTag('budget');
 
+		revalidateTag('budget');
 		return finishState;
 	}
 
@@ -46,8 +46,8 @@ export async function createExpense(
 		rawFormData,
 		currentState.budgetId
 	);
-	revalidateTag('budget');
 
+	revalidateTag('budget');
 	return finishState;
 }
 
@@ -73,8 +73,8 @@ export async function editExpense(
 			currentState.budgetId,
 			currentState.expenseId
 		);
-		revalidateTag('budget');
 
+		revalidateTag('budget');
 		return finishState;
 	}
 

@@ -54,7 +54,6 @@ export async function editIncome(
 		);
 
 		revalidateTag('budget');
-
 		return finishState;
 	}
 
@@ -69,8 +68,8 @@ export async function deleteIncome(currentState: DeleteState, _: FormData) {
 			currentState.budgetId,
 			currentState.dataId
 		);
-		revalidateTag('budget');
 
+		revalidateTag('budget');
 		return finishState;
 	}
 

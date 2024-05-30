@@ -30,8 +30,8 @@ export const GET_BUDGET_OVERVIEW = gql`
 		budgets(year: $year) {
 			year
 			budgets {
-				title
 				id
+				title
 				expenses {
 					totalSum
 				}

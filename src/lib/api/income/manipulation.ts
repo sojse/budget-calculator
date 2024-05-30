@@ -1,5 +1,4 @@
 import { getClient } from '@/lib/apolloClient';
-import gql from 'graphql-tag';
 import { ADD_INCOME, DELETE_INCOME, EDIT_INCOME } from './graphql';
 
 export const createIncome = async (incomeData: any, id: string) => {
