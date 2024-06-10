@@ -28,6 +28,15 @@
             display: block;
         }
     }
+
+    &__title {
+        max-width: 80px;
+        overflow-wrap: break-word;
+
+        @include mq(md) {
+            max-width: 200px;
+        }
+    }
 }
 
 .finance_box_icon {
